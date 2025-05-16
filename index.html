@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,92 +11,75 @@
       font-family: 'Roboto', sans-serif;
       background: url("images/login-bg.jpg") no-repeat center center fixed;
       background-size: cover;
-      position: relative;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for text visibility */
       min-height: 100vh;
-      color: #ffffff;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
-      z-index: -1;
-    }
-
-    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 2rem;
     }
 
     .logo {
-      max-width: 120px;
-      margin-bottom: 1rem;
+      max-width: 180px;
+      margin-bottom: 2rem;
     }
 
     .marquee {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: bold;
+      background: rgba(255, 255, 255, 0.15);
       padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
-      margin: 1rem auto;
-      max-width: 800px;
-      white-space: nowrap;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 900px;
+      white-space: nowrap;
     }
 
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 20s linear infinite;
+      animation: scroll 15s linear infinite;
     }
 
     @keyframes scroll {
-      0% {
-        transform: translateX(0);
+      from {
+        transform: translateX(0%);
       }
-      100% {
+      to {
         transform: translateX(-100%);
       }
     }
 
     footer {
-      background-color: rgba(255, 255, 255, 0.1);
       text-align: center;
-      padding: 1rem;
       font-size: 0.9rem;
-      color: #ddd;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+      color: #ccc;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <!-- RDHS Logo -->
+  <div class="overlay">
     <img src="images/icon-192.png" alt="RDHS Logo" class="logo" />
 
-    <!-- Welcome Message in Sinhala, Tamil, English -->
     <div class="marquee">
       <span>
-        ත්‍රිකුණාමලය ප්‍රාදේශීය සෞඛ්‍ය සේවා අධ්‍යක්ෂකගේ නිල වෙබ් අඩවියට සාදරයෙන් පිළිගනිමු |
-        பிராந்திய சுகாதார சேவைகள் பணிப்பாளர் பணிமனை, திருகோணமலையின் உத்தியோகபூர்வ இணையதளத்திற்கு வரவேற்கிறோம் |
+        ත්‍රිකුණාමලය ප්‍රාදේශීය සෞඛ්‍ය සේවා අධ්‍යක්ෂකගේ නිල වෙබ් අඩවියට සාදරයෙන් පිළිගනිමු | 
+        பிராந்திய சுகாதார சேவைகள் பணிப்பாளர் பணிமனை, திருகோணமலையின் உத்தியோகபூர்வ இணையதளத்திற்கு வரவேற்கிறோம் | 
         Welcome to the Official Website of the Regional Director of Health Services – Trincomalee
       </span>
     </div>
+
+    <footer>
+      &copy; 2025 Regional Director of Health Services - Trincomalee. All rights reserved.
+    </footer>
   </div>
-
-  <footer>
-    &copy; 2025 Regional Director of Health Services - Trincomalee. All rights reserved.
-  </footer>
-
 </body>
 </html>
-
