@@ -1,113 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Interactive Contact Page</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 10px;
-    background: #f9f9f9;
-  }
-
-  h2 {
-    margin-top: 40px;
-    color: #333;
-  }
-
-  .search-container {
-    margin-bottom: 10px;
-  }
-
-  input[type="search"] {
-    width: 100%;
-    max-width: 400px;
-    padding: 8px 12px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 40px;
-    background: #fff;
-    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
-  }
-
-  thead tr {
-    background-color: #007BFF;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-
-  th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-      display: block;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RDHS Trincomalee Contacts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
     }
-
-    thead tr {
-      /* hide header row on small screens */
-      position: relative;
-      top: auto;
-      z-index: auto;
-      background-color: transparent;
-      color: #333;
-      border: none;
+    h2 {
+      margin-top: 40px;
+      color: #2a5d84;
     }
-
-    tbody tr {
-      margin-bottom: 15px;
-      box-shadow: 0 0 5px rgb(0 0 0 / 0.1);
-      background: white;
-      border-radius: 5px;
-      padding: 10px;
+    .table-container {
+      overflow-x: auto;
     }
-
-    tbody td {
-      /* make each cell act like a row with label */
-      padding-left: 50%;
-      position: relative;
-      border: none;
-      border-bottom: 1px solid #eee;
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 30px;
     }
-
-    tbody td::before {
-      content: attr(data-label);
-      position: absolute;
-      left: 15px;
-      font-weight: bold;
-      color: #555;
-      white-space: nowrap;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px 8px;
+      text-align: left;
     }
-  }
-</style>
+    th {
+      background-color: #2a5d84;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 14px;
+        padding: 6px;
+      }
+    }
+  </style>
 </head>
-<body>
-
-<h1>Contact Information</h1>
-
-<div class="search-container">
-  <input type="search" id="searchInput" placeholder="Search all contacts..." onkeyup="filterTables()" />
-</div>
-
-
 <body>
 
 <h1>Office of Regional Director of Health Services - Trincomalee</h1>
@@ -282,39 +215,5 @@
     </tbody>
   </table>
 </div>
-</body>
-</table>
-
-
-  <tbody>
-    <tr><td data-label="Name">Diana Prince</td><td data-label="Phone">456-789-0123</td><td data-label="Email">diana@example.com</td></tr>
-    <tr><td data-label="Name">Evan Davis</td><td data-label="Phone">567-890-1234</td><td data-label="Email">evan@example.com</td></tr>
-    <tr><td data-label="Name">Fiona Green</td><td data-label="Phone">678-901-2345</td><td data-label="Email">fiona@example.com</td></tr>
-  </tbody>
-</table>
-
-<script>
-  function filterTables() {
-    const filter = document.getElementById('searchInput').value.toLowerCase();
-
-    // Get all tables
-    const tables = [document.getElementById('table1'), document.getElementById('table2')];
-
-    tables.forEach(table => {
-      const rows = table.tBodies[0].rows;
-
-      for(let i = 0; i < rows.length; i++) {
-        const rowText = rows[i].textContent.toLowerCase();
-
-        if (rowText.indexOf(filter) > -1) {
-          rows[i].style.display = '';
-        } else {
-          rows[i].style.display = 'none';
-        }
-      }
-    });
-  }
-</script>
-
 </body>
 </html>
