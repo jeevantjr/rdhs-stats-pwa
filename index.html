@@ -15,7 +15,7 @@
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for text visibility */
+      background-color: rgba(0, 0, 0, 0.6); /* Improves text visibility */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -25,13 +25,19 @@
       padding: 2rem;
     }
 
+    .app-heading {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
     .logo {
       max-width: 180px;
       margin-bottom: 2rem;
     }
 
     .marquee {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: bold;
       background: rgba(255, 255, 255, 0.15);
       padding: 1rem;
@@ -40,12 +46,13 @@
       width: 100%;
       max-width: 900px;
       white-space: nowrap;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 15s linear infinite;
+      animation: scroll 30s linear infinite; /* Slower speed */
     }
 
     @keyframes scroll {
@@ -67,6 +74,8 @@
 </head>
 <body>
   <div class="overlay">
+    <div class="app-heading">Regional Director of Health Services - Trincomalee</div>
+
     <img src="images/icon-192.png" alt="RDHS Logo" class="logo" />
 
     <div class="marquee">
@@ -83,3 +92,4 @@
   </div>
 </body>
 </html>
+
