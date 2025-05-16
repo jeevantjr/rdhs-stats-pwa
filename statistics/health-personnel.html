@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .table-container {
+      max-width: 100%;
+      overflow-x: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      background-color: #fff;
+      font-size: 16px;
+    }
+
+    thead {
+      background-color: #004080;
+      color: white;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    caption {
+      caption-side: top;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    @media screen and (max-width: 600px) {
+      table {
+        font-size: 13px;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="table-container">
+  <table>
+    <caption>Health Staff Summary by Institution Type</caption>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Occupations</th>
+        <th>Base Hospitals</th>
+        <th>Divisional Hospital</th>
+        <th>PMCU</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Specialist</td><td>8</td><td>-</td><td>-</td><td>-</td></tr>
+      <tr><td>02</td><td>Doctors</td><td>74</td><td>34</td><td>19</td><td>127</td></tr>
+      <tr><td>03</td><td>Dental Surgeons</td><td>5</td><td>8</td><td>-</td><td>13</td></tr>
+      <tr><td>04</td><td>A.M.P/R.M.P/R.M.O</td><td>1</td><td>1</td><td>1</td><td>3</td></tr>
+      <tr><td>05</td><td>Nurses</td><td>145</td><td>48</td><td>4</td><td>197</td></tr>
+      <tr><td>06</td><td>Hospital Family Health Services (PHI)</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+      <tr><td></td><td>Hospital Family Health Services (PHM)</td><td>19</td><td>28</td><td>-</td><td>47</td></tr>
+      <tr><td>07</td><td>M.L.T</td><td>7</td><td>5</td><td>1</td><td>13</td></tr>
+      <tr><td>08</td><td>Other Technologist*</td><td>11</td><td>-</td><td>2</td><td>13</td></tr>
+      <tr><td>09</td><td>Pharmacist</td><td>12</td><td>2</td><td>1</td><td>15</td></tr>
+      <tr><td>10</td><td>Dispensor</td><td>6</td><td>8</td><td>6</td><td>20</td></tr>
+      <tr><td>11</td><td>Establishment Staff**</td><td>29</td><td>3</td><td>3</td><td>35</td></tr>
+      <tr><td>12</td><td>Attendents</td><td>29</td><td>24</td><td>3</td><td>56</td></tr>
+      <tr><td>13</td><td>Labourers (Sanitary/Ordinary)</td><td>110</td><td>109</td><td>39</td><td>258</td></tr>
+      <tr><td>14</td><td>Other Minor Staff (OES)</td><td>2</td><td>-</td><td>-</td><td>2</td></tr>
+      <tr><td>15</td><td>Others (Drivers, Watcher, Cook)</td><td>11</td><td>10</td><td>4</td><td>25</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td><strong>469</strong></td><td><strong>280</strong></td><td><strong>83</strong></td><td><strong>824</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
