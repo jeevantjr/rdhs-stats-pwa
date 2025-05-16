@@ -156,5 +156,50 @@
       font-size: 0.9rem;
       color: #f0f0f0;
       margin-top: 2rem;
-      text-shadow: 1px 1px 2px #000
+      text-shadow: 1px 1px 2px #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">RDHS Trincomalee</div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="reports.html">Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="overlay">
+    <div class="app-heading">Regional Director of Health Services Trincomalee</div>
+
+    <img src="images/icon-192.png" alt="RDHS Logo" class="logo" />
+
+    <div class="marquee">
+      <span>
+        ත්‍රිකුණාමලය ප්‍රාදේශීය සෞඛ්‍ය සේවා අධ්‍යක්ෂකගේ නිල වෙබ් අඩවියට සාදරයෙන් පිළිගනිමු |
+        பிராந்திய சுகாதார சேவைகள் பணிப்பாளர் பணிமனை, திருகோணமலையின் உத்தியோகபூர்வ இணையதளத்திற்கு வரவேற்கிறோம் |
+        Welcome to the Official Website of the Regional Director of Health Services – Trincomalee
+      </span>
+    </div>
+
+    <footer>
+      &copy; 2025 All Rights Reserved. Health Information Management Unit, Regional Director of Health Services, 120 Court Rd, Trincomalee. TP: 026 22 23 117 | Email: trincomoinfo@gmail.com
+    </footer>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("navLinks");
+      menu.classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
 
