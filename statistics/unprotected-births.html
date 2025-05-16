@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e0f7fa;
+    }
+
+    caption {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="table-container">
+  <table>
+    <caption>MOH Division Data (2020 - 2024)</caption>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>MOH Division</th>
+        <th>2020</th>
+        <th>2021</th>
+        <th>2022</th>
+        <th>2023</th>
+        <th>2024</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Gomarankadawala</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>02</td><td>Kanthale</td><td></td><td>1</td><td>1</td><td></td><td></td></tr>
+      <tr><td>03</td><td>Kinniya</td><td></td><td>1</td><td></td><td>2</td><td>1</td></tr>
+      <tr><td>04</td><td>Kuchchaveli</td><td></td><td></td><td>1</td><td>1</td><td>2</td></tr>
+      <tr><td>05</td><td>Morawewa</td><td></td><td>1</td><td></td><td></td><td></td></tr>
+      <tr><td>06</td><td>Muthur</td><td>1</td><td>2</td><td></td><td>3</td><td>1</td></tr>
+      <tr><td>07</td><td>Padavisiripura</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>08</td><td>Seruwila</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>09</td><td>Thambalagamuwa</td><td>1</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>10</td><td>Trincomalee</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>11</td><td>Eachchalampattai</td><td>1</td><td>5</td><td>2</td><td>1</td><td></td></tr>
+      <tr><td>12</td><td>Uppuvelli</td><td></td><td></td><td></td><td>1</td><td></td></tr>
+      <tr><th colspan="2">Total</th><td>3</td><td>10</td><td>4</td><td>8</td><td>4</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
