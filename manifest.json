@@ -13,9 +13,9 @@
       "type": "image/png"
     },
     {
-      "src": "images/icon-512-from-building.png",
+      "src": "images/login-bg.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpg"
     }
   ]
 }
