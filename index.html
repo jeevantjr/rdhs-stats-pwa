@@ -88,7 +88,7 @@
       }
     }
 
-    /* Overlay with top padding to prevent overlap with navbar */
+    /* Overlay */
     .overlay {
       background-color: rgba(0, 0, 51, 0.6);
       min-height: 100vh;
@@ -116,7 +116,7 @@
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     }
 
-    /* ✅ Updated Marquee */
+    /* ✅ Updated Marquee: slower + white text */
     .marquee {
       font-size: 1.2rem;
       font-weight: 600;
@@ -135,23 +135,13 @@
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 30s linear infinite, colorchange 10s infinite;
-      background: linear-gradient(to right, #ffcc00, #00ffff, #ff66cc, #00ff99, #ffcc00);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 1px 1px 3px #000;
+      animation: scroll 60s linear infinite;
+      color: white;
     }
 
     @keyframes scroll {
       from { transform: translateX(0%); }
       to { transform: translateX(-100%); }
-    }
-
-    @keyframes colorchange {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     @keyframes fadeInDown {
