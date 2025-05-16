@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Contact Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    background: #f9f9f9;
+  }
+
+  h2 {
+    margin-top: 40px;
+    color: #333;
+  }
+
+  .search-container {
+    margin-bottom: 10px;
+  }
+
+  input[type="search"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    background: #fff;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+  }
+
+  thead tr {
+    background-color: #007BFF;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead tr {
+      /* hide header row on small screens */
+      position: relative;
+      top: auto;
+      z-index: auto;
+      background-color: transparent;
+      color: #333;
+      border: none;
+    }
+
+    tbody tr {
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px rgb(0 0 0 / 0.1);
+      background: white;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    tbody td {
+      /* make each cell act like a row with label */
+      padding-left: 50%;
+      position: relative;
+      border: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    tbody td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 15px;
+      font-weight: bold;
+      color: #555;
+      white-space: nowrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Contact Information</h1>
+
+<div class="search-container">
+  <input type="search" id="searchInput" placeholder="Search all contacts..." onkeyup="filterTables()" />
+</div>
+
+<h2>Institution 1 Contacts</h2>
+<table id="table1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td data-label="Name">Alice Johnson</td><td data-label="Phone">123-456-7890</td><td data-label="Email">alice@example.com</td></tr>
+    <tr><td data-label="Name">Bob Smith</td><td data-label="Phone">234-567-8901</td><td data-label="Email">bob@example.com</td></tr>
+    <tr><td data-label="Name">Charlie Brown</td><td data-label="Phone">345-678-9012</td><td data-label="Email">charlie@example.com</td></tr>
+  </tbody>
+</table>
+
+<h2>Institution 2 Contacts</h2>
+<table id="table2">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td data-label="Name">Diana Prince</td><td data-label="Phone">456-789-0123</td><td data-label="Email">diana@example.com</td></tr>
+    <tr><td data-label="Name">Evan Davis</td><td data-label="Phone">567-890-1234</td><td data-label="Email">evan@example.com</td></tr>
+    <tr><td data-label="Name">Fiona Green</td><td data-label="Phone">678-901-2345</td><td data-label="Email">fiona@example.com</td></tr>
+  </tbody>
+</table>
+
+<script>
+  function filterTables() {
+    const filter = document.getElementById('searchInput').value.toLowerCase();
+
+    // Get all tables
+    const tables = [document.getElementById('table1'), document.getElementById('table2')];
+
+    tables.forEach(table => {
+      const rows = table.tBodies[0].rows;
+
+      for(let i = 0; i < rows.length; i++) {
+        const rowText = rows[i].textContent.toLowerCase();
+
+        if (rowText.indexOf(filter) > -1) {
+          rows[i].style.display = '';
+        } else {
+          rows[i].style.display = 'none';
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
