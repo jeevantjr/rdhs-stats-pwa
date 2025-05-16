@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#004080" />
+<link rel="apple-touch-icon" href="images/icon-192.png" />
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RDHS Trincomalee</title>
@@ -200,6 +204,16 @@
       menu.classList.toggle("show");
     }
   </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service worker registered.', reg))
+        .catch(err => console.error('Service worker registration failed:', err));
+    });
+  }
+</script>
+
 </body>
 </html>
 
