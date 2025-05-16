@@ -9,11 +9,11 @@
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom, #e8f5e9, #f1f8e9);
+      background: #f5fcff;
       color: #333;
     }
     header {
-      background: linear-gradient(to right, #004d40, #00796b);
+      background: linear-gradient(to right, #0288d1, #26c6da);
       color: white;
       padding: 50px 20px;
       text-align: center;
@@ -28,48 +28,58 @@
       padding: 40px 20px;
     }
     h2 {
-      color: #00695c;
-      border-bottom: 2px solid #e0e0e0;
+      color: #00796b;
+      border-bottom: 2px solid #c8e6c9;
       padding-bottom: 10px;
       margin-top: 40px;
     }
     .vision-mission {
-      background: url('https://images.unsplash.com/photo-1588776814546-d7d3dd96f5ab?auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+      background: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1600&q=80') no-repeat center center;
       background-size: cover;
       padding: 60px 20px;
       text-align: center;
-      color: white;
+      color: #fff;
       border-radius: 12px;
       margin-bottom: 40px;
     }
     .vision-mission h2 {
-      color: #fff;
       font-size: 2em;
       margin-bottom: 20px;
     }
     .vision-mission p {
-      font-size: 1.2em;
+      font-size: 1.1em;
       max-width: 800px;
-      margin: auto;
-      background: rgba(0, 0, 0, 0.5);
+      margin: 10px auto;
+      background: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
     ul {
       margin: 15px 0 0 20px;
     }
-    .officer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    .officer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
       margin-top: 20px;
+    }
+    .officer-main {
+      display: flex;
+      justify-content: center;
+    }
+    .officer-sub {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
     .officer-card {
       background: white;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
       text-align: center;
+      width: 250px;
     }
     .officer-card img {
       width: 100px;
@@ -77,6 +87,7 @@
       object-fit: cover;
       border-radius: 50%;
       margin-bottom: 10px;
+      border: 3px solid #00796b;
     }
     .officer-card h4 {
       margin: 10px 0 5px;
@@ -95,9 +106,9 @@
 
   <section class="vision-mission">
     <h2>Our Vision</h2>
-    <p>To be the excellent organization in Trincomalee District to create a Healthier Community that contribute towards Healthier Nation.</p>
+    <p>To be the excellent organization in Trincomalee District to create a Healthier Community that contributes towards a Healthier Nation.</p>
     <h2>Our Mission</h2>
-    <p>To assure a healthier community by ensuring equitable access to sustainable quality healthcare service while promoting self reliance, personal responsibility and healthy lifestyle in Trincomalee District.</p>
+    <p>To assure a healthier community by ensuring equitable access to sustainable quality healthcare services while promoting self-reliance, personal responsibility, and healthy lifestyles in Trincomalee District.</p>
   </section>
 
   <section>
@@ -129,26 +140,30 @@
     </ul>
 
     <h2>Our Key Officers</h2>
-    <div class="officer-grid">
-      <div class="officer-card" style="grid-column: span 3;">
-        <img src="images/rdhs.jpg" alt="RDHS" />
-        <h4>Dr. Chandana Kendangamuwa</h4>
-        <p>Regional Director of Health Services</p>
+    <div class="officer-section">
+      <div class="officer-main">
+        <div class="officer-card">
+          <img src="images/rdhs.jpg" alt="RDHS" />
+          <h4>Dr. Chandana Kendangamuwa</h4>
+          <p>Regional Director of Health Services</p>
+        </div>
       </div>
-      <div class="officer-card">
-        <img src="images/gp-trdhs.jpg" alt="GPT RDHS" />
-        <h4>Dr. [Name Here]</h4>
-        <p>Deputy Provincial Director (GPT-RDHS)</p>
-      </div>
-      <div class="officer-card">
-        <img src="images/admin-officer.jpg" alt="Admin Officer" />
-        <h4>Mr. [Name Here]</h4>
-        <p>Administrative Officer</p>
-      </div>
-      <div class="officer-card">
-        <img src="images/accountant.jpg" alt="Accountant" />
-        <h4>Mr. [Name Here]</h4>
-        <p>Accountant</p>
+      <div class="officer-sub">
+        <div class="officer-card">
+          <img src="images/gp-trdhs.jpg" alt="GPT RDHS" />
+          <h4>Dr. [Name Here]</h4>
+          <p>Deputy Provincial Director (GPT-RDHS)</p>
+        </div>
+        <div class="officer-card">
+          <img src="images/admin-officer.jpg" alt="Admin Officer" />
+          <h4>Mr. [Name Here]</h4>
+          <p>Administrative Officer</p>
+        </div>
+        <div class="officer-card">
+          <img src="images/accountant.jpg" alt="Accountant" />
+          <h4>Mr. [Name Here]</h4>
+          <p>Accountant</p>
+        </div>
       </div>
     </div>
   </section>
