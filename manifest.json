@@ -7,14 +7,15 @@
   "theme_color": "#004080",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512-from-building.png",
+      "src": "images/icon-512-from-building.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
+
