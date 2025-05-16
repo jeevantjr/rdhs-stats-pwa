@@ -9,17 +9,16 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      color: #343a40;
       background: url('images/login-bg.jpg') no-repeat center center fixed;
       background-size: cover;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+      color: #ffffff;
     }
 
     header {
       background-color: rgba(0, 64, 128, 0.85);
-      color: white;
       padding: 1.5rem;
       text-align: center;
     }
@@ -29,40 +28,48 @@
       font-size: 1.8rem;
     }
 
-    .welcome-section {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 2rem 1rem;
-      max-width: 900px;
+    .overlay-box {
+      background-color: rgba(0, 0, 0, 0.6);
       margin: 2rem auto;
-      text-align: center;
+      padding: 2rem;
       border-radius: 12px;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
 
     .welcome-message {
-      margin: 1rem 0;
       font-size: 1.2rem;
       font-weight: bold;
+      margin: 1rem 0;
     }
 
-    .sinhala {
-      color: #e83e8c;
-    }
-
-    .tamil {
-      color: #28a745;
-    }
-
-    .english {
-      color: #007bff;
-    }
+    .sinhala { color: #ffc107; }
+    .tamil { color: #28a745; }
+    .english { color: #17a2b8; }
 
     footer {
-      background-color: rgba(241, 241, 241, 0.9);
+      background-color: rgba(255, 255, 255, 0.2);
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
-      color: #6c757d;
+      color: #f8f9fa;
       margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      .welcome-message {
+        font-size: 1rem;
+      }
+
+      .overlay-box {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -71,7 +78,7 @@
     <h1>Regional Director of Health Services - Trincomalee</h1>
   </header>
 
-  <section class="welcome-section">
+  <div class="overlay-box">
     <div class="welcome-message sinhala">
       ත්‍රිකුණාමලය ප්‍රාදේශීය සෞඛ්‍ය සේවා අධ්‍යක්ෂකගේ නිල වෙබ් අඩවියට සාදරයෙන් පිළිගනිමු
     </div>
@@ -81,11 +88,12 @@
     <div class="welcome-message english">
       Welcome to the Official Website of the Regional Director of Health Services – Trincomalee
     </div>
-  </section>
+  </div>
 
   <footer>
     &copy; 2025 Regional Director of Health Services - Trincomalee. All rights reserved.
   </footer>
 </body>
 </html>
+
 
