@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v2';
+const CACHE_NAME = 'rdhs-cache-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,20 +6,20 @@ const urlsToCache = [
   '/MonthlyStatistics.html',
   '/contact.html',
   '/manifest.json',
+  '/service-worker.js',
   '/icon-192.png',
   '/icon-512.png',
-  '/service-worker.js',
 
-  // Subdirectories
+  // If these exist, include your CSS/JS
+  '/style.css',
+  '/main.js',
+
+  // Sub-pages or folders
   '/CardDetails/index.html',
   '/statistics/index.html',
 
-  // Images folder (if any images used)
-  '/images/logo.png', // replace with real image names if you have any
-
-  // CSS & JS (replace with real file names if different)
-  '/style.css',
-  '/main.js'
+  // Any image files you use
+  '/images/logo.png' // Replace or add more image paths if needed
 ];
 
 self.addEventListener('install', function(event) {
@@ -50,7 +50,9 @@ self.addEventListener('fetch', function(event) {
     caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
     }).catch(() => {
+      // fallback to homepage if offline and resource not cached
       return caches.match('/index.html');
     })
   );
 });
+
