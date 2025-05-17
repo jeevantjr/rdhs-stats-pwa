@@ -1,58 +1,42 @@
-const CACHE_NAME = 'rdhs-cache-v3';
+const CACHE_NAME = 'rdhs-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/AboutUs.html',
-  '/MonthlyStatistics.html',
-  '/contact.html',
   '/manifest.json',
-  '/service-worker.js',
-  '/icon-192.png',
-  '/icon-512.png',
 
-  // If these exist, include your CSS/JS
-  '/style.css',
-  '/main.js',
+  // Images (icons, backgrounds, etc.)
+  '/images/icon-192.png',
+  '/images/icon-512-from-building.png',
+  '/images/login-bg.jpg',
 
-  // Sub-pages or folders
+  // CardDetails files
   '/CardDetails/index.html',
-  '/statistics/index.html',
+  '/CardDetails/MOHCadreDetails.html',
+  '/CardDetails/HospitalCadreDetails.html',
+  '/CardDetails/MOHCadreDetails.pdf',
+  '/CardDetails/HospitalCadreDetails.pdf',
+  '/CardDetails/rdhs.pdf',
 
-  // Any image files you use
-  '/images/logo.png' // Replace or add more image paths if needed
+  // Statistics files
+  '/statistics/index.html',
+  '/statistics/communicable-diseases.html',
+  '/statistics/health-personnel.html',
+  '/statistics/hospitals-by-ds.html',
+  '/statistics/maternal-deaths.html',
+  '/statistics/registered-births.html',
+  '/statistics/unprotected-births.html',
 ];
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(key) {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
-  );
-  return self.clients.claim();
-});
-
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    }).catch(() => {
-      // fallback to homepage if offline and resource not cached
-      return caches.match('/index.html');
-    })
+    caches.match(event.request)
+      .then((response) => response || fetch(event.request))
   );
 });
-
