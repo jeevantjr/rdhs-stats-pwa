@@ -8,7 +8,8 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f6f9;
-      padding: 40px;
+      padding: 20px;
+      margin: 0;
       color: #333;
     }
 
@@ -19,19 +20,19 @@
 
     .table-container {
       overflow-x: auto;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 40px;
       font-size: 14px;
+      min-width: 1200px;
     }
 
     th, td {
       border: 1px solid #ccc;
-      padding: 8px 12px;
+      padding: 6px 10px;
       text-align: center;
     }
 
@@ -56,6 +57,13 @@
       font-size: 0.9em;
       text-align: right;
       color: #555;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -70,9 +78,6 @@
           <th rowspan="2">#</th>
           <th rowspan="2">MOH Area</th>
           <th rowspan="2">Category</th>
-          <th colspan="17">Staff Cadre & Position</th>
-        </tr>
-        <tr>
           <th>Medical Officer</th>
           <th>Dental Surgeon</th>
           <th>PHNS</th>
@@ -93,34 +98,65 @@
         </tr>
       </thead>
       <tbody>
-        <!-- You can paste generated rows here. For brevity, I’ll add only Trincomalee’s row. I can add all if you want. -->
-        <tr>
-          <td rowspan="2">1</td>
-          <td rowspan="2">Trincomalee</td>
-          <td>C</td>
-          <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>15</td><td>1</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td>
-        </tr>
-        <tr>
-          <td>P</td>
-          <td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>15</td><td>—</td><td>3</td><td>1</td><td>1</td><td>1</td><td>—</td><td>3</td><td>1</td>
-        </tr>
+        <!-- All 12 MOH areas with both Cadre (C) and Position (P) -->
+        <!-- MOH 1 -->
+        <tr><td rowspan="2">1</td><td rowspan="2">Trincomalee</td><td>C</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>15</td><td>1</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td></tr>
+        <tr><td>P</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>15</td><td>0</td><td>3</td><td>1</td><td>1</td><td>1</td><td>0</td><td>3</td><td>1</td></tr>
 
-        <!-- Add the remaining MOH areas following the same pattern -->
+        <!-- MOH 2 -->
+        <tr><td rowspan="2">2</td><td rowspan="2">Uppuveli</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>16</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>6</td><td>17</td><td>0</td><td>2</td><td>1</td><td>1</td><td>0</td><td>3</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 3 -->
+        <tr><td rowspan="2">3</td><td rowspan="2">Kantale</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>17</td><td>0</td><td>3</td><td>1</td><td>1</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>18</td><td>0</td><td>3</td><td>1</td><td>1</td><td>0</td><td>1</td><td>5</td><td>0</td></tr>
+
+        <!-- MOH 4 -->
+        <tr><td rowspan="2">4</td><td rowspan="2">Kinniya</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td><td>13</td><td>0</td><td>3</td><td>1</td><td>1</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>3</td><td>11</td><td>0</td><td>5</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+
+        <!-- MOH 5 -->
+        <tr><td rowspan="2">5</td><td rowspan="2">Muthur</td><td>C</td><td>2</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>7</td><td>22</td><td>0</td><td>3</td><td>1</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>2</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>8</td><td>21</td><td>0</td><td>4</td><td>2</td><td>1</td><td>0</td><td>3</td><td>1</td><td>0</td></tr>
+
+        <!-- MOH 6 -->
+        <tr><td rowspan="2">6</td><td rowspan="2">Thampalagamam</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>3</td><td>11</td><td>0</td><td>3</td><td>1</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>3</td><td>13</td><td>0</td><td>2</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 7 -->
+        <tr><td rowspan="2">7</td><td rowspan="2">Kuchchaveli</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>3</td><td>12</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>3</td><td>13</td><td>0</td><td>5</td><td>1</td><td>0</td><td>0</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 8 -->
+        <tr><td rowspan="2">8</td><td rowspan="2">Padavisripura</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td><td>0</td><td>2</td><td>1</td><td>0</td><td>0</td><td>2</td><td>3</td><td>0</td></tr>
+
+        <!-- MOH 9 -->
+        <tr><td rowspan="2">9</td><td rowspan="2">Seruwila</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>5</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>2</td><td>7</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 10 -->
+        <tr><td rowspan="2">10</td><td rowspan="2">Eachalampaththu</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 11 -->
+        <tr><td rowspan="2">11</td><td rowspan="2">Gomarangadawala</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>4</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>2</td><td>6</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td><td>3</td><td>2</td><td>0</td></tr>
+
+        <!-- MOH 12 -->
+        <tr><td rowspan="2">12</td><td rowspan="2">Kurinchakerny</td><td>C</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>3</td><td>9</td><td>0</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td></tr>
+        <tr><td>P</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>3</td><td>11</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td></tr>
       </tbody>
+
       <tfoot>
         <tr>
-          <td colspan="2">Grand Total</td>
-          <td>C</td>
-          <td>13</td><td>1</td><td>12</td><td>12</td><td>12</td><td>11</td><td>41</td><td>132</td><td>1</td><td>36</td><td>12</td><td>12</td><td>4</td><td>5</td><td>12</td><td>24</td>
+          <td colspan="3">Grand Total (C)</td><td>13</td><td>1</td><td>12</td><td>12</td><td>12</td><td>11</td><td>41</td><td>132</td><td>1</td><td>36</td><td>12</td><td>12</td><td>4</td><td>5</td><td>12</td><td>24</td>
         </tr>
         <tr>
-          <td colspan="2"></td>
-          <td>P</td>
-          <td>15</td><td>1</td><td>3</td><td>8</td><td>12</td><td>9</td><td>42</td><td>140</td><td>0</td><td>33</td><td>9</td><td>11</td><td>4</td><td>1</td><td>20</td><td>25</td>
+          <td colspan="3">Grand Total (P)</td><td>15</td><td>1</td><td>3</td><td>8</td><td>12</td><td>9</td><td>42</td><td>140</td><td>0</td><td>33</td><td>9</td><td>11</td><td>4</td><td>1</td><td>20</td><td>25</td>
         </tr>
         <tr>
-          <td colspan="3">Vacancies</td>
-          <td>-2</td><td>0</td><td>9</td><td>4</td><td>0</td><td>2</td><td>-1</td><td>-8</td><td>1</td><td>3</td><td>3</td><td>1</td><td>0</td><td>4</td><td>-8</td><td>-1</td>
+          <td colspan="3">Vacancies</td><td>-2</td><td>0</td><td>9</td><td>4</td><td>0</td><td>2</td><td>-1</td><td>-8</td><td>1</td><td>3</td><td>3</td><td>1</td><td>0</td><td>4</td><td>-8</td><td>-1</td>
         </tr>
       </tfoot>
     </table>
