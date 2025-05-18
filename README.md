@@ -71,12 +71,19 @@ To run this project locally:
    git clone https://github.com/jeevantjr/rdhs-stats-pwa.git
    cd rdhs-stats-pwa
 
+---
 
-##  Developer
-## Dr. T. Jeevaraaj ## 
-MBBS, MCGP, MSc in Biomedical Informatics
-Medical Officer – Health Information
-RDHS Office, Trincomalee
-🔗 GitHub: github.com/jeevantjr
+## 👨‍💻 Developer
 
+**Dr T. Jeevaraaj (MBBS, MCGP, MSc in Biomedical Informatics)**  
+**Medical Officer – Health Information**  
+**RDHS Office, Trincomalee**  
+🔗 GitHub: [github.com/jeevantjr](https://github.com/jeevantjr)
+
+---
+
+## 📝 License
+
+This project is open-source and free to use under the **MIT License**.  
+See the [LICENSE](LICENSE) file for full details.
 
