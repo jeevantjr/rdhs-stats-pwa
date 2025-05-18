@@ -72,8 +72,8 @@ To run this project locally:
    cd rdhs-stats-pwa
 
 
-Developer
-Dr. T. Jeevaraaj
+##  Developer
+## Dr. T. Jeevaraaj## 
 MBBS, MCGP, MSc in Biomedical Informatics
 Medical Officer – Health Information
 RDHS Office, Trincomalee
