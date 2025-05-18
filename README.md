@@ -73,7 +73,7 @@ To run this project locally:
 
 
 ##  Developer
-## Dr. T. Jeevaraaj## 
+## Dr. T. Jeevaraaj ## 
 MBBS, MCGP, MSc in Biomedical Informatics
 Medical Officer – Health Information
 RDHS Office, Trincomalee
