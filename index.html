@@ -268,7 +268,7 @@ footer {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    const installContainer = document.getElementById('installPromptContainer');
+    const installContainer = document.getElementById('installContainer');
     installContainer.style.display = 'block';
 
     document.getElementById('installBtn').addEventListener('click', () => {
@@ -287,7 +287,7 @@ footer {
 
   window.addEventListener('appinstalled', () => {
     console.log('📲 RDHS Stats App was successfully installed');
-    document.getElementById('installPromptContainer').style.display = 'none';
+    document.getElementById('installContainer').style.display = 'none';
   });
 </script>
 
