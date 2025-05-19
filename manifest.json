@@ -1,8 +1,8 @@
-
 {
   "name": "RDHS Trincomalee Stats",
   "short_name": "RDHS Stats",
- "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#004080",
@@ -19,4 +19,3 @@
     }
   ]
 }
-
