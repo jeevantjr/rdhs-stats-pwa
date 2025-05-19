@@ -1,30 +1,31 @@
 const CACHE_NAME = 'rdhs-cache-v1';
+
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/rdhs-stats-pwa/',
+  '/rdhs-stats-pwa/index.html',
+  '/rdhs-stats-pwa/manifest.json',
 
   // Images
-  '/images/icon-192.png',
-  '/images/icon-512-from-building.png',
-  '/images/login-bg.jpg',
+  '/rdhs-stats-pwa/images/icon-192.png',
+  '/rdhs-stats-pwa/images/icon-512-from-building.png',
+  '/rdhs-stats-pwa/images/login-bg.jpg',
 
   // CardDetails
-  '/CardDetails/index.html',
-  '/CardDetails/MOHCadreDetails.html',
-  '/CardDetails/HospitalCadreDetails.html',
-  '/CardDetails/MOHCadreDetails.pdf',
-  '/CardDetails/HospitalCadreDetails.pdf',
-  '/CardDetails/rdhs.pdf',
+  '/rdhs-stats-pwa/CardDetails/index.html',
+  '/rdhs-stats-pwa/CardDetails/MOHCadreDetails.html',
+  '/rdhs-stats-pwa/CardDetails/HospitalCadreDetails.html',
+  '/rdhs-stats-pwa/CardDetails/MOHCadreDetails.pdf',
+  '/rdhs-stats-pwa/CardDetails/HospitalCadreDetails.pdf',
+  '/rdhs-stats-pwa/CardDetails/rdhs.pdf',
 
   // Statistics
-  '/statistics/index.html',
-  '/statistics/communicable-diseases.html',
-  '/statistics/health-personnel.html',
-  '/statistics/hospitals-by-ds.html',
-  '/statistics/maternal-deaths.html',
-  '/statistics/registered-births.html',
-  '/statistics/unprotected-births.html',
+  '/rdhs-stats-pwa/statistics/index.html',
+  '/rdhs-stats-pwa/statistics/communicable-diseases.html',
+  '/rdhs-stats-pwa/statistics/health-personnel.html',
+  '/rdhs-stats-pwa/statistics/hospitals-by-ds.html',
+  '/rdhs-stats-pwa/statistics/maternal-deaths.html',
+  '/rdhs-stats-pwa/statistics/registered-births.html',
+  '/rdhs-stats-pwa/statistics/unprotected-births.html'
 ];
 
 // Install: Cache everything
@@ -58,10 +59,9 @@ self.addEventListener('fetch', (event) => {
       return (
         response ||
         fetch(event.request).catch(() =>
-          caches.match('/offline.html') // Optional fallback page
+          caches.match('/rdhs-stats-pwa/offline.html') // Optional fallback page
         )
       );
     })
   );
 });
-
