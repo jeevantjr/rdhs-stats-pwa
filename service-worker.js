@@ -26,10 +26,18 @@ const urlsToCache = [
   '/rdhs-stats-pwa/statistics/maternal-deaths.html',
   '/rdhs-stats-pwa/statistics/registered-births.html',
   '/rdhs-stats-pwa/statistics/unprotected-births.html'
-];
+
    // clinic details
 '/rdhs-stats-pwa/institutions/index.htmll',
   '/rdhs-stats-pwa/institutions/institutionschedule.html',
+     '/rdhs-stats-pwa/institutions/specialclinicsdetails.html',
+
+  //health education
+      '/rdhs-stats-pwa/healtheducation.html',
+  
+];
+
+  
 
   
 // Install: Cache everything
