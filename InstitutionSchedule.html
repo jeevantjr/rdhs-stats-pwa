@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Institution Clinic Schedule</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background-color: #f4f9ff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #004080;
+    }
+
+    select, input {
+      padding: 8px;
+      margin: 10px 5px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background-color: #004080;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #eef3fa;
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+      }
+
+      td::before {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+      }
+
+      td:nth-child(1)::before { content: "Institution"; }
+      td:nth-child(2)::before { content: "Medical clinic"; }
+      td:nth-child(3)::before { content: "HLC"; }
+      td:nth-child(4)::before { content: "ANC/Poly clinic"; }
+      td:nth-child(5)::before { content: "MH"; }
+      td:nth-child(6)::before { content: "ICOPE"; }
+      td:nth-child(7)::before { content: "Mobile clinic"; }
+    }
+  </style>
+</head>
+<body>
+
+<h2>Institution Weekly Clinic Schedule</h2>
+
+<label for="institutionFilter">Filter by Institution:</label>
+<select id="institutionFilter" onchange="filterTable()">
+  <option value="">Show All</option>
+</select>
+
+<label for="searchInput">Search by service/day:</label>
+<input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Type a day or service...">
+
+<table id="clinicTable">
+  <thead>
+    <tr>
+      <th>Institution</th>
+      <th>Medical clinic</th>
+      <th>HLC</th>
+      <th>ANC/Poly clinic</th>
+      <th>MH</th>
+      <th>ICOPE</th>
+      <th>Mobile clinic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Dynamic rows inserted by JavaScript -->
+  </tbody>
+</table>
+
+<script>
+  const data = [
+    {
+      "Institution": "Divisiinal Hospital Type B - Pathavisripura",
+      "Medical clinic": "",
+      "HLC": "",
+      "ANC/Poly clinic": "",
+      "MH": "",
+      "ICOPE": "",
+      "Mobile clinic": ""
+    },
+    {
+      "Institution": "Divisiinal Hospital Type C - Thampalagamam",
+      "Medical clinic": "Thursday",
+      "HLC": "Monday",
+      "ANC/Poly clinic": "Tuesday",
+      "MH": "1st Tuesday",
+      "ICOPE": "Friday",
+      "Mobile clinic": ""
+    },
+    {
+      "Institution": "Divisiinal Hospital Type C - Gomarangadawala",
+      "Medical clinic": "Monday & Friday",
+      "HLC": "?",
+      "ANC/Poly clinic": "?",
+      "MH": "1st -Wednesday",
+      "ICOPE": "",
+      "Mobile clinic": ""
+    },
+    {
+      "Institution": "Divisiinal Hospital Type C - Kuchchaveli",
+      "Medical clinic": "Wednesday",
+      "HLC": "Thursday and aFriday",
+      "ANC/Poly clinic": "1st & 3rd  Tuesday",
+      "MH": "Last  -Wednesday",
+      "ICOPE": "",
+      "Mobile clinic": ""
+    },
+    {
+      "Institution": "Divisiinal Hospital Type C - Serunuwara",
+      "Medical clinic": "",
+      "HLC": "",
+      "ANC/Poly clinic": "",
+      "MH": "",
+      "ICOPE": "",
+      "Mobile clinic": ""
+    }
+  ];
+
+  function populateTable() {
+    const tableBody = document.querySelector('#clinicTable tbody');
+    const institutionSet = new Set();
+
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      Object.values(row).forEach(val => {
+        const td = document.createElement('td');
+        td.textContent = val || '';
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
+      institutionSet.add(row["Institution"]);
+    });
+
+    const filterDropdown = document.getElementById('institutionFilter');
+    institutionSet.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      filterDropdown.appendChild(opt);
+    });
+  }
+
+  function filterTable() {
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    const institutionFilter = document.getElementById("institutionFilter").value.toLowerCase();
+    const rows = document.querySelectorAll("#clinicTable tbody tr");
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll("td");
+      const institution = cells[0].textContent.toLowerCase();
+      const matchSearch = Array.from(cells).some(td => td.textContent.toLowerCase().includes(searchValue));
+      const matchInstitution = !institutionFilter || institution.includes(institutionFilter);
+      row.style.display = (matchSearch && matchInstitution) ? "" : "none";
+    });
+  }
+
+  populateTable();
+</script>
+
+</body>
+</html>
