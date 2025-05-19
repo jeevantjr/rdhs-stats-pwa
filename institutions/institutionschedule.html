@@ -1,94 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Clinic Schedule - RDHS Trincomalee</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7fa;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    h1 {
-      text-align: center;
-      color: #005b8f;
-      margin-bottom: 30px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow-x: auto;
-      display: block;
-    }
-
-    thead {
-      background-color: #005b8f;
-      color: #fff;
-    }
-
-    th, td {
-      padding: 12px 10px;
-      text-align: center;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    tbody tr:nth-child(even) {
-      background-color: #f1f9ff;
-    }
-
-    tbody tr:hover {
-      background-color: #e8f3ff;
-    }
-
-    @media (max-width: 768px) {
-      th, td {
-        font-size: 12px;
-        padding: 8px 6px;
-      }
-
-      h1 {
-        font-size: 20px;
-        padding: 0 10px;
-      }
-
-      .container {
-        margin: 20px 10px;
-        padding: 15px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Clinic Schedule - RDHS Trincomalee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #006699;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #006699;
+            color: #fff;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        @media (max-width: 768px) {
+            .data-table th, .data-table td {
+                font-size: 12px;
+                padding: 6px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
     <h1>Clinic Schedule - RDHS Trincomalee</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Institution</th>
-          <th>Medical Clinic</th>
-          <th>HLC</th>
-          <th>ANC, Poly Clinic</th>
-          <th>MH</th>
-          <th>ICOPE</th>
-          <th>Mobile Clinic</th>
-        </tr>
-      </thead>
-      <tbody>
+    <table class="data-table">
+        <thead>
+            <tr><th>Institution</th><th>Medical clinic</th><th>HLC</th><th>ANC,Poly clinic</th><th>MH</th><th>ICOPE</th><th>Mobile clinic</th></tr>
+        </thead>
+        <tbody>
+           
+
     <tr><td>Divisional Hospital Type B - Pathavisripura</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     <tr><td>Divisional Hospital Type C - Thampalagamam</td><td>Thursday</td><td>Monday</td><td>Tuesday</td><td>1st Tuesday</td><td>Friday</td><td></td></tr>
     <tr><td>Divisional Hospital Type C - Gomarangadawala</td><td>Monday & Friday</td><td>?</td><td>?</td><td>1st - Wednesday</td><td></td><td></td></tr>
