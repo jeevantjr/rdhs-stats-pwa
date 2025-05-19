@@ -28,7 +28,7 @@ const urlsToCache = [
   '/rdhs-stats-pwa/statistics/unprotected-births.html'
 
    // clinic details
-'/rdhs-stats-pwa/institutions/index.htmll',
+'/rdhs-stats-pwa/institutions/index.html',
   '/rdhs-stats-pwa/institutions/institutionschedule.html',
      '/rdhs-stats-pwa/institutions/specialclinicsdetails.html',
 
