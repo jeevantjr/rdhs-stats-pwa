@@ -257,6 +257,34 @@ footer {
     📲 Install RDHS Stats App
   </button>
 </div>
+<script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installContainer = document.getElementById('installPromptContainer');
+    installContainer.style.display = 'block';
+
+    document.getElementById('installBtn').addEventListener('click', () => {
+      installContainer.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('✅ App installed');
+        } else {
+          console.log('❌ User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('📲 RDHS Stats App was successfully installed');
+    document.getElementById('installPromptContainer').style.display = 'none';
+  });
+</script>
 
 </body>
 </html>
