@@ -27,7 +27,10 @@ const urlsToCache = [
   '/rdhs-stats-pwa/statistics/registered-births.html',
   '/rdhs-stats-pwa/statistics/unprotected-births.html'
 ];
+   // clinic details
+'/rdhs-stats-pwa/institutionschedule.html',
 
+  
 // Install: Cache everything
 self.addEventListener('install', (event) => {
   event.waitUntil(
