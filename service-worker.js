@@ -35,6 +35,10 @@ const urlsToCache = [
   // Health Education
   '/rdhs-stats-pwa/healtheducation.html',
 
+  //monthly statistics
+  '/MonthlyStatistics/dengue.html',
+  '/MonthlyStatistics/dengue.html',
+
   // Optional offline fallback (if created)
   // '/rdhs-stats-pwa/offline.html',
 ];
