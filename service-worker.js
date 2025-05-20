@@ -1,6 +1,5 @@
-const CACHE_NAME = 'rdhs-cache-v4'; // Update this version after every significant change
+const CACHE_NAME = 'rdhs-cache-v5'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
-
 
 const urlsToCache = [
   '/rdhs-stats-pwa/',
@@ -38,7 +37,7 @@ const urlsToCache = [
   '/rdhs-stats-pwa/healtheducation/index.html',
   '/rdhs-stats-pwa/healtheducation/FeedYourBaby.html',
 
-  // Monthly statistics
+  // Monthly statistics (adjust if these are outside your scope)
   '/MonthlyStatistics/index.html',
   '/MonthlyStatistics/dengue.html',
 
@@ -46,13 +45,19 @@ const urlsToCache = [
   '/rdhs-stats-pwa/offline.html',
 ];
 
-// Install event
+// Install event with resilient caching
 self.addEventListener('install', (event) => {
   if (DEBUG) console.log('[Service Worker] Installing...');
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      if (DEBUG) console.log('[Service Worker] Pre-caching files...');
-      return cache.addAll(urlsToCache);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (const url of urlsToCache) {
+        try {
+          await cache.add(url);
+          if (DEBUG) console.log('[Service Worker] Cached:', url);
+        } catch (err) {
+          console.warn('[Service Worker] Failed to cache:', url, err);
+        }
+      }
     })
   );
   self.skipWaiting();
@@ -123,4 +128,3 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
-
