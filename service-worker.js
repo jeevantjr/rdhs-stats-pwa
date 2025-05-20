@@ -38,7 +38,7 @@ const urlsToCache = [
 
   //monthly statistics
   '/MonthlyStatistics/dengue.html',
-  '/MonthlyStatistics/dengue.html',
+  '/MonthlyStatistics/index.html',
 
   // Optional offline fallback (if created)
   // '/rdhs-stats-pwa/offline.html',
