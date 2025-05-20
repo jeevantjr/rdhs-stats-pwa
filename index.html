@@ -294,7 +294,39 @@ footer {
     console.log('📲 RDHS Stats App was successfully installed');
     document.getElementById('installContainer').style.display = 'none';
   });
-<!-- Service Worker + Update Prompt -->
+<script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installContainer = document.getElementById('installContainer');
+    installContainer.style.display = 'block';
+
+    document.getElementById('installBtn').addEventListener('click', () => {
+      installContainer.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('✅ App installed');
+        } else {
+          console.log('❌ User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('📲 RDHS Stats App was successfully installed');
+    document.getElementById('installContainer').style.display = 'none';
+  });
+</script>
+
+
+  
+
+<!-- ✅ Service Worker + Update Prompt should be separate -->
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/rdhs-stats-pwa/service-worker.js')
@@ -317,20 +349,6 @@ footer {
   }
 </script>
 
-<!-- Refresh Prompt -->
-<div id="refreshPrompt" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <button onclick="location.reload()" style="
-    background-color: #ffcc00;
-    color: #000;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    cursor: pointer;
-  ">
-    🔄 New Update Available - Refresh
-  </button>
 </div>
 
 </body>
