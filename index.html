@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="/rdhs-stats-pwa/manifest.json" />
   <meta name="theme-color" content="#004080" />
   <link rel="apple-touch-icon" href="images/icon-192.png" />
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RDHS Trincomalee</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     #installBtn:hover {
-  background-color: #0059b3;
-  transform: translateY(-2px);
-}
+      background-color: #0059b3;
+      transform: translateY(-2px);
+    }
 
     body {
       margin: 0;
@@ -23,7 +22,6 @@
       color: #ffffff;
     }
 
-    /* Navbar */
     .navbar {
       width: 100%;
       background-color: rgba(0, 0, 51, 0.9);
@@ -93,7 +91,6 @@
       }
     }
 
-    /* Overlay */
     .overlay {
       background-color: rgba(0, 0, 51, 0.6);
       min-height: 100vh;
@@ -121,7 +118,6 @@
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     }
 
-    /* ✅ Updated Marquee: slower + white text */
     .marquee {
       font-size: 1.2rem;
       font-weight: 600;
@@ -154,34 +150,31 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ✅ Updated Footer */
-footer {
-  text-align: center;
-  font-size: 1rem;
-  color: #f5f5f5;
-  margin-top: 2rem;
-  padding: 1rem 5vw;
-  background-color: rgba(0, 0, 51, 0.85);
-  border-radius: 12px;
-  text-shadow: 1px 1px 3px #000;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  word-wrap: break-word;
-}
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      color: #f5f5f5;
+      margin-top: 2rem;
+      padding: 1rem 5vw;
+      background-color: rgba(0, 0, 51, 0.85);
+      border-radius: 12px;
+      text-shadow: 1px 1px 3px #000;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
 
-/* Optional: Adjust font size for smaller screens */
-@media (max-width: 600px) {
-  footer {
-    font-size: 0.95rem;
-    padding: 1.2rem 4vw;
-  }
-}
-
+    @media (max-width: 600px) {
+      footer {
+        font-size: 0.95rem;
+        padding: 1.2rem 4vw;
+      }
+    }
   </style>
 </head>
 <body>
-  
+
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
@@ -189,15 +182,13 @@ footer {
       <div class="menu-toggle" onclick="toggleMenu()">☰</div>
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
-         <a href="AboutUs.html">About Us</a>
-        <a href="contact.html">Contact Us</a>       
+        <a href="AboutUs.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
         <a href="statistics/index.html">Regional Statistics</a>
-        <a href="MonthlyStatistics.html">Monthly Statistics</a> 
-         <a href="CardDetails/index.html">Cardre Details</a>
-          <a href="institutions/index.html">OPD & Clinic Details</a>
-         <a href="healtheducation.html">Health Education</a>
-        
-        
+        <a href="MonthlyStatistics.html">Monthly Statistics</a>
+        <a href="CardDetails/index.html">Cardre Details</a>
+        <a href="institutions/index.html">OPD & Clinic Details</a>
+        <a href="healtheducation.html">Health Education</a>
       </div>
     </div>
   </nav>
@@ -216,141 +207,117 @@ footer {
       </span>
     </div>
 
-   <footer style="background-color: #002147; padding: 25px 15px; text-align: center; font-family: 'Segoe UI', sans-serif; color: #ffffff;">
-  <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
-    © 2025 All Rights Reserved
-  </p>
-  <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
-    <strong>Health Information Management Unit</strong><br>
-    Regional Director of Health Services, 120 Court Rd, Trincomalee
-  </p>
-  <p style="font-size: 15px; margin: 0; line-height: 1.6;">
-    📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
-    📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br>
-    ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
-  </p>
-</footer>
+    <!-- Install App Button -->
+    <div id="installContainer" style="text-align: center; margin-top: 2rem;">
+      <button id="installBtn" style="
+        background-color: #004080;
+        color: #ffffff;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      ">
+        📲 Install RDHS Stats App
+      </button>
+    </div>
 
+    <!-- Refresh Prompt -->
+    <div id="refreshPrompt" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+      <button onclick="location.reload()" style="
+        background-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        cursor: pointer;
+      ">
+        🔄 New Update Available - Refresh
+      </button>
+    </div>
 
+    <!-- Footer -->
+    <footer>
+      <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
+        © 2025 All Rights Reserved
+      </p>
+      <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
+        <strong>Health Information Management Unit</strong><br>
+        Regional Director of Health Services, 120 Court Rd, Trincomalee
+      </p>
+      <p style="font-size: 15px; margin: 0; line-height: 1.6;">
+        📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
+        📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br>
+        ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
+      </p>
+    </footer>
   </div>
 
+  <!-- Scripts -->
   <script>
     function toggleMenu() {
       var menu = document.getElementById("navLinks");
       menu.classList.toggle("show");
     }
   </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => console.log('Service worker registered.', reg))
-        .catch(err => console.error('Service worker registration failed:', err));
-    });
-  }
-</script>
 
-<!-- Stylish Install App Button -->
-<div id="installContainer" style="text-align: center; margin-top: 2rem;">
-  <button id="installBtn" style="
-    background-color: #004080;
-    color: #ffffff;
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  ">
-    📲 Install RDHS Stats App
-  </button>
-</div>
-<script>
-  let deferredPrompt;
+  <!-- Install App Logic -->
+  <script>
+    let deferredPrompt;
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    const installContainer = document.getElementById('installContainer');
-    installContainer.style.display = 'block';
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installContainer').style.display = 'block';
 
-    document.getElementById('installBtn').addEventListener('click', () => {
-      installContainer.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('✅ App installed');
-        } else {
-          console.log('❌ User dismissed the install prompt');
-        }
-        deferredPrompt = null;
+      document.getElementById('installBtn').addEventListener('click', () => {
+        document.getElementById('installContainer').style.display = 'none';
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('✅ App installed');
+          } else {
+            console.log('❌ User dismissed the install prompt');
+          }
+          deferredPrompt = null;
+        });
       });
     });
-  });
 
-  window.addEventListener('appinstalled', () => {
-    console.log('📲 RDHS Stats App was successfully installed');
-    document.getElementById('installContainer').style.display = 'none';
-  });
-<script>
-  let deferredPrompt;
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    const installContainer = document.getElementById('installContainer');
-    installContainer.style.display = 'block';
-
-    document.getElementById('installBtn').addEventListener('click', () => {
-      installContainer.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('✅ App installed');
-        } else {
-          console.log('❌ User dismissed the install prompt');
-        }
-        deferredPrompt = null;
-      });
+    window.addEventListener('appinstalled', () => {
+      console.log('📲 RDHS Stats App was successfully installed');
+      document.getElementById('installContainer').style.display = 'none';
     });
-  });
+  </script>
 
-  window.addEventListener('appinstalled', () => {
-    console.log('📲 RDHS Stats App was successfully installed');
-    document.getElementById('installContainer').style.display = 'none';
-  });
-</script>
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/rdhs-stats-pwa/service-worker.js')
+        .then(registration => {
+          console.log('✅ Service worker registered.', registration);
 
-
-  
-
-<!-- ✅ Service Worker + Update Prompt should be separate -->
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/rdhs-stats-pwa/service-worker.js')
-      .then(registration => {
-        registration.onupdatefound = () => {
-          const installingWorker = registration.installing;
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
-                // New update is available
-                document.getElementById('refreshPrompt').style.display = 'block';
+          registration.onupdatefound = () => {
+            const installingWorker = registration.installing;
+            installingWorker.onstatechange = () => {
+              if (installingWorker.state === 'installed') {
+                if (navigator.serviceWorker.controller) {
+                  document.getElementById('refreshPrompt').style.display = 'block';
+                }
               }
-            }
+            };
           };
-        };
-      })
-      .catch(error => {
-        console.error('Service worker registration failed:', error);
-      });
-  }
-</script>
-
-</div>
-
+        })
+        .catch(error => {
+          console.error('❌ Service worker registration failed:', error);
+        });
+    }
+  </script>
 </body>
 </html>
 
