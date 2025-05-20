@@ -1,4 +1,5 @@
 const CACHE_NAME = 'rdhs-cache-v3'; // Update this version after every significant change
+const DEBUG = false; // Set to true for development logging
 
 const urlsToCache = [
   '/rdhs-stats-pwa/',
@@ -40,16 +41,16 @@ const urlsToCache = [
   '/MonthlyStatistics/index.html',
   '/MonthlyStatistics/dengue.html',
 
-  // Optional offline fallback
-  // '/rdhs-stats-pwa/offline.html',
+  // Offline fallback page
+  '/rdhs-stats-pwa/offline.html',
 ];
 
 // Install event
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
+  if (DEBUG) console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Pre-caching files...');
+      if (DEBUG) console.log('[Service Worker] Pre-caching files...');
       return cache.addAll(urlsToCache);
     })
   );
@@ -58,13 +59,13 @@ self.addEventListener('install', (event) => {
 
 // Activate event
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating...');
+  if (DEBUG) console.log('[Service Worker] Activating...');
   event.waitUntil(
     caches.keys().then((cacheNames) =>
       Promise.all(
         cacheNames.map((name) => {
           if (name !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', name);
+            if (DEBUG) console.log('[Service Worker] Deleting old cache:', name);
             return caches.delete(name);
           }
         })
@@ -76,32 +77,48 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event
 self.addEventListener('fetch', (event) => {
-  // Use Network First for navigations (HTML pages)
+  if (event.request.method !== 'GET') return;
+
   if (event.request.mode === 'navigate') {
+    // Network-first strategy for navigation
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, response.clone());
-            return response;
-          });
+          const cloned = response.clone();
+          event.waitUntil(
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, cloned);
+            })
+          );
+          return response;
         })
-        .catch(() => caches.match(event.request)) // fallback to cache if offline
+        .catch(() => {
+          if (DEBUG) console.warn('[Service Worker] Offline fallback for navigation.');
+          return caches.match('/rdhs-stats-pwa/offline.html');
+        })
     );
   } else {
-    // Cache First for static assets
+    // Cache-first strategy for static assets
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
-        return cachedResponse || fetch(event.request).then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(event.request)
+          .then((networkResponse) => {
+            const cloned = networkResponse.clone();
+            event.waitUntil(
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(event.request, cloned);
+              })
+            );
             return networkResponse;
+          })
+          .catch(() => {
+            if (DEBUG) console.warn('[Service Worker] Request failed and no cache found:', event.request.url);
+            return caches.match('/rdhs-stats-pwa/offline.html');
           });
-        });
-      }).catch(() =>
-        // Optional fallback for failed requests
-        caches.match('/rdhs-stats-pwa/offline.html')
-      )
+      })
     );
   }
 });
