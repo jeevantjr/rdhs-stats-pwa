@@ -295,6 +295,40 @@ footer {
     document.getElementById('installContainer').style.display = 'none';
   });
 </script>
+<!-- Refresh Prompt for New Version -->
+<div id="refreshPrompt" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <button onclick="location.reload()" style="
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+  ">
+    🔄 New Update Available - Refresh
+  </button>
+</div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(registration => {
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // New update available
+                document.getElementById('refreshPrompt').style.display = 'block';
+              }
+            }
+          };
+        };
+      });
+  }
+</script>
 
 </body>
 </html>
