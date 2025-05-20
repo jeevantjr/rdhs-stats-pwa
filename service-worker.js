@@ -25,25 +25,26 @@ const urlsToCache = [
   '/rdhs-stats-pwa/statistics/hospitals-by-ds.html',
   '/rdhs-stats-pwa/statistics/maternal-deaths.html',
   '/rdhs-stats-pwa/statistics/registered-births.html',
-  '/rdhs-stats-pwa/statistics/unprotected-births.html'
+  '/rdhs-stats-pwa/statistics/unprotected-births.html',
 
-   // clinic details
-'/rdhs-stats-pwa/institutions/index.html',
+  // Clinic Details
+  '/rdhs-stats-pwa/institutions/index.html',
   '/rdhs-stats-pwa/institutions/institutionschedule.html',
-     '/rdhs-stats-pwa/institutions/specialclinicsdetails.html',
+  '/rdhs-stats-pwa/institutions/specialclinicsdetails.html',
 
-  //health education
-      '/rdhs-stats-pwa/healtheducation.html',
-  
+  // Health Education
+  '/rdhs-stats-pwa/healtheducation.html',
+
+  // Optional: offline fallback (if created)
+  // '/rdhs-stats-pwa/offline.html',
 ];
 
-  
-
-  
-// Install: Cache everything
+// Install: Cache all necessary files
 self.addEventListener('install', (event) => {
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
+      console.log('[Service Worker] Caching app shell and content');
       return cache.addAll(urlsToCache);
     })
   );
@@ -51,28 +52,31 @@ self.addEventListener('install', (event) => {
 
 // Activate: Clean up old caches
 self.addEventListener('activate', (event) => {
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((name) => {
           if (name !== CACHE_NAME) {
+            console.log('[Service Worker] Deleting old cache:', name);
             return caches.delete(name);
           }
         })
       );
     })
   );
+  return self.clients.claim();
 });
 
-// Fetch: Serve cached or go to network
+// Fetch: Try cache first, then network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return (
-        response ||
-        fetch(event.request).catch(() =>
-          caches.match('/rdhs-stats-pwa/offline.html') // Optional fallback page
-        )
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).catch(() =>
+        caches.match('/rdhs-stats-pwa/offline.html') // Only if you add an offline page
       );
     })
   );
