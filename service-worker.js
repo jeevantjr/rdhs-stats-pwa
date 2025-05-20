@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v1';
+const CACHE_NAME = 'rdhs-cache-v2'; // Make sure to update version on each change
 
 const urlsToCache = [
   '/rdhs-stats-pwa/',
@@ -35,22 +35,22 @@ const urlsToCache = [
   // Health Education
   '/rdhs-stats-pwa/healtheducation.html',
 
-  // Optional: offline fallback (if created)
+  // Optional offline fallback (if created)
   // '/rdhs-stats-pwa/offline.html',
 ];
 
-// Install: Cache all necessary files
+// Install event
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Caching app shell and content');
+      console.log('[Service Worker] Caching app shell');
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-// Activate: Clean up old caches
+// Activate event
 self.addEventListener('activate', (event) => {
   console.log('[Service Worker] Activating...');
   event.waitUntil(
@@ -68,7 +68,7 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// Fetch: Try cache first, then network
+// Fetch event
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -76,8 +76,9 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
       return fetch(event.request).catch(() =>
-        caches.match('/rdhs-stats-pwa/offline.html') // Only if you add an offline page
+        caches.match('/rdhs-stats-pwa/offline.html') // Optional
       );
     })
   );
 });
+
