@@ -1,6 +1,7 @@
 const CACHE_NAME = 'rdhs-cache-v4'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
 
+
 const urlsToCache = [
   '/rdhs-stats-pwa/',
   '/rdhs-stats-pwa/index.html',
