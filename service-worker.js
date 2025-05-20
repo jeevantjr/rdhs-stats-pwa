@@ -33,7 +33,8 @@ const urlsToCache = [
   '/rdhs-stats-pwa/institutions/specialclinicsdetails.html',
 
   // Health Education
-  '/rdhs-stats-pwa/healtheducation.html',
+  '/rdhs-stats-pwa/healtheducation/FeedYourBaby.html',
+    '/rdhs-stats-pwa/healtheducation/index.html',
 
   //monthly statistics
   '/MonthlyStatistics/dengue.html',
