@@ -1,63 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monthly Statistics - Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feeding Your Baby – Health Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f9ff;
+      color: #002147;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #2c3e50;
+    }
+
+    header {
+      background-color: #0074cc;
+      color: white;
+      padding: 1.5rem 1rem;
       text-align: center;
     }
 
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
     .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
       background-color: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: #34495e;
+    .language-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
     }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
+    .language-buttons button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #0074cc;
+      color: white;
+      transition: background-color 0.3s ease;
     }
 
-    .icon {
-      font-size: 60px;
-      margin-bottom: 20px;
+    .language-buttons button:hover {
+      background-color: #005fa3;
+    }
+
+    .video-section {
+      display: none;
+      text-align: center;
+    }
+
+    .video-section.active {
+      display: block;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 12px;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #555;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 3rem;
+      padding: 1rem;
     }
   </style>
 </head>
 <body>
+
+  <header>
+    <h1>Correct Way to Feed Your Baby</h1>
+    <p>Choose your language to watch the video</p>
+  </header>
+
   <div class="container">
-    <div class="icon">🚧</div>
-    <h1>Health Education </h1>
-    <p>The Health Education section you are looking for is currently under construction.</p>
-    <p>We’re working hard to bring this content to you soon. Thank you for your patience!</p>
+    <div class="language-buttons">
+      <button onclick="showVideo('tamil')">தமிழ் (Tamil)</button>
+      <button onclick="showVideo('sinhala')">සිංහල (Sinhala)</button>
+    </div>
+
+    <div id="tamil" class="video-section">
+      <iframe src="https://www.youtube.com/embed/G694tvPQVvQ?si=yfM3xJLnYPoaNxXh" 
+              title="Tamil Video – Correct Way to Feed Your Baby" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen></iframe>
+      <p>தமிழில் காண்க – உங்கள் குழந்தையை உணவளிக்கும் சரியான முறை</p>
+    </div>
+
+    <div id="sinhala" class="video-section">
+      <iframe src="https://www.youtube.com/embed/diJzwJ8MB2w?si=AAfC1rR3H-Zhh1hn" 
+              title="Sinhala Video – Correct Way to Feed Your Baby" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen></iframe>
+      <p>සිංහලෙන් නැරඹින්න – ඔබේ ශිෂුවාට නිවැරදිව ආහාරය ලබාදීම</p>
+    </div>
   </div>
+
+ 
    <footer style="background-color: #002147; padding: 25px 15px; text-align: center; font-family: 'Segoe UI', sans-serif; color: #ffffff;">
   <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
     © 2025 All Rights Reserved
@@ -88,5 +147,17 @@
 ">
   🏠 Home
 </a>
+
+  <script>
+    function showVideo(lang) {
+      document.getElementById('tamil').classList.remove('active');
+      document.getElementById('sinhala').classList.remove('active');
+      document.getElementById(lang).classList.add('active');
+    }
+
+    // Show Tamil by default
+    showVideo('tamil');
+  </script>
+
 </body>
 </html>
