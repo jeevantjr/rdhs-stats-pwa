@@ -98,6 +98,41 @@
     .officer-card p {
       font-size: 0.95em;
     }
+
+    /* New styles for image section */
+    .image-section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .image-block {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .image-block h2 {
+      font-size: 1.8rem;
+      color: #01579b;
+      margin-bottom: 1rem;
+    }
+    .image-block p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .image-block img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 3px solid #0288d1;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 <body>
@@ -143,15 +178,14 @@
       <li>Occupational Health, Communicable & NCD Control, Mental Health, Oral Care.</li>
     </ul>
 
-<section style="max-width: 900px; margin: 2rem auto; padding: 1.5rem 2rem; background-color: rgba(0, 64, 128, 0.85); border-radius: 12px; color: #ffffff; font-family: 'Roboto', sans-serif; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-  <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #FFD700; border-bottom: 3px solid #FFD700; padding-bottom: 0.3rem;">
-    Key Leadership Team of the RDHS Office
-  </h2>
-  <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 0;">
-    The Regional Director of Health Services (RDHS) office is supported by a dedicated leadership team committed to ensuring efficient and effective healthcare administration in Trincomalee. Below are the key officers who play vital roles in managing and advancing our health services.
-  </p>
-</section>
-
+    <section style="max-width: 900px; margin: 2rem auto; padding: 1.5rem 2rem; background-color: rgba(0, 64, 128, 0.85); border-radius: 12px; color: #ffffff; font-family: 'Roboto', sans-serif; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #FFD700; border-bottom: 3px solid #FFD700; padding-bottom: 0.3rem;">
+        Key Leadership Team of the RDHS Office
+      </h2>
+      <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 0;">
+        The Regional Director of Health Services (RDHS) office is supported by a dedicated leadership team committed to ensuring efficient and effective healthcare administration in Trincomalee. Below are the key officers who play vital roles in managing and advancing our health services.
+      </p>
+    </section>
 
     <div class="officer-section">
       <div class="officer-main">
@@ -180,35 +214,56 @@
       </div>
     </div>
   </section>
-     <footer style="background-color: #002147; padding: 25px 15px; text-align: center; font-family: 'Segoe UI', sans-serif; color: #ffffff;">
-  <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
-    © 2025 All Rights Reserved
-  </p>
-  <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
-    <strong>Health Information Management Unit</strong><br>
-    Regional Director of Health Services, 120 Court Rd, Trincomalee
-  </p>
-  <p style="font-size: 15px; margin: 0; line-height: 1.6;">
-    📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
-    📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br>
-    ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
-  </p>
-</footer>
+
+  <!-- Added Organizational Chart and Hospital Details -->
+  <section class="image-section">
+    <div class="image-block">
+      <h2>Organizational Structure</h2>
+      <p>
+        This diagram presents the official organizational chart of the Regional Director of Health Services Office in Trincomalee. It outlines the hierarchical structure and key departmental divisions to help the public and staff understand how healthcare leadership is organized.
+      </p>
+      <img src="images/orgchart.png" alt="Organizational Chart of RDHS Trincomalee">
+    </div>
+
+    <div class="image-block">
+      <h2>Hospital Details – Trincomalee District</h2>
+      <p>
+        This visual representation displays all hospitals, MOH offices, PMCU units, and other healthcare institutions under the Regional Director of Health Services in Trincomalee district. It helps stakeholders and visitors quickly identify facilities across the region.
+      </p>
+      <img src="images/hospdetails.png" alt="Hospital Details of RDHS Trincomalee">
+    </div>
+  </section>
+
+  <footer style="background-color: #002147; padding: 25px 15px; text-align: center; font-family: 'Segoe UI', sans-serif; color: #ffffff;">
+    <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
+      © 2025 All Rights Reserved
+    </p>
+    <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
+      <strong>Health Information Management Unit</strong><br>
+      Regional Director of Health Services, 120 Court Rd, Trincomalee
+    </p>
+    <p style="font-size: 15px; margin: 0; line-height: 1.6;">
+      📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
+      📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br>
+      ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
+    </p>
+  </footer>
+
   <a href="index.html" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #002147;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-">
-  🏠 Home
-</a>
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #002147;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  ">
+    🏠 Home
+  </a>
 </body>
 </html>
