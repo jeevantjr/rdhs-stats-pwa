@@ -2,48 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MOH Division Table</title>
+  <title>Maternal Deaths by MOH Division (2020–2024)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
+      background-color: #f2f4f8;
+      color: #333;
     }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 1.8em;
+      color: #004ba0;
+    }
+
     .table-container {
       overflow-x: auto;
+      margin-bottom: 30px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+
     th, td {
       border: 1px solid #ddd;
       padding: 10px;
       text-align: center;
     }
+
     th {
       background-color: #4CAF50;
       color: white;
     }
+
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
+
     tr:hover {
       background-color: #e3f2fd;
     }
-    caption {
-      caption-side: top;
-      font-size: 1.5em;
-      font-weight: bold;
-      margin-bottom: 10px;
+
+    .chart-container {
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, #004ba0, #1976d2);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
 
+<h2>Maternal Deaths by MOH Division (2020–2024)</h2>
+
+<div class="chart-container">
+  <canvas id="birthsChart"></canvas>
+</div>
+
 <div class="table-container">
   <table>
-    <caption>MOH Division Data (2020 - 2024)</caption>
+    <caption><strong>MOH Division Data (2020 - 2024)</strong></caption>
     <thead>
       <tr>
         <th>S.No</th>
@@ -68,29 +109,49 @@
       <tr><td>10</td><td>Trincomalee</td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr><td>11</td><td>Eachchalampattai</td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr><td>12</td><td>Uppuvelli</td><td>1</td><td></td><td></td><td></td><td></td></tr>
-      <tr><th colspan="2">Total</th><td>6</td><td>4</td><td></td><td>4</td><td>4</td></tr>
+      <tr><th colspan="2">Total</th><td>6</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
     </tbody>
   </table>
 </div>
-  
-<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" 
-style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: linear-gradient(to right, #004ba0, #1976d2);
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-">
+
+<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-button">
   🔙 Back to Health Statistics Dashboard – 2024
 </a>
+
+<script>
+  const ctx = document.getElementById('birthsChart').getContext('2d');
+  const birthsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2020', '2021', '2022', '2023', '2024'],
+      datasets: [{
+        label: 'Total Unprotected Births',
+        data: [6, 4, 4, 4, 4],
+        backgroundColor: '#1976d2',
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Total Unprotected Births by Year',
+          font: {
+            size: 16
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1 }
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
