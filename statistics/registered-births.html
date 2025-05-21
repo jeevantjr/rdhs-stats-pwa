@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MOH Division Statistics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Registered Births in MOH Offices of Trincomalee District from 2020 to 2024." />
+  <title>Registered Births in MOH Offices (2020–2024)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-color: #f9f9f9;
     }
 
     .table-container {
       max-width: 100%;
       overflow-x: auto;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      margin-bottom: 40px;
     }
 
     table {
@@ -22,7 +27,6 @@
       border-collapse: collapse;
       min-width: 700px;
       font-size: 16px;
-      background-color: #fff;
     }
 
     thead {
@@ -49,11 +53,39 @@
       margin-bottom: 10px;
     }
 
+    tbody tr:last-child {
+      background-color: #e6f2ff;
+      font-weight: bold;
+    }
+
+    .chart-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
     @media screen and (max-width: 600px) {
       th, td {
         padding: 8px;
         font-size: 13px;
       }
+    }
+
+    .back-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, #004ba0, #1976d2);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
     }
   </style>
 </head>
@@ -64,13 +96,13 @@
     <caption>MOH Division Statistics (2020 - 2024)</caption>
     <thead>
       <tr>
-        <th>S.No</th>
-        <th>MOH Division</th>
-        <th>2020</th>
-        <th>2021</th>
-        <th>2022</th>
-        <th>2023</th>
-        <th>2024</th>
+        <th scope="col">S.No</th>
+        <th scope="col">MOH Division</th>
+        <th scope="col">2020</th>
+        <th scope="col">2021</th>
+        <th scope="col">2022</th>
+        <th scope="col">2023</th>
+        <th scope="col">2024</th>
       </tr>
     </thead>
     <tbody>
@@ -83,7 +115,7 @@
       <tr><td>07</td><td>Padavisiripura</td><td>136</td><td>141</td><td>133</td><td>100</td><td>1170</td></tr>
       <tr><td>08</td><td>Seruwila</td><td>308</td><td>298</td><td>262</td><td>193</td><td>120</td></tr>
       <tr><td>09</td><td>Thambalagamuwa</td><td>642</td><td>603</td><td>651</td><td>548</td><td>177</td></tr>
-      <tr><td>10</td><td>Trincomlaee</td><td>649</td><td>566</td><td>554</td><td>526</td><td>506</td></tr>
+      <tr><td>10</td><td>Trincomalee</td><td>649</td><td>566</td><td>554</td><td>526</td><td>506</td></tr>
       <tr><td>11</td><td>Eachchalampattai</td><td>310</td><td>317</td><td>297</td><td>264</td><td>501</td></tr>
       <tr><td>12</td><td>Uppuvelli</td><td>821</td><td>752</td><td>753</td><td>647</td><td>612</td></tr>
       <tr>
@@ -97,25 +129,68 @@
     </tbody>
   </table>
 </div>
-  
-<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" 
-style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: linear-gradient(to right, #004ba0, #1976d2);
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-">
+
+<div class="chart-container">
+  <canvas id="birthChart"></canvas>
+</div>
+
+<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-link">
   🔙 Back to Health Statistics Dashboard – 2024
 </a>
+
+<script>
+  const ctx = document.getElementById('birthChart').getContext('2d');
+  const birthChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2020', '2021', '2022', '2023', '2024'],
+      datasets: [
+        {
+          label: 'Total Registered Births',
+          data: [7877, 7409, 7425, 6323, 6167],
+          borderColor: '#1976d2',
+          backgroundColor: 'rgba(25, 118, 210, 0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total Registered Births in MOH Divisions (2020–2024)',
+          font: {
+            size: 18
+          }
+        },
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Number of Births'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Year'
+          }
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
+
