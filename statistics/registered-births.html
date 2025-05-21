@@ -8,18 +8,48 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    .heading-card {
+      background: linear-gradient(to right, #004ba0, #1976d2);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin-bottom: 40px;
+    }
+
+    .heading-card h1 {
+      margin: 0;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .chart-container {
+      width: 95%;
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
     }
 
     .table-container {
-      max-width: 100%;
+      width: 95%;
+      max-width: 1200px;
+      margin: auto;
       overflow-x: auto;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background: #fff;
-      margin-bottom: 40px;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     table {
@@ -36,7 +66,7 @@
 
     th, td {
       padding: 10px 12px;
-      text-align: left;
+      text-align: center;
       border-bottom: 1px solid #ddd;
       white-space: nowrap;
     }
@@ -45,30 +75,17 @@
       background-color: #f5f5f5;
     }
 
+    tbody tr:last-child {
+      background-color: #e6f2ff;
+      font-weight: bold;
+    }
+
     caption {
       caption-side: top;
       text-align: left;
       font-size: 1.3em;
       font-weight: bold;
       margin-bottom: 10px;
-    }
-
-    tbody tr:last-child {
-      background-color: #e6f2ff;
-      font-weight: bold;
-    }
-
-    .chart-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    @media screen and (max-width: 600px) {
-      th, td {
-        padding: 8px;
-        font-size: 13px;
-      }
     }
 
     .back-link {
@@ -82,27 +99,45 @@
       text-decoration: none;
       font-size: 16px;
       font-weight: 600;
-      font-family: 'Segoe UI', sans-serif;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
       z-index: 1000;
     }
+
+    @media screen and (max-width: 600px) {
+      th, td {
+        padding: 8px;
+        font-size: 13px;
+      }
+
+      .heading-card h1 {
+        font-size: 1.5em;
+      }
+    }
   </style>
 </head>
 <body>
+
+<div class="heading-card">
+  <h1>Registered Births in MOH Divisions – Trincomalee District (2020–2024)</h1>
+</div>
+
+<div class="chart-container">
+  <canvas id="birthChart"></canvas>
+</div>
 
 <div class="table-container">
   <table>
     <caption>MOH Division Statistics (2020 - 2024)</caption>
     <thead>
       <tr>
-        <th scope="col">S.No</th>
-        <th scope="col">MOH Division</th>
-        <th scope="col">2020</th>
-        <th scope="col">2021</th>
-        <th scope="col">2022</th>
-        <th scope="col">2023</th>
-        <th scope="col">2024</th>
+        <th>S.No</th>
+        <th>MOH Division</th>
+        <th>2020</th>
+        <th>2021</th>
+        <th>2022</th>
+        <th>2023</th>
+        <th>2024</th>
       </tr>
     </thead>
     <tbody>
@@ -128,10 +163,6 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<div class="chart-container">
-  <canvas id="birthChart"></canvas>
 </div>
 
 <a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-link">
