@@ -2,31 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Responsive Table</title>
+  <title>Unprotected Births by MOH Division (2020–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
+      background-color: #f5f5f5;
     }
 
     .table-container {
       overflow-x: auto;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
     }
 
     table {
       border-collapse: collapse;
       width: 100%;
-      max-width: 100%;
     }
 
     th, td {
-      border: 1px solid #dddddd;
+      border: 1px solid #ddd;
       padding: 10px;
       text-align: center;
     }
 
     th {
-      background-color: #4CAF50;
+      background-color: #2e7d32;
       color: white;
     }
 
@@ -42,6 +49,41 @@
       font-size: 1.5em;
       margin-bottom: 10px;
       font-weight: bold;
+      text-align: left;
+    }
+
+    tbody tr:last-child {
+      font-weight: bold;
+      background-color: #e8f5e9;
+    }
+
+    .chart-container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    @media screen and (max-width: 600px) {
+      th, td {
+        padding: 6px;
+        font-size: 13px;
+      }
+    }
+
+    .back-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, #004ba0, #1976d2);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
     }
   </style>
 </head>
@@ -49,16 +91,16 @@
 
 <div class="table-container">
   <table>
-    <caption>MOH Division Data (2020 - 2024)</caption>
+    <caption>Unprotected Births by MOH Division (2020–2024)</caption>
     <thead>
       <tr>
-        <th>S.No</th>
-        <th>MOH Division</th>
-        <th>2020</th>
-        <th>2021</th>
-        <th>2022</th>
-        <th>2023</th>
-        <th>2024</th>
+        <th scope="col">S.No</th>
+        <th scope="col">MOH Division</th>
+        <th scope="col">2020</th>
+        <th scope="col">2021</th>
+        <th scope="col">2022</th>
+        <th scope="col">2023</th>
+        <th scope="col">2024</th>
       </tr>
     </thead>
     <tbody>
@@ -74,29 +116,71 @@
       <tr><td>10</td><td>Trincomalee</td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr><td>11</td><td>Eachchalampattai</td><td>1</td><td>5</td><td>2</td><td>1</td><td></td></tr>
       <tr><td>12</td><td>Uppuvelli</td><td></td><td></td><td></td><td>1</td><td></td></tr>
-      <tr><th colspan="2">Total</th><td>3</td><td>10</td><td>4</td><td>8</td><td>4</td></tr>
+      <tr>
+        <td colspan="2"><strong>Total</strong></td>
+        <td><strong>3</strong></td>
+        <td><strong>10</strong></td>
+        <td><strong>4</strong></td>
+        <td><strong>8</strong></td>
+        <td><strong>4</strong></td>
+      </tr>
     </tbody>
   </table>
 </div>
-  
-<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" 
-style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: linear-gradient(to right, #004ba0, #1976d2);
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-">
+
+<div class="chart-container">
+  <canvas id="unprotectedChart"></canvas>
+</div>
+
+<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-link">
   🔙 Back to Health Statistics Dashboard – 2024
 </a>
+
+<script>
+  const ctx = document.getElementById('unprotectedChart').getContext('2d');
+  const unprotectedChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2020', '2021', '2022', '2023', '2024'],
+      datasets: [{
+        label: 'Unprotected Births',
+        data: [3, 10, 4, 8, 4],
+        backgroundColor: '#388e3c'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Unprotected Births by Year (2020–2024)',
+          font: {
+            size: 18
+          }
+        },
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Number of Unprotected Births'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Year'
+          }
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
+
