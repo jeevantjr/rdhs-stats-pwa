@@ -3,38 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Unprotected Births by MOH Division (2020–2024)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #f3f4f6;
+      color: #333;
+    }
+
+    .header-card {
+      background: linear-gradient(135deg, #43a047, #1b5e20);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .header-card h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: auto;
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
 
     .table-container {
       overflow-x: auto;
-      background-color: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-bottom: 40px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      max-width: 100%;
+      margin: auto;
     }
 
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
     }
 
     th, td {
       border: 1px solid #ddd;
-      padding: 10px;
+      padding: 12px;
       text-align: center;
     }
 
     th {
       background-color: #2e7d32;
-      color: white;
+      color: #fff;
     }
 
     tr:nth-child(even) {
@@ -46,27 +76,16 @@
     }
 
     caption {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      font-weight: bold;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #2e7d32;
       text-align: left;
     }
 
     tbody tr:last-child {
       font-weight: bold;
       background-color: #e8f5e9;
-    }
-
-    .chart-container {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    @media screen and (max-width: 600px) {
-      th, td {
-        padding: 6px;
-        font-size: 13px;
-      }
     }
 
     .back-link {
@@ -80,107 +99,128 @@
       text-decoration: none;
       font-size: 16px;
       font-weight: 600;
-      font-family: 'Segoe UI', sans-serif;
       box-shadow: 0 6px 16px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
       z-index: 1000;
+    }
+
+    @media screen and (max-width: 600px) {
+      .header-card h1 {
+        font-size: 1.4rem;
+      }
+
+      table, th, td {
+        font-size: 14px;
+      }
+
+      .chart-container {
+        padding: 10px;
+      }
+
+      .back-link {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="table-container">
-  <table>
-    <caption>Unprotected Births by MOH Division (2020–2024)</caption>
-    <thead>
-      <tr>
-        <th scope="col">S.No</th>
-        <th scope="col">MOH Division</th>
-        <th scope="col">2020</th>
-        <th scope="col">2021</th>
-        <th scope="col">2022</th>
-        <th scope="col">2023</th>
-        <th scope="col">2024</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>01</td><td>Gomarankadawala</td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td>02</td><td>Kanthale</td><td></td><td>1</td><td>1</td><td></td><td></td></tr>
-      <tr><td>03</td><td>Kinniya</td><td></td><td>1</td><td></td><td>2</td><td>1</td></tr>
-      <tr><td>04</td><td>Kuchchaveli</td><td></td><td></td><td>1</td><td>1</td><td>2</td></tr>
-      <tr><td>05</td><td>Morawewa</td><td></td><td>1</td><td></td><td></td><td></td></tr>
-      <tr><td>06</td><td>Muthur</td><td>1</td><td>2</td><td></td><td>3</td><td>1</td></tr>
-      <tr><td>07</td><td>Padavisiripura</td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td>08</td><td>Seruwila</td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td>09</td><td>Thambalagamuwa</td><td>1</td><td></td><td></td><td></td><td></td></tr>
-      <tr><td>10</td><td>Trincomalee</td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td>11</td><td>Eachchalampattai</td><td>1</td><td>5</td><td>2</td><td>1</td><td></td></tr>
-      <tr><td>12</td><td>Uppuvelli</td><td></td><td></td><td></td><td>1</td><td></td></tr>
-      <tr>
-        <td colspan="2"><strong>Total</strong></td>
-        <td><strong>3</strong></td>
-        <td><strong>10</strong></td>
-        <td><strong>4</strong></td>
-        <td><strong>8</strong></td>
-        <td><strong>4</strong></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="header-card">
+    <h1>Unprotected Births by MOH Division (2020–2024)</h1>
+  </div>
 
-<div class="chart-container">
-  <canvas id="unprotectedChart"></canvas>
-</div>
+  <div class="chart-container">
+    <canvas id="unprotectedChart"></canvas>
+  </div>
 
-<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-link">
-  🔙 Back to Health Statistics Dashboard – 2024
-</a>
+  <div class="table-container">
+    <table>
+      <caption>Annual Data by Division</caption>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>MOH Division</th>
+          <th>2020</th>
+          <th>2021</th>
+          <th>2022</th>
+          <th>2023</th>
+          <th>2024</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td>Gomarankadawala</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>02</td><td>Kanthale</td><td></td><td>1</td><td>1</td><td></td><td></td></tr>
+        <tr><td>03</td><td>Kinniya</td><td></td><td>1</td><td></td><td>2</td><td>1</td></tr>
+        <tr><td>04</td><td>Kuchchaveli</td><td></td><td></td><td>1</td><td>1</td><td>2</td></tr>
+        <tr><td>05</td><td>Morawewa</td><td></td><td>1</td><td></td><td></td><td></td></tr>
+        <tr><td>06</td><td>Muthur</td><td>1</td><td>2</td><td></td><td>3</td><td>1</td></tr>
+        <tr><td>07</td><td>Padavisiripura</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>08</td><td>Seruwila</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>09</td><td>Thambalagamuwa</td><td>1</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>10</td><td>Trincomalee</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>11</td><td>Eachchalampattai</td><td>1</td><td>5</td><td>2</td><td>1</td><td></td></tr>
+        <tr><td>12</td><td>Uppuvelli</td><td></td><td></td><td></td><td>1</td><td></td></tr>
+        <tr>
+          <td colspan="2"><strong>Total</strong></td>
+          <td><strong>3</strong></td>
+          <td><strong>10</strong></td>
+          <td><strong>4</strong></td>
+          <td><strong>8</strong></td>
+          <td><strong>4</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<script>
-  const ctx = document.getElementById('unprotectedChart').getContext('2d');
-  const unprotectedChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['2020', '2021', '2022', '2023', '2024'],
-      datasets: [{
-        label: 'Unprotected Births',
-        data: [3, 10, 4, 8, 4],
-        backgroundColor: '#388e3c'
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Unprotected Births by Year (2020–2024)',
-          font: {
-            size: 18
-          }
-        },
-        legend: {
-          display: false
-        }
+  <a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" class="back-link">
+    🔙 Back to Health Statistics Dashboard – 2024
+  </a>
+
+  <script>
+    const ctx = document.getElementById('unprotectedChart').getContext('2d');
+    const unprotectedChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Unprotected Births',
+          data: [3, 10, 4, 8, 4],
+          backgroundColor: '#66bb6a'
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true,
+      options: {
+        responsive: true,
+        plugins: {
           title: {
             display: true,
-            text: 'Number of Unprotected Births'
+            text: 'Unprotected Births by Year (2020–2024)',
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            display: false
           }
         },
-        x: {
-          title: {
-            display: true,
-            text: 'Year'
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Unprotected Births'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Year'
+            }
           }
         }
       }
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
-
