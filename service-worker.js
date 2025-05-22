@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v9'; // Update this version after every significant change
+const CACHE_NAME = 'rdhs-cache-v10'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
 
 const urlsToCache = [
@@ -43,7 +43,7 @@ const urlsToCache = [
 
   // Monthly statistics (adjust if these are outside your scope)
   '/MonthlyStatistics/index.html',
-  '/MonthlyStatistics/dengue.html',
+  '/MonthlyStatistics/dengue2.html',
 
   // Offline fallback page
   '/rdhs-stats-pwa/offline.html',
