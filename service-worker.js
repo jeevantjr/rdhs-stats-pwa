@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v7'; // Update this version after every significant change
+const CACHE_NAME = 'rdhs-cache-v8'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
 
 const urlsToCache = [
@@ -27,6 +27,10 @@ const urlsToCache = [
   '/rdhs-stats-pwa/statistics/maternal-deaths.html',
   '/rdhs-stats-pwa/statistics/registered-births.html',
   '/rdhs-stats-pwa/statistics/unprotected-births.html',
+   '/rdhs-stats-pwa/statistics/statistics/Bed.html',
+  '/rdhs-stats-pwa/statistics/statistics/Inward.html',
+  '/rdhs-stats-pwa/statistics/statistics/Outdoor.html',
+   '/rdhs-stats-pwa/statistics/statistics/Dengue.html',
 
   // Clinic Details
   '/rdhs-stats-pwa/institutions/index.html',
