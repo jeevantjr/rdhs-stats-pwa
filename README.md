@@ -1,89 +1,135 @@
-# 📊 RDHS Statistics Dashboard (PWA)
+# 🏥 RDHS Statistics Dashboard (PWA)
 
-A responsive and mobile-friendly **Progressive Web Application (PWA)** developed for the **Regional Director of Health Services (RDHS)** to visualize key public health statistics in a clear, interactive, and user-centric interface.
+A modern, responsive, and offline-capable **Progressive Web Application (PWA)** designed for the **Regional Director of Health Services (RDHS), Trincomalee**, to visualize, monitor, and manage vital public health statistics interactively and intuitively.
 
-🌐 **Live Website**: [https://jeevantjr.github.io/rdhs-stats-pwa/](https://jeevantjr.github.io/rdhs-stats-pwa/)
+🌐 **Live Site**: [https://jeevantjr.github.io/rdhs-stats-pwa/](https://jeevantjr.github.io/rdhs-stats-pwa/)
 
 ---
 
 ## 🚀 Key Features
 
-- 📱 **Progressive Web App**  
-  Installable on any device, with offline functionality and fast load times.
+- **📱 Progressive Web App**  
+  Installable on mobile and desktop devices with offline functionality using service workers and caching strategies.
 
-- 📊 **Interactive Data Visualization**  
-  Presents vital health statistics using **Chart.js**—simple, engaging, and informative graphs.
+- **📊 Real-Time Health Statistics**  
+  Visual representation of health trends with dynamic graphs and clean tabular views, built using **Chart.js**.
 
-- 🧭 **User-Friendly Navigation**  
-  Clear and intuitive layout for effortless browsing across data categories.
+- **🏥 Institutional Data & Clinic Schedules**  
+  Displays outpatient schedules and clinic services at hospitals and PMCU facilities throughout the Trincomalee district.
 
-- 🧑‍⚕️ **Healthcare Focused**  
-  Tailored to the needs of **RDHS offices and MOH divisions** for strategic decision-making.
+- **📋 Interactive MOH & Hospital Cadre Data**  
+  Access workforce distribution by cadre, institution, and MOH divisions with downloadable PDF summaries.
 
-- 🔄 **Real-Time Monitoring**  
-  Supports timely tracking of health trends, immunization coverage, disease surveillance, and more.
+- **📅 Monthly Statistics**  
+  Focused dashboards for **dengue cases**, **outdoor and indoor patients**, **bed occupancy**, and more.
 
----
+- **🎓 Health Education**  
+  Education materials such as "Feed Your Baby" and others to promote preventive health practices.
 
-## 🎯 Purpose
+- **📂 Downloadable Resources**  
+  Health service summaries, reports, and cadre PDFs readily available.
 
-The **RDHS Statistics Dashboard** aims to:
-
-- Centralize regional health indicators for better accessibility.
-- Facilitate evidence-based planning and healthcare resource allocation.
-- Promote transparency and efficiency in public health data management.
-- Enable routine performance monitoring across MOH divisions.
+- **⚡ Fast, Lightweight & Intuitive UI**  
+  Optimized for performance and ease-of-use across all devices with **Bootstrap** styling.
 
 ---
 
-## 🗂️ Application Structure
+## 🧭 Navigation Overview
 
-- 📍 **Main Dashboard**  
-  Overview of aggregated health data by MOH division.
+### 📌 Main Sections:
+- **Dashboard Overview**  
+  Health service statistics across divisions and districts.
 
-- 🧪 **Key Health Indicators**  
-  Covers areas like immunization, maternal and child health, and disease trends.
+- **CardDetails**  
+  - MOH Cadre Details  
+  - Hospital Cadre Details  
+  - Summary Reports (PDF)
 
-- 📈 **Comparative Charts**  
-  Visual comparisons across years and administrative units.
+- **Statistics**  
+  - Communicable Diseases  
+  - Maternal Deaths  
+  - Health Personnel  
+  - Registered & Unprotected Births  
+  - Hospital Stats: Beds, Inward/Outdoor Visits, Dengue
 
-- 📥 **Downloadable Resources**  
-  Download options for reports and datasets (where applicable).
+- **Institutions**  
+  - Outpatient Schedules by Hospital  
+  - Special Clinics
+
+- **Health Education**  
+  - Baby Feeding Education  
+  - Additional modules in progress
+
+- **MonthlyStatistics**  
+  - Dengue Stats & Outbreak Monitoring
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Technology Stack
 
-- **HTML5**, **CSS3**, **JavaScript**
-- **Chart.js** – Elegant and customizable charts
-- **Bootstrap** – Responsive layout and UI components
-- **PWA Technologies** – Including Manifest & Service Worker for offline support
-- **GitHub Pages** – Fast and free web hosting
+- **HTML4/5**, **CSS3**, **JavaScript (Vanilla JS)**
+- **Chart.js** for rendering graphs
+- **Bootstrap 4** for responsive layout
+- **Progressive Web App (PWA)** capabilities with Service Worker & App Manifest
+- **GitHub Pages** for fast and free hosting
 
 ---
 
-## 📦 Installation (For Developers)
+## ⚙️ PWA Capabilities
 
-To run this project locally:
+- **Offline Support**  
+  With a customized service worker and pre-cached routes for all major pages, users can navigate even with limited connectivity.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/jeevantjr/rdhs-stats-pwa.git
-   cd rdhs-stats-pwa
+- **App Install Prompt**  
+  Supports Add-to-Home-Screen functionality across Android, iOS, and desktops.
+
+- **Automatic Caching**  
+  Key assets and pages cached for instant access and fast load times.
+
+---
+
+## 📦 Developer Installation
+
+To run the project locally for development:
+
+```bash
+git clone https://github.com/jeevantjr/rdhs-stats-pwa.git
+cd rdhs-stats-pwa
+# Open index.html in your preferred browser
+```
+
+To serve using a local server:
+
+```bash
+# Using Python
+python -m http.server 8000
+
+# Or use Node.js
+npm install -g serve
+serve .
+```
 
 ---
 
 ## 👨‍💻 Developer
- Under the vision of <strong>‘Transforming Public Health through Digital Innovation’</strong>,this platform was developed and is continuously maintained by
-**Dr T. Jeevaraaj (MBBS, MCGP, MSc in Biomedical Informatics)**  
-**Medical Officer – Health Information**  
-**RDHS Office, Trincomalee**  
-🔗 GitHub: [github.com/jeevantjr](https://github.com/jeevantjr)
+
+> Under the vision of **‘Transforming Public Health through Digital Innovation’**, this platform was developed and is actively maintained by:
+
+**Dr. T. Jeevaraaj**  
+MBBS, MCGP, MSc in Biomedical Informatics  
+Medical Officer – Health Information  
+Regional Director of Health Services, Trincomalee  
+🔗 GitHub: [https://github.com/jeevantjr](https://github.com/jeevantjr)
 
 ---
 
-## 📝 License
+## 📩 Feedback & Collaboration
 
-This project is open-source and free to use under the **MIT License**.  
-See the [LICENSE](LICENSE) file for full details.
+We welcome feedback, suggestions, and collaborations to expand this tool’s reach and impact.  
+Please reach out via GitHub Issues or through the RDHS Office, Trincomalee.
 
+---
+
+## 📃 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
