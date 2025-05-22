@@ -1,97 +1,414 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monthly Statistics - Coming Soon</title>
+  <meta charset="UTF-8">
+  <title>Hospital OPD Schedules</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #2c3e50;
-      text-align: center;
+      font-family: Arial, sans-serif;
     }
-
-    .container {
+    .accordion {
+      background-color: #f1f1f1;
+      color: #333;
+      cursor: pointer;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
+      margin-top: 5px;
+    }
+    .accordion:hover {
+      background-color: #ddd;
+    }
+    .active, .accordion:active {
+      background-color: #ccc;
+    }
+    .panel {
+      padding: 0 14px;
+      display: none;
       background-color: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+      overflow: hidden;
+      border-left: 2px solid #ccc;
+      border-right: 2px solid #ccc;
+      border-bottom: 2px solid #ccc;
     }
-
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: #34495e;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
     }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
+    td, th {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
     }
-
-    .icon {
-      font-size: 60px;
-      margin-bottom: 20px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 1.5rem 1rem;
-      font-size: 0.95rem;
-      background-color: #004080;
-      color: white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
+    th {
+      background-color: #eee;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="icon">🚧</div>
-    <h1>OPD Details</h1>
-    <p>The OPD Details section you are looking for is currently under construction.</p>
-    <p>We’re working hard to bring this content to you soon. Thank you for your patience!</p>
-  </div>
-    <footer>
-    <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
-      © 2025 All Rights Reserved
-    </p>
-    <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
-      <strong>Health Information Management Unit</strong><br />
-      Regional Director of Health Services, 120 Court Rd, Trincomalee
-    </p>
-    <p style="font-size: 15px; margin: 0; line-height: 1.6;">
-      📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
-      📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br />
-      ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
-    </p>
-  </footer>
-    <a href="index.html" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #002147;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-">
-  🏠 Home
-</a>
+
+<h2>Hospital OPD Schedules</h2>
+
+<!-- Example: Repeat this block for each hospital -->
+<button class="accordion">Base Hospital Type A - Kinniya</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 12PM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Base Hospital Type A - Muthur</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 12PM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Basel Hospital Type B - Pulmoddai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 12PM</td></tr>
+  </table>
+</div>
+<button class="accordion">Divisional Hospital Type B - Pathavisripura</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Thampalagamam</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Gomarangadawala</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Kuchchaveli</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Serunuwara</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Nilaveli</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Killivetty</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Eachilampathai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Thoppur</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Seruwila</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Mahadivulwewa</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Sampoor</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Wan Ela</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Selvanayagapuram</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td>8AM TO 10AM</td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Alankerny</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Battukachchiya</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Chenaiyoor</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - China Bay</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Ganthalawa</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Kappalthurai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Kakkamunai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Kachchakodithivu</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Kumburupitty</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Morawewa</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Manalchenai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Mullipothanai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Naduoothu</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Sampalthivu</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Thiriyai</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Pattalipuram</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Primary Medical Care Unit - Valaithottam</button>
+<div class="panel">
+  <table>
+    <tr><th>Weekdays Morning</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Weekdays Evening</th><td>2PM TO 4PM</td></tr>
+    <tr><th>Saturday</th><td>8AM TO 12PM</td></tr>
+    <tr><th>Sunday</th><td></td></tr>
+  </table>
+</div>
+<!-- Add more blocks here for other hospitals following the same pattern -->
+
+<script>
+  const acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
