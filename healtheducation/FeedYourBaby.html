@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Feeding Your Baby – Health Education</title>
+
+  <!-- Meta tags for social sharing -->
+  <meta property="og:title" content="உங்கள் குழந்தைக்கு உணவளிக்கும் சரியான முறை | ඔබේ දරුවාට නිවැරදිව ආහාරය ලබාදීම" />
+  <meta property="og:description" content="Watch this short health education video on the correct way to feed your baby. Available in Tamil and Sinhala." />
+  <meta property="og:image" content="https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/thumb-feedbaby.jpg" />
+  <meta property="og:url" content="https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html" />
+  <meta property="og:type" content="website" />
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -24,6 +32,30 @@
     header h1 {
       margin: 0;
       font-size: 1.8rem;
+    }
+
+    .highlight-section {
+      background: linear-gradient(to right, #e0f7fa, #fff3e0);
+      padding: 2rem 1rem;
+      text-align: center;
+      border-radius: 20px;
+      margin: 1rem auto;
+      max-width: 800px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .highlight-section h2 {
+      margin: 0.5rem 0;
+    }
+
+    .highlight-section h2:first-child {
+      color: #004d40;
+      font-size: 1.8rem;
+    }
+
+    .highlight-section h2:last-child {
+      color: #6a1b9a;
+      font-size: 1.6rem;
     }
 
     .container {
@@ -73,6 +105,41 @@
       border-radius: 12px;
     }
 
+    .share-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .share-buttons a {
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .facebook { background-color: #4267B2; }
+    .facebook:hover { background-color: #365899; }
+
+    .whatsapp { background-color: #25D366; }
+    .whatsapp:hover { background-color: #1ebe5a; }
+
+    .x { background-color: #000; }
+    .x:hover { background-color: #222; }
+
+    .share-message {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      color: #444;
+      line-height: 1.6;
+    }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
@@ -89,13 +156,17 @@
     <p>Choose your language to watch the video</p>
   </header>
 
+  <section class="highlight-section">
+    <h2>உங்கள் குழந்தைக்கு உணவளிக்கும் சரியான முறை</h2>
+    <h2>ඔබේ දරුවාට නිවැරදිව ආහාරය ලබාදීම</h2>
+  </section>
+
   <div class="container">
     <div class="language-buttons">
       <button onclick="showVideo('tamil')">தமிழ் (Tamil)</button>
       <button onclick="showVideo('sinhala')">සිංහල (Sinhala)</button>
     </div>
 
-    <!-- Tamil Video -->
     <div id="tamil" class="video-section">
       <iframe src="https://www.youtube.com/embed/G694tvPQVvQ" 
               title="Tamil Video – Correct Way to Feed Your Baby" 
@@ -105,35 +176,18 @@
               allowfullscreen></iframe>
       <p>தமிழில் காண்க – உங்கள் குழந்தைக்கு உணவளிக்கும் சரியான முறை</p>
 
-      <!-- Sharing Section (after Tamil video) -->
-      <div class="share-section" style="margin-top: 2rem; text-align: center;">
-        <p style="font-weight: bold; font-size: 1rem; color: #003366; margin-bottom: 10px;">
-          இந்தப் பதிவினை உங்களுடைய நண்பர்களுடன் பகிர்ந்து கொண்டு எமது சமுதாயம் வளமடைய உதவுங்கள். நன்றி!<br>
-          මෙම පණිවිඩය ඔබේ මිතුරන් සමඟ බෙදාගෙන අපගේ සමාජයට වාසියක් ලබාදෙන්න. ස්තුතියි!
-        </p>
-        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html"
-             target="_blank" 
-             style="background-color: #3b5998; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            📘 Facebook
-          </a>
-          <a href="https://api.whatsapp.com/send?text=Watch%20this%20important%20health%20video:%20https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html"
-             target="_blank" 
-             style="background-color: #25D366; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            📱 WhatsApp
-          </a>
-          <a href="https://twitter.com/intent/tweet?url=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html&text=Watch%20this%20important%20health%20education%20video"
-             target="_blank" 
-             style="background-color: #1DA1F2; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            🐦 X (Twitter)
-          </a>
-        </div>
+      <div class="share-buttons">
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html" target="_blank">Share on Facebook</a>
+        <a class="whatsapp" href="https://wa.me/?text=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html" target="_blank">Share on WhatsApp</a>
+        <a class="x" href="https://twitter.com/intent/tweet?url=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html&text=Correct%20Way%20to%20Feed%20Your%20Baby" target="_blank">Share on X</a>
+      </div>
+      <div class="share-message">
+        இந்தப் பதிவினை உங்களுடைய நண்பர்களுடன் பகிர்ந்து கொண்டு <br> எமது சமுதாயம் வளமடைய உதவுங்கள் நன்றி.
       </div>
     </div>
 
-    <!-- Sinhala Video -->
     <div id="sinhala" class="video-section">
-      <iframe src="https://www.youtube.com/embed/diJzwJ8MB2w?si=AAfC1rR3H-Zhh1hn" 
+      <iframe src="https://www.youtube.com/embed/diJzwJ8MB2w" 
               title="Sinhala Video – Correct Way to Feed Your Baby" 
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -141,29 +195,13 @@
               allowfullscreen></iframe>
       <p>සිංහලෙන් නරඹන්න – ඔබේ දරුවාට නිවැරදිව ආහාරය ලබාදීම</p>
 
-      <!-- Sharing Section (after Sinhala video) -->
-      <div class="share-section" style="margin-top: 2rem; text-align: center;">
-        <p style="font-weight: bold; font-size: 1rem; color: #003366; margin-bottom: 10px;">
-          இந்தப் பதிவினை உங்களுடைய நண்பர்களுடன் பகிர்ந்து கொண்டு எமது சமுதாயம் வளமடைய உதவுங்கள். நன்றி!<br>
-          මෙම පණිවිඩය ඔබේ මිතුරන් සමඟ බෙදාගෙන අපගේ සමාජයට වාසියක් ලබාදෙන්න. ස්තුතියි!
-        </p>
-        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html"
-             target="_blank" 
-             style="background-color: #3b5998; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            📘 Facebook
-          </a>
-          <a href="https://api.whatsapp.com/send?text=Watch%20this%20important%20health%20video:%20https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html"
-             target="_blank" 
-             style="background-color: #25D366; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            📱 WhatsApp
-          </a>
-          <a href="https://twitter.com/intent/tweet?url=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html&text=Watch%20this%20important%20health%20education%20video"
-             target="_blank" 
-             style="background-color: #1DA1F2; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            🐦 X (Twitter)
-          </a>
-        </div>
+      <div class="share-buttons">
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html" target="_blank">Facebook පටවන්න</a>
+        <a class="whatsapp" href="https://wa.me/?text=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html" target="_blank">WhatsApp බෙදාගන්න</a>
+        <a class="x" href="https://twitter.com/intent/tweet?url=https://jeevantjr.github.io/rdhs-stats-pwa/healtheducation/FeedYourBaby.html&text=Correct%20Way%20to%20Feed%20Your%20Baby" target="_blank">X (Twitter) බෙදාගන්න</a>
+      </div>
+      <div class="share-message">
+        මෙම පණිවිඩය ඔබේ මිතුරන් සමඟ බෙදාගනිමින් <br> අපගේ සමාජය වර්ධනය වීමට උපකාර කරන්න. ස්තුතියි!
       </div>
     </div>
   </div>
@@ -206,10 +244,7 @@
       document.getElementById('sinhala').classList.remove('active');
       document.getElementById(lang).classList.add('active');
     }
-
-    // Show Tamil by default
-    showVideo('tamil');
+    showVideo('tamil'); // Show Tamil by default
   </script>
-
 </body>
 </html>
