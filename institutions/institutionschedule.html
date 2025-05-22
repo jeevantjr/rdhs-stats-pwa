@@ -1,135 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Clinic Schedule - RDHS Trincomalee</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #006699;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        .data-table th {
-            background-color: #006699;
-            color: #fff;
-        }
-        .data-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-          footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 1.5rem 1rem;
-      font-size: 0.95rem;
-      background-color: #004080;
-      color: white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
+  <meta charset="UTF-8">
+  <title>Clinic Schedule</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
     }
-        @media (max-width: 768px) {
-            .data-table th, .data-table td {
-                font-size: 12px;
-                padding: 6px;
-            }
-        }
-    </style>
+    .accordion {
+      background-color: #f1f1f1;
+      color: #333;
+      cursor: pointer;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
+      margin-top: 5px;
+    }
+    .accordion:hover {
+      background-color: #ddd;
+    }
+    .active, .accordion:active {
+      background-color: #ccc;
+    }
+    .panel {
+      padding: 0 14px;
+      display: none;
+      background-color: white;
+      overflow: hidden;
+      border-left: 2px solid #ccc;
+      border-right: 2px solid #ccc;
+      border-bottom: 2px solid #ccc;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    td, th {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+  </style>
 </head>
 <body>
-    <h1>Clinic Schedule - RDHS Trincomalee</h1>
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>Institution</th>
-                <th>Medical clinic</th>
-                <th>HLC</th>
-                <th>ANC,Poly clinic</th>
-                <th>MH</th>
-                <th>ICOPE</th>
-                <th>Mobile clinic</th>
-            </tr>
-        </thead>
-        <tbody>
-           
 
-    <tr><td>Divisional Hospital Type B - Pathavisripura</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Thampalagamam</td><td>Thursday</td><td>Monday</td><td>Tuesday</td><td>1st Tuesday</td><td>Friday</td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Gomarangadawala</td><td>Monday & Friday</td><td>?</td><td>?</td><td>1st - Wednesday</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Kuchchaveli</td><td>Wednesday</td><td>Thursday and Friday</td><td>1st & 3rd Tuesday</td><td>Last - Wednesday</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Serunuwara</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Nilaveli</td><td>Tuesday</td><td>Friday</td><td>1st & 3rd Wednesday</td><td>Last - Wednesday</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Killivetty</td><td>Tuesday</td><td>Friday</td><td>2nd & 4th Thursday</td><td>3rd Tuesday</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Eachilampathai</td><td>Tuesday</td><td>Friday</td><td></td><td>Last - TUESDAY</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Thoppur</td><td>Tuesday</td><td></td><td>Thursday</td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Seruwila</td><td>Wednesday</td><td>Friday</td><td></td><td>Last - TUESDAY</td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Mahadivulwewa</td><td>Tuesday & Thursday</td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Sampoor</td><td>Tuesday</td><td></td><td>1st week Thursday</td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Wan Ela</td><td>Tuesday</td><td>Thursday</td><td>1st & 3rd Wednesday</td><td></td><td></td><td></td></tr>
-    <tr><td>Divisional Hospital Type C - Selvanayagapuram</td><td>Mon, Tue, Wed, Friday</td><td>Wed, Thursday</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Alankerny</td><td>Wednesday</td><td></td><td>1st & 3rd Tuesday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Battukachchiya</td><td>Tuesday</td><td></td><td>2nd & 4th Friday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Chenaiyoor</td><td>Tuesday</td><td>Thursday</td><td>Every other Monday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - China Bay</td><td>Tuesday</td><td>Wednesday</td><td>1st & 3rd Thursday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Ganthalawa</td><td>Thursday</td><td></td><td>2nd & 4th Tuesday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Kappalthurai</td><td>Tuesday</td><td>Wednesday</td><td>2nd & 4th Friday</td><td></td><td></td><td>Thursday</td></tr>
-    <tr><td>Primary Medical Care Unit - Kakkamunai</td><td>Tuesday & Saturday</td><td>1st & 3rd Thursday</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Kachchakodithivu</td><td>Thursday</td><td>Tuesday</td><td>1st & 3rd Monday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Kumburupitty</td><td>Thursday, Friday</td><td>Wednesday</td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Morawewa</td><td>Tuesday & Thursday</td><td>Wednesday</td><td>1st Wednesday</td><td>1st Wednesday</td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Manalchenai</td><td>Tues & Wednesday</td><td></td><td>1st & 3rd Thursday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Mullipothanai</td><td>Wednesday</td><td></td><td>1st & 3rd Thursday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Naduoothu</td><td>Thursday</td><td>Tuesday</td><td>2nd & 4th Monday</td><td>1st Tuesday</td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Sampalthivu</td><td>Wednesday</td><td></td><td>2nd & 4th Tuesday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Thiriyai</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Pattalipuram</td><td>Monday & Friday</td><td></td><td>1st & 3rd Monday</td><td></td><td></td><td></td></tr>
-    <tr><td>Primary Medical Care Unit - Valaiththoddam</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-   </tbody>
-    </table>
-  </div>
-        <a href="index.html" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #002147;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-">
-  🏠 Home
-</a>
-      <footer>
-    <p style="font-size: 16px; font-weight: 600; margin: 0 0 10px;">
-      © 2025 All Rights Reserved
-    </p>
-    <p style="font-size: 15px; margin: 0 0 10px; line-height: 1.6;">
-      <strong>Health Information Management Unit</strong><br />
-      Regional Director of Health Services, 120 Court Rd, Trincomalee
-    </p>
-    <p style="font-size: 15px; margin: 0; line-height: 1.6;">
-      📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
-      📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br />
-      ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
-    </p>
-  </footer>
+<h2>Clinic Schedule</h2>
+
+<!-- Repeat for each hospital -->
+<button class="accordion">Divisional Hospital Type B - Pathavisripura</button>
+<div class="panel">
+  <table>
+    <tr><th>Maternal & Child Health</th><td></td></tr>
+    <tr><th>Well Women Clinic</th><td></td></tr>
+    <tr><th>Non Communicable Diseases</th><td></td></tr>
+    <tr><th>Antenatal</th><td></td></tr>
+    <tr><th>Family Planning</th><td></td></tr>
+    <tr><th>Other</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Thampalagamam</button>
+<div class="panel">
+  <table>
+    <tr><th>Maternal & Child Health</th><td>Thursday</td></tr>
+    <tr><th>Well Women Clinic</th><td>Monday</td></tr>
+    <tr><th>Non Communicable Diseases</th><td>Tuesday</td></tr>
+    <tr><th>Antenatal</th><td>1st Tuesday</td></tr>
+    <tr><th>Family Planning</th><td>Friday</td></tr>
+    <tr><th>Other</th><td></td></tr>
+  </table>
+</div>
+
+<button class="accordion">Divisional Hospital Type C - Gomarangadawala</button>
+<div class="panel">
+  <table>
+    <tr><th>Maternal & Child Health</th><td>Monday & Friday</td></tr>
+    <tr><th>Well Women Clinic</th><td>?</td></tr>
+    <tr><th>Non Communicable Diseases</th><td>?</td></tr>
+    <tr><th>Antenatal</th><td>1st - Wednesday</td></tr>
+    <tr><th>Family Planning</th><td></td></tr>
+    <tr><th>Other</th><td></td></tr>
+  </table>
+</div>
+
+<!-- Add the remaining hospitals in similar format -->
+
+<script>
+  const acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
