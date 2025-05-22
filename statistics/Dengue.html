@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MOH Division Dengue Case Summary</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .chart-container {
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .table-container {
+      max-width: 100%;
+      overflow-x: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      background-color: #fff;
+      font-size: 16px;
+    }
+
+    thead {
+      background-color: #004080;
+      color: white;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    caption {
+      caption-side: top;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    @media screen and (max-width: 600px) {
+      table {
+        font-size: 13px;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Visualization Chart -->
+<div class="chart-container">
+  <canvas id="caseChart"></canvas>
+</div>
+
+<script>
+  const ctx = document.getElementById('caseChart').getContext('2d');
+  const caseChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Muthur', 'Trincomalee', 'Uppuveli', 'Kinniya', 'Kuchchaveli', 'Kurinchakerny', 'Eachchalampathu', 'Kantale', 'Thampalakamam', 'Seruwila', 'Gotnarankadawala', 'Padavisiripura'],
+      datasets: [{
+        label: 'No. of Cases',
+        data: [144, 136, 128, 99, 68, 45, 27, 47, 37, 22, 19, 10],
+        backgroundColor: '#1976d2'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Cases Reported by MOH Division (2024)',
+          font: { size: 18 }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: { size: 12 }
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<!-- Table -->
+<div class="table-container">
+  <table>
+    <caption>MOH Division-wise Dengue Cases and Deaths – 2024</caption>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>MOH Division</th>
+        <th>Nos. of Cases</th>
+        <th>Nos. of Deaths</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td>Muthur</td><td>144</td><td>0</td></tr>
+      <tr><td>02</td><td>Trincomalee</td><td>136</td><td>0</td></tr>
+      <tr><td>03</td><td>Uppuveli</td><td>128</td><td>0</td></tr>
+      <tr><td>04</td><td>Kinniya</td><td>99</td><td>0</td></tr>
+      <tr><td>05</td><td>Kuchchaveli</td><td>68</td><td>0</td></tr>
+      <tr><td>06</td><td>Kurinchakerny</td><td>45</td><td>0</td></tr>
+      <tr><td>07</td><td>Eachchalampathu</td><td>27</td><td>0</td></tr>
+      <tr><td>08</td><td>Kantale</td><td>47</td><td>0</td></tr>
+      <tr><td>09</td><td>Thampalakamam</td><td>37</td><td>0</td></tr>
+      <tr><td>10</td><td>Seruwila</td><td>22</td><td>0</td></tr>
+      <tr><td>11</td><td>Gotnarankadawala</td><td>19</td><td>0</td></tr>
+      <tr><td>12</td><td>Padavisiripura</td><td>10</td><td>0</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td><strong>782</strong></td><td><strong>0</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Back Button -->
+<a href="https://jeevantjr.github.io/rdhs-stats-pwa/statistics/index.html" 
+style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #004ba0, #1976d2);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+">
+  🔙 Back to Health Statistics Dashboard – 2024
+</a>
+
+</body>
+</html>
