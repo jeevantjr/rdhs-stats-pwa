@@ -74,7 +74,7 @@ To run this project locally:
 ---
 
 ## 👨‍💻 Developer
-
+ Under the vision of <strong>‘Transforming Public Health through Digital Innovation’</strong>,this platform was developed and is continuously maintained by
 **Dr T. Jeevaraaj (MBBS, MCGP, MSc in Biomedical Informatics)**  
 **Medical Officer – Health Information**  
 **RDHS Office, Trincomalee**  
