@@ -416,24 +416,7 @@
   }
 </script>
 
-  <script>
-  const accordions = document.querySelectorAll(".accordion");
 
-  accordions.forEach((accordion) => {
-    accordion.addEventListener("click", function () {
-      // Toggle between adding and removing the "active" class
-      this.classList.toggle("active");
-
-      // Toggle the panel display
-      const panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
-    });
-  });
-</script>
 
 <a href="index.html" style="
   position: fixed;
