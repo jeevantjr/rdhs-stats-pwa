@@ -40,10 +40,11 @@ const urlsToCache = [
   // Health Education
   '/rdhs-stats-pwa/healtheducation/index.html',
   '/rdhs-stats-pwa/healtheducation/FeedYourBaby.html',
+  '/rdhs-stats-pwa/healtheducation/Leptospirosistamil.html',
 
   // Monthly statistics (adjust if these are outside your scope)
-  '/MonthlyStatistics/index.html',
-  '/MonthlyStatistics/dengue2.html',
+  '/rdhs-stats-pwa/MonthlyStatistics/index.html',
+  '/rdhs-stats-pwa/MonthlyStatistics/dengue2.html',
 
   // Offline fallback page
   '/rdhs-stats-pwa/offline.html',
