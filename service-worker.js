@@ -41,6 +41,7 @@ const urlsToCache = [
   '/rdhs-stats-pwa/healtheducation/index.html',
   '/rdhs-stats-pwa/healtheducation/FeedYourBaby.html',
   '/rdhs-stats-pwa/healtheducation/Leptospirosistamil.html',
+   '/rdhs-stats-pwa/healtheducation/Leptospirosissinhala.html',
 
   // Monthly statistics (adjust if these are outside your scope)
   '/rdhs-stats-pwa/MonthlyStatistics/index.html',
