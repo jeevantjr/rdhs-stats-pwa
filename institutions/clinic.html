@@ -7,7 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #f4f4f4;
     }
     h2 {
       text-align: center;
@@ -16,16 +16,17 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      background-color: #fff;
       margin-top: 20px;
-      background-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: left;
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
     }
     th {
-      background-color: #eaeaea;
+      background-color: #e8e8e8;
     }
     tr:nth-child(even) {
       background-color: #f9f9f9;
@@ -37,15 +38,7 @@
   <h2>Institution Clinic Schedule</h2>
 
   <table id="scheduleTable">
-    <thead>
-      <tr>
-        <th>Institution</th>
-        <th>Clinic</th>
-        <th>Day</th>
-        <th>Location</th>
-        <th>Time</th>
-      </tr>
-    </thead>
+    <thead></thead>
     <tbody></tbody>
   </table>
 
@@ -56,13 +49,25 @@
       .then(response => response.text())
       .then(data => {
         const rows = data.trim().split("\n").map(row => row.split(","));
-        const tbody = document.querySelector("#scheduleTable tbody");
+        const table = document.getElementById("scheduleTable");
+        const thead = table.querySelector("thead");
+        const tbody = table.querySelector("tbody");
 
+        // Create header row
+        const headerRow = document.createElement("tr");
+        rows[0].forEach(header => {
+          const th = document.createElement("th");
+          th.textContent = header.trim().replace(/^\/+|\/+$/g, ""); // Remove slashes
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Create data rows
         for (let i = 1; i < rows.length; i++) {
           const tr = document.createElement("tr");
           rows[i].forEach(cell => {
             const td = document.createElement("td");
-            td.textContent = cell;
+            td.textContent = cell.trim();
             tr.appendChild(td);
           });
           tbody.appendChild(tr);
@@ -70,10 +75,7 @@
       })
       .catch(error => {
         console.error("Error loading CSV:", error);
-        document.querySelector("#scheduleTable").insertAdjacentHTML(
-          "afterend",
-          "<p style='color: red;'>Failed to load clinic schedule. Please check the sheet link or internet connection.</p>"
-        );
+        document.body.insertAdjacentHTML("beforeend", "<p style='color:red;'>Failed to load data. Please check your sheet publishing settings.</p>");
       });
   </script>
 
