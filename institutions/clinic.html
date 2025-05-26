@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Institution Clinic Schedule</title>
   <meta charset="UTF-8">
+  <title>Institution Clinic Schedule</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: #f9f9f9;
+      background-color: #f5f5f5;
     }
     h2 {
       text-align: center;
+      color: #333;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      background: white;
+      background-color: white;
     }
     th, td {
       padding: 10px;
@@ -24,12 +25,12 @@
       text-align: left;
     }
     th {
-      background-color: #e0e0e0;
+      background-color: #eaeaea;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
   </style>
-
-  <!-- ✅ Correct Tabletop Script -->
-  <script src="https://cdn.jsdelivr.net/gh/jsoma/tabletop@master/src/tabletop.js"></script>
 </head>
 <body>
 
@@ -49,31 +50,31 @@
   </table>
 
   <script>
-    const publicSpreadsheetID = '1wByzNdoEwNAPlsSSOXLsk1ognq8X6Bi1ItOZozfeFo0';
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRIl-56jrALMp_oi8rxmR0mIk59IW2ZFECkgmisrqXHuJiNR2ngxoiMYk1YQ9hjYi3CzfcEcnoODG2S/pub?gid=395353517&single=true&output=csv";
 
-    function showInfo(data) {
-      const tbody = document.querySelector("#scheduleTable tbody");
-      tbody.innerHTML = '';
-      data.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${row.Institution || ''}</td>
-          <td>${row.Clinic || ''}</td>
-          <td>${row.Day || ''}</td>
-          <td>${row.Location || ''}</td>
-          <td>${row.Time || ''}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.trim().split("\n").map(row => row.split(","));
+        const tbody = document.querySelector("#scheduleTable tbody");
 
-    window.addEventListener('DOMContentLoaded', () => {
-      Tabletop.init({
-        key: publicSpreadsheetID,
-        callback: showInfo,
-        simpleSheet: true
+        for (let i = 1; i < rows.length; i++) {
+          const tr = document.createElement("tr");
+          rows[i].forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        }
+      })
+      .catch(error => {
+        console.error("Error loading CSV:", error);
+        document.querySelector("#scheduleTable").insertAdjacentHTML(
+          "afterend",
+          "<p style='color: red;'>Failed to load clinic schedule. Please check the sheet link or internet connection.</p>"
+        );
       });
-    });
   </script>
 
 </body>
