@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leprosy 2025 Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Leprosy Case Trends - 2025</h1>
+    <canvas id="leprosyChart" height="100"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>Monthly Leprosy Case Table</h2>
+    <div id="tableContainer"></div>
+  </div>
+
+  <script>
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTA4ae_n-8Y8OKKBdG49KJ4KKIVxpxPVRfaPgNCMd2QzpiA-_aI-1TLvCF_PnSpuY9UxjPAkQfLX8tt/pub?gid=1657353331&single=true&output=csv";
+
+    async function fetchCSVData(url) {
+      const res = await fetch(url);
+      const text = await res.text();
+      return text.split('\n').map(row => row.split(','));
+    }
+
+    function drawChart(labels, data) {
+      const ctx = document.getElementById('leprosyChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Total Cases',
+            data: data,
+            backgroundColor: '#2980b9',
+            borderRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTable(headers, rows) {
+      let html = '<table><thead><tr>';
+      headers.forEach(h => html += `<th>${h}</th>`);
+      html += '</tr></thead><tbody>';
+      rows.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => html += `<td>${cell}</td>`);
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      document.getElementById('tableContainer').innerHTML = html;
+    }
+
+    async function init() {
+      const rawData = await fetchCSVData(csvUrl);
+
+      const headers = rawData[0];
+      const dataRows = rawData.slice(1).filter(row => row.length > 1);
+
+      // Prepare chart data
+      const monthIndex = 0;
+      const totalIndex = 1;
+      const months = dataRows.map(row => row[monthIndex]);
+      const totals = dataRows.map(row => parseInt(row[totalIndex]) || 0);
+
+      drawChart(months, totals);
+      renderTable(headers, dataRows);
+    }
+
+    init();
+  </script>
+
+</body>
+</html>
