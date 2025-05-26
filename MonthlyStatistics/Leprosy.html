@@ -32,6 +32,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      font-size: 14px;
     }
     th, td {
       border: 1px solid #ccc;
@@ -45,6 +46,9 @@
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
+    .table-container {
+      overflow-x: auto;
+    }
   </style>
 </head>
 <body>
@@ -56,7 +60,7 @@
 
   <div class="card">
     <h2>Monthly Leprosy Case Table</h2>
-    <div id="tableContainer"></div>
+    <div class="table-container" id="tableContainer"></div>
   </div>
 
   <script>
@@ -75,7 +79,7 @@
         data: {
           labels: labels,
           datasets: [{
-            label: 'Total Cases',
+            label: 'Total Leprosy Cases',
             data: data,
             backgroundColor: '#2980b9',
             borderRadius: 5
@@ -87,6 +91,11 @@
             y: {
               beginAtZero: true,
               ticks: { stepSize: 1 }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
             }
           }
         }
@@ -113,10 +122,13 @@
       const dataRows = rawData.slice(1).filter(row => row.length > 1);
 
       // Prepare chart data
-      const monthIndex = 0;
-      const totalIndex = 1;
+      const monthIndex = 0;  // assuming "Month" is first column
+      const totalIndex = 1;  // assuming "Total" is second column
       const months = dataRows.map(row => row[monthIndex]);
-      const totals = dataRows.map(row => parseInt(row[totalIndex]) || 0);
+      const totals = dataRows.map(row => {
+        const val = (row[totalIndex] || '').replace(/[^\d]/g, '').trim();
+        return val ? parseInt(val) : 0;
+      });
 
       drawChart(months, totals);
       renderTable(headers, dataRows);
