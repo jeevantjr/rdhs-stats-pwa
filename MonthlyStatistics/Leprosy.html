@@ -2,140 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Leprosy 2025 Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Monthly Leprosy Updates by MOH Area</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+      color: #333;
     }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1, h2 {
-      text-align: center;
+
+    h2 {
+      font-weight: 600;
       color: #2c3e50;
     }
-    canvas {
-      margin-top: 20px;
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      margin-bottom: 30px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 14px;
+
+    .card-body {
+      padding: 20px;
     }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
+
+    table.dataTable thead th {
+      background-color: #6c757d;
+      color: #fff;
       text-align: center;
+      vertical-align: middle;
     }
-    th {
-      background-color: #3498db;
-      color: white;
+
+    table.dataTable tbody td {
+      text-align: center;
+      vertical-align: middle;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-    .table-container {
+
+    .chart-container {
+      position: relative;
+      width: 100%;
       overflow-x: auto;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    .container {
+      max-width: 1100px;
     }
   </style>
 </head>
 <body>
+  <div class="container my-5">
+    <h2 class="text-center mb-4">📊 2025 Monthly Leprosy Updates by MOH Area</h2>
 
-  <div class="card">
-    <h1>Leprosy Case Trends - 2025</h1>
-    <canvas id="leprosyChart" height="100"></canvas>
+    <!-- Chart -->
+    <div class="card">
+      <div class="card-body">
+        <div class="chart-container">
+          <canvas id="leprosyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="leprosyTable" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>MOH Area</th>
+                <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+                <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Eachilampattu</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>Gomarankadawela</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Kanthale</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Kinniya</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Kuchchaveli</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Kurinchakerni</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Muthur</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Padavi Sripura</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>Seruwila</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td></tr>
+              <tr><td>Thampalakamam</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>Trincomalee</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td></tr>
+              <tr><td>Uppuveli</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>Monthly Leprosy Case Table</h2>
-    <div class="table-container" id="tableContainer"></div>
-  </div>
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
+  <!-- Chart Script -->
   <script>
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTA4ae_n-8Y8OKKBdG49KJ4KKIVxpxPVRfaPgNCMd2QzpiA-_aI-1TLvCF_PnSpuY9UxjPAkQfLX8tt/pub?gid=1657353331&single=true&output=csv";
+    $(document).ready(function () {
+      $('#leprosyTable').DataTable({
+        responsive: true,
+        paging: false,
+        searching: true,
+        info: false
+      });
+    });
 
-    async function fetchCSVData(url) {
-      const res = await fetch(url);
-      const text = await res.text();
-      return text.split('\n').map(row => row.split(','));
-    }
-
-    function drawChart(labels, data) {
-      const ctx = document.getElementById('leprosyChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Total Leprosy Cases',
-            data: data,
-            backgroundColor: '#2980b9',
-            borderRadius: 5
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { stepSize: 1 }
+    const ctx = document.getElementById('leprosyChart').getContext('2d');
+    const leprosyChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+          {
+            label: 'Eachilampattu',
+            data: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: '#007bff',
+            tension: 0.4
+          },
+          {
+            label: 'Seruwila',
+            data: [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: '#28a745',
+            tension: 0.4
+          },
+          {
+            label: 'Thampalakamam',
+            data: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: '#ffc107',
+            tension: 0.4
+          },
+          {
+            label: 'Trincomalee',
+            data: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            borderColor: '#dc3545',
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Monthly Leprosy Cases – 2025 (MOH Areas)',
+            font: {
+              size: 18
             }
           },
-          plugins: {
-            legend: {
-              display: false
+          legend: {
+            position: 'bottom'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Cases'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Month'
             }
           }
         }
-      });
-    }
-
-    function renderTable(headers, rows) {
-      let html = '<table><thead><tr>';
-      headers.forEach(h => html += `<th>${h}</th>`);
-      html += '</tr></thead><tbody>';
-      rows.forEach(row => {
-        html += '<tr>';
-        row.forEach(cell => html += `<td>${cell}</td>`);
-        html += '</tr>';
-      });
-      html += '</tbody></table>';
-      document.getElementById('tableContainer').innerHTML = html;
-    }
-
-    async function init() {
-      const rawData = await fetchCSVData(csvUrl);
-
-      const headers = rawData[0];
-      const dataRows = rawData.slice(1).filter(row => row.length > 1);
-
-      // Prepare chart data
-      const monthIndex = 0;  // assuming "Month" is first column
-      const totalIndex = 1;  // assuming "Total" is second column
-      const months = dataRows.map(row => row[monthIndex]);
-      const totals = dataRows.map(row => {
-        const val = (row[totalIndex] || '').replace(/[^\d]/g, '').trim();
-        return val ? parseInt(val) : 0;
-      });
-
-      drawChart(months, totals);
-      renderTable(headers, dataRows);
-    }
-
-    init();
+      }
+    });
   </script>
-
 </body>
 </html>
