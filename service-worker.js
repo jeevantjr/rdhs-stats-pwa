@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v15'; // Update this version after every significant change
+const CACHE_NAME = 'rdhs-cache-v16'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
 
 const urlsToCache = [
