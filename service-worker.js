@@ -50,7 +50,7 @@ const urlsToCache = [
   '/rdhs-stats-pwa/MonthlyStatistics/Leprosy.html', 
    '/rdhs-stats-pwa/MonthlyStatistics/ChildDeaths.html',
   '/rdhs-stats-pwa/MonthlyStatistics/Underweight.html',
-
+ '/rdhs-stats-pwa/MonthlyStatistics/TeenagePregnant.html',
   
   // Offline fallback page
   '/rdhs-stats-pwa/offline.html',
