@@ -58,12 +58,35 @@
     .container {
       max-width: 1100px;
     }
+    .viewing-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8ff);
+  color: #004080;
+  padding: 14px 18px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+  font-size: 1rem;
+  font-weight: 500;
+  justify-content: center;
+  text-align: center;
+}
+
+.viewing-tip i {
+  font-size: 1.6rem;
+  color: #007bff;
+}
   </style>
 </head>
 <body>
   <div class="container my-5">
     <h2 class="text-center mb-4">📊 2025 Monthly Leprosy Updates by MOH Area</h2>
-
+<div class="viewing-tip">
+  <i class="fas fa-mobile-alt"></i>
+  <span> 📱 Best viewed in <strong>portrait mode</strong></span>
+</div>
     <!-- Chart -->
     <div class="card">
       <div class="card-body">
