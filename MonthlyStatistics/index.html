@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monthly Statistics 2025</title>
+  <title>Monthly Health Statistics – 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
@@ -30,48 +29,55 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 2rem auto;
-      padding: 1rem 2rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
     }
 
-    .stat-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .stat-list li {
-      background-color: #e9f1fb;
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #004080;
+      margin-top: 2.5rem;
       margin-bottom: 1rem;
+      border-bottom: 2px solid #004080;
+      padding-bottom: 0.5rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: white;
       padding: 1rem 1.5rem;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .stat-list li:hover {
-      background-color: #d0e4fc;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 64, 128, 0.2);
-    }
-
-    .stat-list a {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       text-decoration: none;
       color: #002147;
-      font-size: 1.1rem;
-      font-weight: 600;
-      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .stat-list i {
-      font-size: 1.3rem;
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 64, 128, 0.2);
+      background-color: #e9f1fb;
+    }
+
+    .card i {
+      font-size: 1.5rem;
       color: #004080;
+      flex-shrink: 0;
+    }
+
+    .card span {
+      font-size: 1.1rem;
+      font-weight: 600;
     }
 
     footer {
@@ -85,16 +91,17 @@
       border-top-right-radius: 20px;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 1rem;
-      }
+    footer a {
+      color: #90caf9;
+      text-decoration: none;
+    }
 
+    @media (max-width: 600px) {
       header h1 {
         font-size: 1.5rem;
       }
 
-      .stat-list a {
+      .card span {
         font-size: 1rem;
       }
     }
@@ -103,17 +110,46 @@
 <body>
 
   <header>
-    <h1><i class="fas fa-hospital-user"></i> Monthly Statistics 2025</h1>
+    <h1><i class="fas fa-chart-line"></i> Monthly Health Statistics – 2025</h1>
   </header>
 
   <div class="container">
-    <ul class="stat-list">
-      <li><i class="fas fa-calendar-alt"></i><a href="dengue2.html">Monthily Dengue updates by MOH</a></li>
-   <li><i class="fas fa-calendar-alt"></i><a href="Leprosy.html">Monthily Leprosy updates by MOH</a></li>
-     <li><i class="fas fa-calendar-alt"></i><a href="Anaemia.html">Anaemia in Pregnant Mothers – 2025</a></li>
-   <li><i class="fas fa-calendar-alt"></i><a href="ChildDeaths.html">Child Deaths Under 5 – 2025</a></li>  
-     <li><i class="fas fa-calendar-alt"></i><a href="Underweight.html">Underweight Preschoolers (2–5 years) – 2025</a></li> 
-    </ul>
+
+    <!-- Communicable Diseases -->
+    <div class="section-title">🦠 Communicable Diseases</div>
+    <div class="card-grid">
+      <a href="dengue2.html" class="card">
+        <i class="fas fa-bug"></i>
+        <span>Monthly Dengue Updates by MOH</span>
+      </a>
+      <a href="Leprosy.html" class="card">
+        <i class="fas fa-virus"></i>
+        <span>Monthly Leprosy Updates by MOH</span>
+      </a>
+    </div>
+
+    <!-- Maternal Health -->
+    <div class="section-title">🤰 Maternal Health</div>
+    <div class="card-grid">
+      <a href="Anaemia.html" class="card">
+        <i class="fas fa-heartbeat"></i>
+        <span>Anaemia in Pregnant Mothers – 2025</span>
+      </a>
+    </div>
+
+    <!-- Child Health -->
+    <div class="section-title">👶 Child Health</div>
+    <div class="card-grid">
+      <a href="ChildDeaths.html" class="card">
+        <i class="fas fa-baby"></i>
+        <span>Child Deaths Under 5 – 2025</span>
+      </a>
+      <a href="Underweight.html" class="card">
+        <i class="fas fa-weight"></i>
+        <span>Underweight Preschoolers (2–5 years) – 2025</span>
+      </a>
+    </div>
+
   </div>
 
   <footer>
@@ -125,9 +161,9 @@
       Regional Director of Health Services, 120 Court Rd, Trincomalee
     </p>
     <p style="font-size: 15px; margin: 0; line-height: 1.6;">
-      📞 <a href="tel:+94262222263" style="color: #90caf9; text-decoration: none;">026 2222263</a> &nbsp;|&nbsp;
+      📞 <a href="tel:+94262222263">026 2222263</a> &nbsp;|&nbsp;
       📠 Fax: <span style="color: #bbdefb;">026 2220854</span><br />
-      ✉️ <a href="mailto:trincomoinfo@gmail.com" style="color: #90caf9; text-decoration: none;">trincomoinfo@gmail.com</a>
+      ✉️ <a href="mailto:trincomoinfo@gmail.com">trincomoinfo@gmail.com</a>
     </p>
   </footer>
 
@@ -150,3 +186,4 @@
 
 </body>
 </html>
+
