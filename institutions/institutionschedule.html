@@ -2,455 +2,255 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Clinic Schedule</title>
+  <title>Hospital Clinic Schedule</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
-    .accordion {
-      background-color: #f1f1f1;
-      color: #333;
-      cursor: pointer;
-      padding: 14px;
+
+    .header {
+      background: linear-gradient(to right, #4f46e5, #3b82f6);
+      color: white;
       width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .container {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 600px;
+      padding: 0 20px;
+    }
+
+    .dropdown {
+      margin-bottom: 30px;
+    }
+
+    select {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      width: 100%;
       font-size: 16px;
-      transition: background-color 0.2s ease;
-      margin-top: 5px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .accordion:hover {
-      background-color: #ddd;
+
+    .results {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    .active, .accordion:active {
-      background-color: #ccc;
-    }
-    .panel {
-      padding: 0 14px;
-      display: none;
-      background-color: white;
-      overflow: hidden;
-      border-left: 2px solid #ccc;
-      border-right: 2px solid #ccc;
-      border-bottom: 2px solid #ccc;
-    }
-    table {
+
+    .card {
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
+      transition: transform 0.2s ease;
     }
-    td, th {
-      border: 1px solid #999;
-      padding: 8px;
-      text-align: left;
+
+    .card:hover {
+      transform: translateY(-2px);
     }
-    th {
-      background-color: #eee;
+
+    .card strong {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .card span {
+      font-size: 15px;
+    }
+
+    /* Color themes for different clinic types */
+    .maternal { background: #fef3c7; color: #78350f; }         /* Light Amber */
+    .wellwomen { background: #ede9fe; color: #5b21b6; }        /* Light Purple */
+    .ncd { background: #cffafe; color: #155e75; }              /* Light Teal */
+    .antenatal { background: #dcfce7; color: #166534; }        /* Light Green */
+    .family { background: #fae8ff; color: #701a75; }           /* Light Pink */
+    .other { background: #f3f4f6; color: #374151; }            /* Light Gray */
+
+    @media (max-width: 500px) {
+      .header h1 {
+        font-size: 22px;
+      }
+      select {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 <body>
-<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
-  <div style="background: linear-gradient(to right, #4f46e5, #3b82f6); color: white; padding: 20px 40px; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); text-align: center; max-width: 90%;">
-    <h1 style="margin: 0; font-size: 2rem; font-weight: 600; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-      Hospital Clinic Schedule
-    </h1>
+
+  <div class="header">
+    <h1>Hospital Clinic Schedules</h1>
+    <p>Check clinic availability by selecting your hospital</p>
   </div>
-</div>
 
+  <div class="container">
+    <div class="dropdown">
+      <select id="hospitalSelect">
+        <option value="">🏥 Select a Hospital</option>
+      </select>
+    </div>
 
+    <div class="results" id="results"></div>
+  </div>
 
+  <script>
+       const data = [
+      {
+        hospital: "Divisional Hospital Type B - Pathavisripura",
+        clinics: [
+          { type: "Maternal & Child Health", days: "" },
+          { type: "Well Women Clinic", days: "" },
+          { type: "Non Communicable Diseases", days: "" },
+          { type: "Antenatal", days: "" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Divisional Hospital Type C - Thampalagamam",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Thursday" },
+          { type: "Well Women Clinic", days: "Monday" },
+          { type: "Non Communicable Diseases", days: "Tuesday" },
+          { type: "Antenatal", days: "1st Tuesday" },
+          { type: "Family Planning", days: "Friday" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Divisional Hospital Type C - Gomarangadawala",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Wednesday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Primary Medical Care Unit - Mahadivulwewa",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Thursday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Primary Medical Care Unit - Morawewa",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Wednesday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Primary Medical Care Unit - Kuchchaveli",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Tuesday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
+      {
+        hospital: "Primary Medical Care Unit - Pulmoddai",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Thursday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      },
 
-<!-- Repeat for each hospital -->
-<button class="accordion">Divisional Hospital Type B - Pathavisripura</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td></td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
+      {
+        hospital: "Primary Medical Care Unit - Serunuwara",
+        clinics: [
+          { type: "Maternal & Child Health", days: "Monday & Friday" },
+          { type: "Well Women Clinic", days: "?" },
+          { type: "Non Communicable Diseases", days: "?" },
+          { type: "Antenatal", days: "1st - Thursday" },
+          { type: "Family Planning", days: "" },
+          { type: "Other", days: "" }
+        ]
+      }
+    ];
 
-<button class="accordion">Divisional Hospital Type C - Thampalagamam</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Monday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>Tuesday</td></tr>
-    <tr><th>Antenatal</th><td>1st Tuesday</td></tr>
-    <tr><th>Family Planning</th><td>Friday</td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
+    const clinicClasses = {
+      "Maternal & Child Health": "maternal",
+      "Well Women Clinic": "wellwomen",
+      "Non Communicable Diseases": "ncd",
+      "Antenatal": "antenatal",
+      "Family Planning": "family",
+      "Other": "other"
+    };
 
-<button class="accordion">Divisional Hospital Type C - Gomarangadawala</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Monday & Friday</td></tr>
-    <tr><th>Well Women Clinic</th><td>?</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>?</td></tr>
-    <tr><th>Antenatal</th><td>1st - Wednesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-<button class="accordion">Divisional Hospital Type C - Kuchchaveli</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Thursday and Friday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Tuesday</td></tr>
-    <tr><th>Antenatal</th><td>Last - Wednesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
+    const hospitalSelect = document.getElementById("hospitalSelect");
+    const results = document.getElementById("results");
 
-<button class="accordion">Divisional Hospital Type C - Serunuwara</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td></td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
+    // Populate dropdown
+    data.forEach(h => {
+      const option = document.createElement("option");
+      option.value = h.hospital;
+      option.textContent = h.hospital;
+      hospitalSelect.appendChild(option);
+    });
 
-<button class="accordion">Divisional Hospital Type C - Nilaveli</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Friday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Wednesday</td></tr>
-    <tr><th>Antenatal</th><td>Last - Wednesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
+    // Show results on hospital selection
+    hospitalSelect.addEventListener("change", () => {
+      const selected = hospitalSelect.value;
+      results.innerHTML = "";
 
-<button class="accordion">Divisional Hospital Type C - Killivetty</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Friday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Thursday</td></tr>
-    <tr><th>Antenatal</th><td>3rd Tuesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Eachilampathai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Friday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td>Last - Tuesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Thoppur</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>Thursday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Seruwila</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Friday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td>Last - Tuesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Mahadivulwewa</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday & Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Sampoor</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st week Thursday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Wan Ela</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Thursday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Wednesday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Divisional Hospital Type C - Selvanayagapuram</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Mon, Tue, Wed, Friday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Wed, Thursday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Alankerny</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Tuesday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Battukachchiya</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Friday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-<button class="accordion">Primary Medical Care Unit - Chenaiyoor</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Thursday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>Every other Monday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - China Bay</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Wednesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Thursday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Ganthalawa</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Tuesday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Kappalthurai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Wednesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Friday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td>Thursday</td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Kakkamunai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday & Saturday</td></tr>
-    <tr><th>Well Women Clinic</th><td>1st & 3rd Thursday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Kachchakodithivu</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Tuesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Monday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Kumburupitty</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Thursday, Friday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Wednesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Morawewa</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tuesday & Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Wednesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st Wednesday</td></tr>
-    <tr><th>Antenatal</th><td>1st Wednesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Manalchenai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Tues & Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Thursday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Mullipothanai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Thursday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Naduoothu</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Thursday</td></tr>
-    <tr><th>Well Women Clinic</th><td>Tuesday</td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Monday</td></tr>
-    <tr><th>Antenatal</th><td>1st Tuesday</td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Sampalthivu</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Wednesday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>2nd & 4th Tuesday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Thiriyai</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td></td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Pattalipuram</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td>Monday & Friday</td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td>1st & 3rd Monday</td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<button class="accordion">Primary Medical Care Unit - Valaiththoddam</button>
-<div class="panel">
-  <table>
-    <tr><th>Maternal & Child Health</th><td></td></tr>
-    <tr><th>Well Women Clinic</th><td></td></tr>
-    <tr><th>Non Communicable Diseases</th><td></td></tr>
-    <tr><th>Antenatal</th><td></td></tr>
-    <tr><th>Family Planning</th><td></td></tr>
-    <tr><th>Other</th><td></td></tr>
-  </table>
-</div>
-
-<!-- Add the remaining hospitals in similar format -->
-
-<script>
-  const acc = document.getElementsByClassName("accordion");
-  for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
+      if (selected) {
+        const hospital = data.find(d => d.hospital === selected);
+        hospital.clinics.forEach(c => {
+          const className = clinicClasses[c.type] || "other";
+          results.innerHTML += `
+            <div class="card ${className}">
+              <strong>${c.type}</strong>
+              <span>Available on: ${c.days || "Not specified"}</span>
+            </div>`;
+        });
       }
     });
-  }
-</script>
-
-
+  </script>
 <a href="index.html" style="
   position: fixed;
   bottom: 20px;
@@ -469,3 +269,7 @@
 </a>
 </body>
 </html>
+
+
+
+
