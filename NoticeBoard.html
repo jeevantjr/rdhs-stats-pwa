@@ -3,56 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <title>Notice Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-card {
+      max-width: 960px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 16px;
       padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    h1 {
-      text-align: center;
-      color: #333;
+
+    .header-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
     }
+
+    .header-card h1 {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .table-container {
+      max-width: 960px;
+      margin: 0 auto 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      min-width: 600px;
     }
+
     th, td {
-      padding: 12px 15px;
-      border: 1px solid #ccc;
+      padding: 14px 16px;
+      border-bottom: 1px solid #eee;
       text-align: left;
     }
+
     th {
-      background-color: #006699;
+      background-color: #007B9E;
       color: white;
+      font-weight: 600;
     }
-    tr:nth-child(even) {
+
+    tr:hover {
       background-color: #f9f9f9;
     }
+
     a.link-btn {
-      color: #1a73e8;
+      color: #007B9E;
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-card img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .header-card h1 {
+        font-size: 1.5rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Notice Board</h1>
-  <table id="noticeTable">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>To Whom</th>
-        <th>Message</th>
-        <th>From Whom</th>
-        <th>Attachment</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+
+  <!-- Header card with logo -->
+  <div class="header-card">
+    <img src="rdhs-stats-pwa/images/icon-192.png" alt="Logo">
+    <h1>RDHS Notice Board</h1>
+  </div>
+
+  <!-- Table container -->
+  <div class="table-container">
+    <table id="noticeTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>To Whom</th>
+          <th>Message</th>
+          <th>From Whom</th>
+          <th>Attachment</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <script>
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3ABmBzmX3OgzqubEa09Gepqxnw0JPz718WJzE9urSO2F8EkrhP9Rr0KPQoFxkBSUM1eYUj747JDY9/pub?gid=0&single=true&output=csv';
@@ -79,6 +146,6 @@
       }
     });
   </script>
+
 </body>
 </html>
-
