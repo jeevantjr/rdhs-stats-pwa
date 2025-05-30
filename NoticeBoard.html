@@ -19,25 +19,26 @@
     .header-card {
       max-width: 960px;
       margin: 20px auto;
-      background: white;
+      background: linear-gradient(135deg, #007B9E, #00B9A3);
       border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: white;
     }
 
     .header-card img {
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto 15px;
     }
 
     .header-card h1 {
-      font-size: 1.8rem;
-      color: #2c3e50;
+      font-size: 2rem;
       margin: 0;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     }
 
     .table-container {
@@ -77,18 +78,13 @@
     }
 
     @media (max-width: 768px) {
-      .header-card {
-        flex-direction: column;
-        text-align: center;
+      .header-card h1 {
+        font-size: 1.5rem;
       }
 
       .header-card img {
-        width: 50px;
-        height: 50px;
-      }
-
-      .header-card h1 {
-        font-size: 1.5rem;
+        width: 60px;
+        height: 60px;
       }
 
       table {
@@ -99,7 +95,7 @@
 </head>
 <body>
 
-  <!-- Header card with logo -->
+  <!-- Header with centered logo and colored card -->
   <div class="header-card">
     <img src="images/icon-192.png" alt="Logo">
     <h1>RDHS Notice Board</h1>
@@ -146,6 +142,21 @@
       }
     });
   </script>
-
+<a href="index.html" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #002147;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+">
+  🏠 Home
+</a>
 </body>
 </html>
