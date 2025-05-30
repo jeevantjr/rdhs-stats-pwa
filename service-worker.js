@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rdhs-cache-v17'; // Update this version after every significant change
+const CACHE_NAME = 'rdhs-cache-v18'; // Update this version after every significant change
 const DEBUG = false; // Set to true for development logging
 
 const urlsToCache = [
@@ -51,6 +51,9 @@ const urlsToCache = [
    '/rdhs-stats-pwa/MonthlyStatistics/ChildDeaths.html',
   '/rdhs-stats-pwa/MonthlyStatistics/Underweight.html',
  '/rdhs-stats-pwa/MonthlyStatistics/TeenagePregnant.html',
+
+  //Notice Board
+  '/rdhs-stats-pwa/NoticeBoard.html',
   
   // Offline fallback page
   '/rdhs-stats-pwa/offline.html',
