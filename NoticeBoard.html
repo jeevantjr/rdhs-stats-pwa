@@ -12,28 +12,60 @@
     }
     h1 {
       text-align: center;
+      color: #333;
       margin-bottom: 20px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     th, td {
       padding: 12px;
       border: 1px solid #ddd;
+      text-align: left;
     }
     th {
       background-color: #007B9E;
       color: white;
     }
-    tr:hover {
+    tr:nth-child(even) {
       background-color: #f1f1f1;
     }
     a.link-btn {
       color: #1a73e8;
       text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+      td:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+      }
+      td:nth-of-type(1):before { content: "Date"; }
+      td:nth-of-type(2):before { content: "To Whom"; }
+      td:nth-of-type(3):before { content: "Message"; }
+      td:nth-of-type(4):before { content: "From Whom"; }
+      td:nth-of-type(5):before { content: "Attachment"; }
     }
   </style>
 </head>
@@ -53,30 +85,27 @@
   </table>
 
   <script>
-    const publicSpreadsheetKey = '18ZcQBoOeHo6FAPu2XHyNeYJnzqTQM0dsM7XxTuBNeok';
+    const sheetKey = '18ZcQBoOeHo6FAPu2XHyNeYJnzqTQM0dsM7XxTuBNeok';
 
     function init() {
       Tabletop.init({
-        key: publicSpreadsheetKey,
-        callback: showInfo,
-        simpleSheet: true
-      });
-    }
-
-    function showInfo(data) {
-      const tableBody = document.querySelector('#noticeTable tbody');
-      tableBody.innerHTML = ''; // Clear old data
-
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${row.Date || ''}</td>
-          <td>${row['To Whom'] || ''}</td>
-          <td>${row.Message || ''}</td>
-          <td>${row['From Whom'] || ''}</td>
-          <td>${row['Attachment Link'] ? `<a href="${row['Attachment Link']}" target="_blank" class="link-btn">View</a>` : ''}</td>
-        `;
-        tableBody.appendChild(tr);
+        key: sheetKey,
+        simpleSheet: true,
+        callback: function(data) {
+          const tableBody = document.querySelector('#noticeTable tbody');
+          tableBody.innerHTML = '';
+          data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${row.Date || ''}</td>
+              <td>${row['To Whom'] || ''}</td>
+              <td>${row.Message || ''}</td>
+              <td>${row['From Whom'] || ''}</td>
+              <td>${row['Attachment Link'] ? `<a href="${row['Attachment Link']}" target="_blank" class="link-btn">View</a>` : ''}</td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        }
       });
     }
 
