@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notice Board</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f9fc;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #007B9E;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    a.link-btn {
+      color: #1a73e8;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Notice Board</h1>
+  <table id="noticeTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>To Whom</th>
+        <th>Message</th>
+        <th>From Whom</th>
+        <th>Attachment</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const publicSpreadsheetKey = '18ZcQBoOeHo6FAPu2XHyNeYJnzqTQM0dsM7XxTuBNeok';
+
+    function init() {
+      Tabletop.init({
+        key: publicSpreadsheetKey,
+        callback: showInfo,
+        simpleSheet: true
+      });
+    }
+
+    function showInfo(data) {
+      const tableBody = document.querySelector('#noticeTable tbody');
+      tableBody.innerHTML = ''; // Clear old data
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.Date || ''}</td>
+          <td>${row['To Whom'] || ''}</td>
+          <td>${row.Message || ''}</td>
+          <td>${row['From Whom'] || ''}</td>
+          <td>${row['Attachment Link'] ? `<a href="${row['Attachment Link']}" target="_blank" class="link-btn">View</a>` : ''}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
