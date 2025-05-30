@@ -1,71 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Notice Board</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f4f4f4;
       padding: 20px;
-      background: #f7f9fc;
     }
     h1 {
       text-align: center;
       color: #333;
-      margin-bottom: 20px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
     th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
       text-align: left;
     }
     th {
-      background-color: #007B9E;
+      background-color: #006699;
       color: white;
     }
     tr:nth-child(even) {
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
     }
     a.link-btn {
       color: #1a73e8;
       text-decoration: underline;
-    }
-    @media (max-width: 600px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
-      }
-      th {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-      td {
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid #eee;
-      }
-      td:before {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-      }
-      td:nth-of-type(1):before { content: "Date"; }
-      td:nth-of-type(2):before { content: "To Whom"; }
-      td:nth-of-type(3):before { content: "Message"; }
-      td:nth-of-type(4):before { content: "From Whom"; }
-      td:nth-of-type(5):before { content: "Attachment"; }
     }
   </style>
 </head>
@@ -85,31 +55,30 @@
   </table>
 
   <script>
-    const sheetKey = '18ZcQBoOeHo6FAPu2XHyNeYJnzqTQM0dsM7XxTuBNeok';
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3ABmBzmX3OgzqubEa09Gepqxnw0JPz718WJzE9urSO2F8EkrhP9Rr0KPQoFxkBSUM1eYUj747JDY9/pub?gid=0&single=true&output=csv';
 
-    function init() {
-      Tabletop.init({
-        key: sheetKey,
-        simpleSheet: true,
-        callback: function(data) {
-          const tableBody = document.querySelector('#noticeTable tbody');
-          tableBody.innerHTML = '';
-          data.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${row.Date || ''}</td>
-              <td>${row['To Whom'] || ''}</td>
-              <td>${row.Message || ''}</td>
-              <td>${row['From Whom'] || ''}</td>
-              <td>${row['Attachment Link'] ? `<a href="${row['Attachment Link']}" target="_blank" class="link-btn">View</a>` : ''}</td>
-            `;
-            tableBody.appendChild(tr);
-          });
-        }
-      });
-    }
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        const tableBody = document.querySelector('#noticeTable tbody');
+        tableBody.innerHTML = '';
 
-    window.addEventListener('DOMContentLoaded', init);
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row["Date"] || ''}</td>
+            <td>${row["To Whom"] || ''}</td>
+            <td>${row["Message"] || ''}</td>
+            <td>${row["From Whom"] || ''}</td>
+            <td>${row["Attachment Link"] ? `<a href="${row["Attachment Link"]}" target="_blank" class="link-btn">View</a>` : ''}</td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+    });
   </script>
 </body>
 </html>
+
