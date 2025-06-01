@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hospital Assets Management System</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 450px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #0e5d8f;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #0e5d8f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #094a72;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="login-box">
+    <h1>Hospital Assets Management System</h1>
+    <input type="text" id="username" placeholder="Enter Username" />
+    <input type="password" id="password" placeholder="Enter Password" />
+    <button onclick="validate()">Login</button>
+    <div class="error" id="error-msg"></div>
+  </div>
+
+  <script>
+    const correctUsername = "rdhs";
+    const correctPassword = "admin";
+    const redirectURL = "https://script.google.com/macros/s/AKfycbwgu3saAdvczxFG_EZlpEmBYThktjhq3dgZQ8jQ0ktXZW4IrKHvb49W3uIfqI-mmiKzgA/exec";
+
+    function validate() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("error-msg");
+
+      if (user === correctUsername && pass === correctPassword) {
+        // Redirect to the Apps Script page
+        window.location.href = redirectURL;
+      } else {
+        errorMsg.textContent = "You are not authorized person to view and edit this system.";
+      }
+    }
+  </script>
+</body>
+</html>
