@@ -2,113 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dengue Update - Monthly Report</title>
+  <title>Dengue Case Trends</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
+      background: linear-gradient(to right, #f9f9f9, #e0f7fa);
       margin: 0;
       padding: 20px;
     }
-    .header {
+
+    h1 {
       text-align: center;
-      background: #007B9E;
-      color: white;
+      color: #00796B;
+    }
+
+    .chart-container {
+      max-width: 960px;
+      margin: 20px auto;
+      background: white;
       padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
-    .header h1 {
-      margin: 0;
-    }
+
     .table-container {
+      max-width: 960px;
+      margin: 40px auto;
       overflow-x: auto;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 700px;
+      min-width: 600px;
     }
+
     th, td {
-      padding: 12px 14px;
+      padding: 10px 14px;
+      text-align: center;
       border-bottom: 1px solid #ddd;
-      text-align: left;
     }
+
     th {
-      background: #007B9E;
+      background: #00796B;
       color: white;
     }
+
     tr:hover {
-      background: #f0f8ff;
+      background-color: #f1f1f1;
     }
-    .footer-link {
+
+    a.home-btn {
       position: fixed;
       bottom: 20px;
-      right: 20px;
-      background-color: #002147;
+      left: 20px;
+      background-color: #004D40;
       color: white;
-      padding: 10px 16px;
+      padding: 12px 18px;
       border-radius: 40px;
       text-decoration: none;
       font-size: 16px;
+      font-family: 'Segoe UI', sans-serif;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    a.home-btn:hover {
+      background-color: #00695C;
+    }
+
+    @media (max-width: 768px) {
+      canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Dengue Cases by MOH Division (2025 Monthly Report)</h1>
-</div>
+  <h1>Dengue Case Trends - 2025</h1>
 
-<div class="table-container">
-  <table id="dengueTable">
-    <thead></thead>
-    <tbody></tbody>
-  </table>
-</div>
+  <div class="chart-container">
+    <canvas id="dengueChart" height="200"></canvas>
+  </div>
 
-<script>
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv';
+  <div class="table-container">
+    <table id="dataTable">
+      <thead id="tableHead"></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
 
-  Papa.parse(csvUrl, {
-    download: true,
-    header: true,
-    complete: function(results) {
-      const data = results.data;
-      const thead = document.querySelector('#dengueTable thead');
-      const tbody = document.querySelector('#dengueTable tbody');
+  <a href="index.html" class="home-btn">🏠 Home</a>
 
-      if (data.length === 0) return;
+  <script>
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv";
 
-      // Create header row
-      const headerRow = document.createElement('tr');
-      Object.keys(data[0]).forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
+    Papa.parse(sheetURL, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const totals = new Array(12).fill(0);
 
-      // Create table rows
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        Object.values(row).forEach(value => {
-          const td = document.createElement('td');
-          td.textContent = value;
-          tr.appendChild(td);
+        const thead = document.getElementById("tableHead");
+        const tbody = document.getElementById("tableBody");
+        const keys = Object.keys(data[0]);
+
+        // Set table header
+        let headerRow = "<tr>";
+        keys.forEach(key => {
+          headerRow += `<th>${key}</th>`;
         });
-        tbody.appendChild(tr);
-      });
-    }
-  });
-</script>
+        headerRow += "</tr>";
+        thead.innerHTML = headerRow;
 
-<a href="index.html" class="footer-link">🏠 Home</a>
+        // Populate table and calculate monthly totals
+        data.forEach(row => {
+          let rowHtml = "<tr>";
+          keys.forEach((key, idx) => {
+            let val = row[key] || "0";
+            if (idx > 0 && idx <= 12) {
+              totals[idx - 1] += parseInt(val) || 0;
+            }
+            rowHtml += `<td>${val}</td>`;
+          });
+          rowHtml += "</tr>";
+          tbody.innerHTML += rowHtml;
+        });
+
+        // Render chart
+        const ctx = document.getElementById("dengueChart").getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [{
+              label: "Total Dengue Cases",
+              data: totals,
+              borderColor: "#00796B",
+              backgroundColor: "rgba(0,121,107,0.1)",
+              fill: true,
+              tension: 0.3,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                labels: {
+                  color: '#333',
+                  font: {
+                    size: 14
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 10
+                }
+              }
+            }
+          }
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
