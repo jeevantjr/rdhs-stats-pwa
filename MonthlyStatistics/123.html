@@ -2,234 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Dengue Case Trends</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dengue Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
+      background: linear-gradient(to right, #f9f9f9, #e0f7fa);
       margin: 0;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
-      color: #007B9E;
-      margin-bottom: 10px;
+      color: #00796B;
     }
-    #mohFilter {
-      display: block;
-      margin: 0 auto 20px;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    #chartContainer {
-      max-width: 100%;
+
+    .chart-container {
+      max-width: 960px;
       margin: 20px auto;
-    }
-    #analytics {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: white;
       padding: 20px;
-      max-width: 600px;
-      margin: 20px auto;
-      color: #333;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
+
+    .table-container {
+      max-width: 960px;
+      margin: 40px auto;
+      overflow-x: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      min-width: 600px;
     }
+
     th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ccc;
-      text-align: left;
+      padding: 10px 14px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
     }
+
     th {
-      background-color: #007B9E;
+      background: #00796B;
       color: white;
     }
+
     tr:hover {
       background-color: #f1f1f1;
     }
-    .home-btn {
+
+    a.home-btn {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background-color: #007B9E;
+      background-color: #004D40;
       color: white;
-      padding: 12px 16px;
+      padding: 12px 18px;
       border-radius: 40px;
       text-decoration: none;
       font-size: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 1000;
+      transition: background-color 0.3s ease;
     }
+
+    a.home-btn:hover {
+      background-color: #00695C;
+    }
+
     @media (max-width: 768px) {
-      canvas, table {
+      canvas {
         width: 100% !important;
+        height: auto !important;
       }
-      #analytics {
+
+      table {
         font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Dengue Monthly Report</h1>
-  <label for="mohFilter">Filter by MOH Division:</label>
-  <select id="mohFilter">
-    <option value="All">All</option>
-  </select>
 
-  <div id="chartContainer">
-    <canvas id="dengueChart"></canvas>
+  <h1>Dengue Case Trends - 2025</h1>
+
+  <div class="chart-container">
+    <canvas id="dengueChart" height="200"></canvas>
   </div>
 
-  <div id="analytics">
-    <p><strong>Peak Month:</strong> <span id="peakMonth"></span></p>
-    <p><strong>Lowest Month:</strong> <span id="lowestMonth"></span></p>
-    <p><strong>Total YTD Cases:</strong> <span id="totalCases"></span></p>
+  <div class="table-container">
+    <table id="dataTable">
+      <thead id="tableHead"></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
   </div>
-
-  <table id="dataTable">
-    <thead>
-      <tr>
-        <th>Month</th>
-        <th>MOH Division</th>
-        <th>Cases</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
 
   <a href="index.html" class="home-btn">🏠 Home</a>
 
   <script>
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv';
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv";
 
-    let allData = [];
-    let chart;
-
-    Papa.parse(csvUrl, {
+    Papa.parse(sheetURL, {
       download: true,
       header: true,
       complete: function(results) {
-        allData = results.data.filter(row => row["Month"] && row["MOH Division"] && row["Cases"]);
-        populateMOHDropdown();
-        updateVisuals("All");
-      }
-    });
+        const data = results.data;
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const totals = new Array(12).fill(0);
 
-    function populateMOHDropdown() {
-      const select = document.getElementById("mohFilter");
-      const mohSet = new Set(allData.map(row => row["MOH Division"]));
-      mohSet.forEach(moh => {
-        const option = document.createElement("option");
-        option.value = moh;
-        option.textContent = moh;
-        select.appendChild(option);
-      });
+        const thead = document.getElementById("tableHead");
+        const tbody = document.getElementById("tableBody");
+        const keys = Object.keys(data[0]);
 
-      select.addEventListener("change", () => {
-        updateVisuals(select.value);
-      });
-    }
+        // Set table header
+        let headerRow = "<tr>";
+        keys.forEach(key => {
+          headerRow += `<th>${key}</th>`;
+        });
+        headerRow += "</tr>";
+        thead.innerHTML = headerRow;
 
-    function updateVisuals(selectedMOH) {
-      const filtered = selectedMOH === "All" ? allData : allData.filter(row => row["MOH Division"] === selectedMOH);
-      updateTable(filtered);
-      updateChart(filtered);
-      updateAnalytics(filtered);
-    }
+        // Populate table and calculate monthly totals
+        data.forEach(row => {
+          let rowHtml = "<tr>";
+          keys.forEach((key, idx) => {
+            let val = row[key] || "0";
+            if (idx > 0 && idx <= 12) {
+              totals[idx - 1] += parseInt(val) || 0;
+            }
+            rowHtml += `<td>${val}</td>`;
+          });
+          rowHtml += "</tr>";
+          tbody.innerHTML += rowHtml;
+        });
 
-    function updateTable(data) {
-      const tbody = document.querySelector("#dataTable tbody");
-      tbody.innerHTML = "";
-      data.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${row["Month"]}</td><td>${row["MOH Division"]}</td><td>${row["Cases"]}</td>`;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function updateChart(data) {
-      const monthMap = {};
-      data.forEach(row => {
-        const month = row["Month"];
-        const cases = parseInt(row["Cases"], 10) || 0;
-        monthMap[month] = (monthMap[month] || 0) + cases;
-      });
-
-      const labels = Object.keys(monthMap);
-      const values = labels.map(m => monthMap[m]);
-
-      if (chart) chart.destroy();
-      const ctx = document.getElementById("dengueChart").getContext("2d");
-      chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Dengue Cases',
-            data: values,
-            borderColor: '#007B9E',
-            backgroundColor: 'rgba(0,123,158,0.1)',
-            tension: 0.3,
-            pointRadius: 5,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: false }
+        // Render chart
+        const ctx = document.getElementById("dengueChart").getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [{
+              label: "Total Dengue Cases",
+              data: totals,
+              borderColor: "#00796B",
+              backgroundColor: "rgba(0,121,107,0.1)",
+              fill: true,
+              tension: 0.3,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+            }]
           },
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: { display: true, text: 'Cases' }
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                labels: {
+                  color: '#333',
+                  font: {
+                    size: 14
+                  }
+                }
+              }
             },
-            x: {
-              title: { display: true, text: 'Month' }
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 10
+                }
+              }
             }
           }
-        }
-      });
-    }
-
-    function updateAnalytics(data) {
-      const monthMap = {};
-      data.forEach(row => {
-        const month = row["Month"];
-        const cases = parseInt(row["Cases"], 10) || 0;
-        monthMap[month] = (monthMap[month] || 0) + cases;
-      });
-
-      let peakMonth = "", lowestMonth = "";
-      let max = -Infinity, min = Infinity, total = 0;
-
-      for (const [month, cases] of Object.entries(monthMap)) {
-        if (cases > max) {
-          max = cases;
-          peakMonth = month;
-        }
-        if (cases < min) {
-          min = cases;
-          lowestMonth = month;
-        }
-        total += cases;
+        });
       }
-
-      document.getElementById("peakMonth").textContent = `${peakMonth} (${max} cases)`;
-      document.getElementById("lowestMonth").textContent = `${lowestMonth} (${min} cases)`;
-      document.getElementById("totalCases").textContent = total;
-    }
+    });
   </script>
+
 </body>
 </html>
