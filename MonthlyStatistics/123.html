@@ -19,7 +19,7 @@
       color: #00796B;
     }
 
-    .chart-container {
+    .chart-container, .table-container {
       max-width: 960px;
       margin: 20px auto;
       background: white;
@@ -28,14 +28,21 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .table-container {
+    .controls {
       max-width: 960px;
-      margin: 40px auto;
-      overflow-x: auto;
-      background: white;
-      border-radius: 16px;
-      padding: 10px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      margin: 0 auto 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
 
     table {
@@ -72,19 +79,9 @@
       font-family: 'Segoe UI', sans-serif;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 1000;
-      transition: background-color 0.3s ease;
-    }
-
-    a.home-btn:hover {
-      background-color: #00695C;
     }
 
     @media (max-width: 768px) {
-      canvas {
-        width: 100% !important;
-        height: auto !important;
-      }
-
       table {
         font-size: 0.9rem;
       }
@@ -93,101 +90,138 @@
 </head>
 <body>
 
-  <h1>Dengue Case Trends - 2025</h1>
+<h1>Dengue Case Trends - 2025</h1>
 
-  <div class="chart-container">
-    <canvas id="dengueChart" height="200"></canvas>
-  </div>
+<div class="controls">
+  <label>
+    Filter by MOH Division:
+    <select id="mohFilter">
+      <option value="All">All</option>
+    </select>
+  </label>
+  <button onclick="downloadCSV()">⬇ Download CSV</button>
+</div>
 
-  <div class="table-container">
-    <table id="dataTable">
-      <thead id="tableHead"></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
+<div class="chart-container">
+  <canvas id="dengueChart" height="200"></canvas>
+</div>
 
-  <a href="index.html" class="home-btn">🏠 Home</a>
+<div class="table-container">
+  <table id="dataTable">
+    <thead id="tableHead"></thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
 
-  <script>
-    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv";
+<a href="index.html" class="home-btn">🏠 Home</a>
 
-    Papa.parse(sheetURL, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const data = results.data;
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const totals = new Array(12).fill(0);
+<script>
+  const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv";
+  let fullData = [];
+  let chartInstance = null;
 
-        const thead = document.getElementById("tableHead");
-        const tbody = document.getElementById("tableBody");
-        const keys = Object.keys(data[0]);
+  function renderTable(data) {
+    const keys = Object.keys(data[0] || {});
+    const thead = document.getElementById("tableHead");
+    const tbody = document.getElementById("tableBody");
+    thead.innerHTML = "";
+    tbody.innerHTML = "";
 
-        // Set table header
-        let headerRow = "<tr>";
-        keys.forEach(key => {
-          headerRow += `<th>${key}</th>`;
-        });
-        headerRow += "</tr>";
-        thead.innerHTML = headerRow;
+    // Headers
+    let headerRow = "<tr>";
+    keys.forEach(key => headerRow += `<th>${key}</th>`);
+    headerRow += "</tr>";
+    thead.innerHTML = headerRow;
 
-        // Populate table and calculate monthly totals
-        data.forEach(row => {
-          let rowHtml = "<tr>";
-          keys.forEach((key, idx) => {
-            let val = row[key] || "0";
-            if (idx > 0 && idx <= 12) {
-              totals[idx - 1] += parseInt(val) || 0;
-            }
-            rowHtml += `<td>${val}</td>`;
-          });
-          rowHtml += "</tr>";
-          tbody.innerHTML += rowHtml;
-        });
+    // Rows
+    data.forEach(row => {
+      let rowHtml = "<tr>";
+      keys.forEach(key => rowHtml += `<td>${row[key] || "0"}</td>`);
+      rowHtml += "</tr>";
+      tbody.innerHTML += rowHtml;
+    });
+  }
 
-        // Render chart
-        const ctx = document.getElementById("dengueChart").getContext("2d");
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: months,
-            datasets: [{
-              label: "Total Dengue Cases",
-              data: totals,
-              borderColor: "#00796B",
-              backgroundColor: "rgba(0,121,107,0.1)",
-              fill: true,
-              tension: 0.3,
-              pointRadius: 5,
-              pointHoverRadius: 7,
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: true,
-                labels: {
-                  color: '#333',
-                  font: {
-                    size: 14
-                  }
-                }
-              }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  stepSize: 10
-                }
-              }
-            }
-          }
-        });
+  function renderChart(filteredData) {
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const totals = new Array(12).fill(0);
+
+    filteredData.forEach(row => {
+      months.forEach((m, i) => {
+        totals[i] += parseInt(row[m]) || 0;
+      });
+    });
+
+    const ctx = document.getElementById("dengueChart").getContext("2d");
+    if (chartInstance) chartInstance.destroy();
+
+    chartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: months,
+        datasets: [{
+          label: "Dengue Cases",
+          data: totals,
+          borderColor: "#00796B",
+          backgroundColor: "rgba(0,121,107,0.1)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
       }
     });
-  </script>
+  }
+
+  function downloadCSV() {
+    const csv = Papa.unparse(filteredDataForDownload);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "filtered_dengue_data.csv";
+    link.click();
+  }
+
+  let filteredDataForDownload = [];
+
+  function updateFilter() {
+    const selectedMOH = document.getElementById("mohFilter").value;
+    const filtered = selectedMOH === "All"
+      ? fullData
+      : fullData.filter(row => row["MOH Division"] === selectedMOH);
+
+    filteredDataForDownload = filtered;
+    renderTable(filtered);
+    renderChart(filtered);
+  }
+
+  Papa.parse(sheetURL, {
+    download: true,
+    header: true,
+    complete: function(results) {
+      fullData = results.data.filter(r => r["MOH Division"]);
+      filteredDataForDownload = fullData;
+
+      // Populate filter dropdown
+      const mohSelect = document.getElementById("mohFilter");
+      const divisions = Array.from(new Set(fullData.map(r => r["MOH Division"]))).sort();
+      divisions.forEach(moh => {
+        const option = document.createElement("option");
+        option.value = moh;
+        option.textContent = moh;
+        mohSelect.appendChild(option);
+      });
+
+      mohSelect.addEventListener("change", updateFilter);
+      updateFilter(); // Initial load
+    }
+  });
+</script>
 
 </body>
 </html>
