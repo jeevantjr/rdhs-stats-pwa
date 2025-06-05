@@ -271,33 +271,54 @@
   </script>
 
   <!-- Install App Logic -->
-  <script>
-    let deferredPrompt;
+<!-- Install App Logic -->
+<script>
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase());
+  }
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('installContainer').style.display = 'block';
+  let deferredPrompt;
 
-      document.getElementById('installBtn').addEventListener('click', () => {
-        document.getElementById('installContainer').style.display = 'none';
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('✅ App installed');
-          } else {
-            console.log('❌ User dismissed the install prompt');
-          }
-          deferredPrompt = null;
-        });
+  window.addEventListener('load', () => {
+    const container = document.getElementById('installContainer');
+
+    if (isIOS()) {
+      container.innerHTML = `
+        <div style="background-color: rgba(255,255,255,0.15); color: #fff; padding: 1.2rem; border-radius: 12px; max-width: 380px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.4); font-size: 1rem; line-height: 1.6;">
+          📲 <strong>To install this app on your iPhone</strong>, open it in <strong>Safari</strong>, tap the <strong>Share</strong> icon, then choose <strong>"Add to Home Screen"</strong>.
+        </div>
+      `;
+    }
+  });
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    const container = document.getElementById('installContainer');
+    container.style.display = 'block';
+
+    const button = document.getElementById('installBtn');
+    button.addEventListener('click', () => {
+      container.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('✅ App installed');
+        } else {
+          console.log('❌ User dismissed the install prompt');
+        }
+        deferredPrompt = null;
       });
     });
+  });
 
-    window.addEventListener('appinstalled', () => {
-      console.log('📲 RDHS Stats App was successfully installed');
-      document.getElementById('installContainer').style.display = 'none';
-    });
-  </script>
+  window.addEventListener('appinstalled', () => {
+    console.log('📲 RDHS Stats App was successfully installed');
+    document.getElementById('installContainer').style.display = 'none';
+  });
+</script>
+
 
   <!-- Service Worker Registration -->
   <script>
