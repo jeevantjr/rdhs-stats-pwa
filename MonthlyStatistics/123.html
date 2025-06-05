@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dengue Update - Monthly Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      background: #007B9E;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #007B9E;
+      color: white;
+    }
+    tr:hover {
+      background: #f0f8ff;
+    }
+    .footer-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #002147;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Dengue Cases by MOH Division (2025 Monthly Report)</h1>
+</div>
+
+<div class="table-container">
+  <table id="dengueTable">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpQW0OWxqQ_e-rpmIUISO1nAaH9XbOHUdGXOq6iFmkPaP1ovDCyA695qpRZHFhvlU0b-W7zgSXiYA7/pub?output=csv';
+
+  Papa.parse(csvUrl, {
+    download: true,
+    header: true,
+    complete: function(results) {
+      const data = results.data;
+      const thead = document.querySelector('#dengueTable thead');
+      const tbody = document.querySelector('#dengueTable tbody');
+
+      if (data.length === 0) return;
+
+      // Create header row
+      const headerRow = document.createElement('tr');
+      Object.keys(data[0]).forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+
+      // Create table rows
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        Object.values(row).forEach(value => {
+          const td = document.createElement('td');
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+  });
+</script>
+
+<a href="index.html" class="footer-link">🏠 Home</a>
+</body>
+</html>
