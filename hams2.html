@@ -1,0 +1,704 @@
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --primary-gradient-start: #1573e8;
+            --primary-gradient-end: #3498db;
+            --secondary-color: #6c757d;
+            --success-color: #198754; /* Green for success/health theme */
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+            --light-bg: #f4f7f9;
+            --white-color: #ffffff;
+            --text-dark: #212529;
+            --text-light: #f1f5f9;
+            --border-color: #dee2e6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 0.5rem;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container-main {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Title Card --- */
+        .title-card {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: var(--white-color);
+            padding: 30px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .title-card .icon-wrapper { font-size: 3rem; opacity: 0.9; }
+        .title-card .text-wrapper h1 { font-size: 2rem; font-weight: 700; margin-bottom: 5px; }
+        .title-card .text-wrapper h5 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0; color: var(--text-light); }
+
+        /* --- Institution Details Card --- */
+        .details-card {
+            background-color: #e8f5e9;
+            padding: 25px 30px;
+            border-left: 5px solid var(--success-color);
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        .details-card h4 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #1e4620;
+            font-size: 1.25rem;
+            border-bottom: 1px solid #c8e6c9;
+            padding-bottom: 0.5rem;
+        }
+        .details-card p {
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+        .details-card p strong {
+            color: var(--text-dark);
+            min-width: 180px;
+            display: inline-block;
+        }
+        .details-card i.fa-fw {
+            color: var(--success-color);
+        }
+        .btn-edit-details {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        /* --- Controls Area --- */
+        .controls-section {
+            background-color: #fcfdff;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            border: 1px solid #e0e8f1;
+        }
+        .controls-section .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn i { margin-right: 8px; }
+
+        /* --- Table Styling --- */
+        .table-responsive {
+             box-shadow: var(--card-shadow);
+             border-radius: var(--border-radius);
+             overflow: hidden;
+        }
+        .table {
+            margin-bottom: 0;
+            background-color: var(--white-color);
+        }
+        .table thead th {
+             background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+             color: var(--white-color);
+             border-bottom: 0;
+             font-weight: 600;
+             white-space: nowrap;
+             vertical-align: middle;
+             padding: 1rem 1.2rem;
+             font-size: 1rem;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            border-color: #f1f1f1;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #eef7ff;
+        }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Zebra-striping */
+        }
+        .table .action-buttons { white-space: nowrap; }
+        td.text-break { word-break: break-word; }
+
+        /* --- Modal Styling --- */
+        .modal-header { background-color: var(--primary-color); color: var(--white-color); }
+        .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+        .modal-title { font-weight: 600; }
+        .modal-body .form-label { font-weight: 500; }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .title-card { flex-direction: column; text-align: center; gap: 15px; }
+            .details-card p strong { display: block; margin-bottom: 2px; min-width: unset; }
+            .btn-toolbar { flex-direction: column; align-items: stretch; }
+            .btn-toolbar .btn { width: 100%; margin-bottom: 0.5rem; }
+            .table .action-buttons button { width: 100%; margin-bottom: 5px; } /* Ensure buttons stack on small screens */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container container-main">
+
+    <div class="title-card shadow-sm">
+        <div class="icon-wrapper"><i class="fas fa-notes-medical"></i></div>
+        <div class="text-wrapper">
+            <h1>Health Asset Management System</h1>
+            <h5>Regional Director of Health Services - Trincomalee</h5>
+        </div>
+    </div>
+
+    <div class="details-card shadow-sm">
+        <button class="btn btn-outline-success btn-sm btn-edit-details" onclick="openDetailsModal()" title="Edit Institution Details">
+            <i class="fas fa-pencil-alt"></i> Edit
+        </button>
+        <h4><i class="fas fa-hospital me-2"></i>Institution Details</h4>
+        <div class="row">
+            <div class="col-lg-6">
+                <p><i class="fas fa-clinic-medical fa-fw me-2"></i><strong>Hospital Name:</strong><span id="hospitalName">Divisional Hospital Thampalakamam</span></p>
+                <p><i class="fas fa-map-marker-alt fa-fw me-2"></i><strong>Address:</strong><span id="hospitalAddress">Main Street, Thampalakamam, Trincomalee</span></p>
+                <p><i class="fas fa-phone-alt fa-fw me-2"></i><strong>Hospital Contact No.:</strong><span id="hospitalContact">+94 26 222 1234</span></p>
+            </div>
+            <div class="col-lg-6">
+                <p><i class="fas fa-user-tie fa-fw me-2"></i><strong>Hospital In-charge:</strong><span id="moicName">Dr. A. B. Perera (MOIC)</span></p>
+                <p><i class="fas fa-mobile-alt fa-fw me-2"></i><strong>MOIC's Mobile No.:</strong><span id="moicContact">+94 71 987 6543</span></p>
+                <p><i class="fas fa-user-shield fa-fw me-2"></i><strong>Inventory In-charge:</strong><span id="inventoryChargeName">Mr. C. D. Silva</span></p>
+                <p><i class="fas fa-mobile-alt fa-fw me-2"></i><strong>Inventory In-charge's Mobile No.:</strong><span id="inventoryChargeContact">+94 77 123 4567</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-section shadow-sm">
+        <div class="row mb-4 gy-3 align-items-end">
+            <div class="col-lg-4 col-md-6">
+                <label for="category" class="form-label"><i class="fas fa-tags"></i> Category</label>
+                <select id="category" class="form-select">
+                    <option value="Surgical" selected>Surgical</option>
+                    <option value="Dental">Dental</option>
+                    <option value="General">General</option>
+                    <option value="Consumable">Consumable</option>
+                    <option value="Counterfoil">Counterfoil</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label for="year" class="form-label"><i class="fas fa-calendar-alt"></i> Year</label>
+                <select id="year" class="form-select">
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                   <label for="search" class="form-label"><i class="fas fa-search"></i> Search Items</label>
+                   <div class="input-group">
+                       <input type="text" id="search" class="form-control" placeholder="Filter by name or inv. no..." onkeyup="filterTable()">
+                       <button class="btn btn-primary" onclick="loadInventory()" type="button" id="button-addon2">
+                           <i class="fas fa-sync-alt"></i>Load
+                       </button>
+                   </div>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-end btn-toolbar" role="toolbar" aria-label="Action buttons">
+            <button class="btn btn-success me-2 mb-2 mb-md-0" onclick="openAddModal()">
+                <i class="fas fa-plus"></i>Add New Item
+            </button>
+            <button class="btn btn-secondary mb-2 mb-md-0" onclick="exportToExcel()">
+                <i class="fas fa-file-excel"></i>Export Excel
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle" id="inventoryTable">
+            <thead>
+                <tr>
+                    <th>Inv. No</th>
+                    <th>Item Description</th>
+                    <th>Ledger Bal.</th>
+                    <th>Actual Bal.</th>
+                    <th>+/-</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">Please select a category and year, then click "Load".</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: var(--success-color); color: var(--white-color);">
+        <h5 class="modal-title" id="detailsModalLabel"><i class="fas fa-pencil-alt me-2"></i>Edit Institution Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1) grayscale(100%) brightness(200%);"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 mb-3"><label for="editHospitalName" class="form-label">Hospital Name:</label><input type="text" class="form-control" id="editHospitalName"></div>
+          <div class="col-md-6 mb-3"><label for="editHospitalAddress" class="form-label">Address:</label><input type="text" class="form-control" id="editHospitalAddress"></div>
+          <div class="col-md-6 mb-3"><label for="editHospitalContact" class="form-label">Hospital Contact Number:</label><input type="text" class="form-control" id="editHospitalContact"></div>
+          <div class="col-md-6 mb-3"><label for="editMoicName" class="form-label">Hospital In-charge Name:</label><input type="text" class="form-control" id="editMoicName"></div>
+          <div class="col-md-6 mb-3"><label for="editMoicContact" class="form-label">MOIC's Mobile Number:</label><input type="text" class="form-control" id="editMoicContact"></div>
+          <div class="col-md-6 mb-3"><label for="editInventoryChargeName" class="form-label">Inventory In-charge Name:</label><input type="text" class="form-control" id="editInventoryChargeName"></div>
+          <div class="col-md-6 mb-3"><label for="editInventoryChargeContact" class="form-label">Inventory In-charge's Mobile Number:</label><input type="text" class="form-control" id="editInventoryChargeContact"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" onclick="saveDetails()"><i class="fas fa-save me-1"></i>Save Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title" id="addModalLabel"><i class="fas fa-plus-circle me-2"></i>Add New Inventory Item</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <form id="addItemForm">
+          <div class="mb-3"><label for="addInventoryNo" class="form-label">Inventory No:</label><input type="text" class="form-control" id="addInventoryNo" required></div>
+          <div class="mb-3"><label for="addItemDescription" class="form-label">Item Description:</label><input type="text" class="form-control" id="addItemDescription" required></div>
+          <div class="mb-3"><label for="addLedgerBalance" class="form-label">Ledger Balance:</label><input type="number" class="form-control" id="addLedgerBalance" required min="0" value="0"></div>
+          <div class="mb-3"><label for="addActualBalance" class="form-label">Actual Balance (Optional):</label><input type="number" class="form-control" id="addActualBalance" min="0" value="0"></div>
+          <div class="mb-3"><label for="addRemarks" class="form-label">Remarks (Optional):</label><textarea class="form-control" id="addRemarks" rows="2"></textarea></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveNewItem()"><i class="fas fa-save me-1"></i>Save Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title" id="editModalLabel"><i class="fas fa-edit me-2"></i>Edit Inventory Item</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+           <form id="editItemForm">
+               <div class="mb-3"><label for="editItemName" class="form-label">Item Description:</label><input type="text" class="form-control" id="editItemName" readonly disabled></div>
+               <div class="mb-3"><label for="editLedgerBalance" class="form-label">Ledger Balance:</label><input type="number" class="form-control" id="editLedgerBalance" readonly disabled></div>
+               <div class="mb-3"><label for="editActualBalance" class="form-label">Actual Balance:</label><input type="number" class="form-control" id="editActualBalance" required min="0"></div>
+               <div class="mb-3"><label for="editRemarks" class="form-label">Remarks:</label><textarea class="form-control" id="editRemarks" rows="3"></textarea></div>
+           </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveEdit()"><i class="fas fa-save me-1"></i>Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+    // --- State and Configuration ---
+    let inventoryData = [];
+    let editRowIndex = -1; // This index refers to the data row within the *filtered* and *header-stripped* inventoryData array, so it corresponds to actual row index + 1 in the sheet
+    let authorized = false;
+    const correctPassword = "hams2024"; // IMPORTANT: In a real system, this password should NOT be hardcoded in client-side JS. It should be securely checked on the server-side (Apps Script).
+
+    // --- Authorization ---
+    async function askAuthorization() {
+        if (authorized) return true; // If already authorized, no need to ask again
+        const { value: password, isConfirmed } = await Swal.fire({
+            title: 'Authorization Required',
+            input: 'password',
+            inputLabel: 'Enter MOIC Password',
+            inputPlaceholder: 'Enter your password',
+            inputAttributes: { autocapitalize: 'off', autocorrect: 'off' },
+            showCancelButton: true,
+            confirmButtonText: 'Authorize',
+            allowOutsideClick: false, // Prevent closing without action
+            inputValidator: (value) => !value && 'Password cannot be empty!'
+        });
+
+        if (isConfirmed) {
+            if (password === correctPassword) { // IMPORTANT: This check should be server-side in a real app
+                authorized = true;
+                showToast('success', 'Authorization Successful!');
+                return true;
+            } else {
+                Swal.fire('Authorization Failed', 'The password you entered is incorrect.', 'error');
+                return false;
+            }
+        }
+        return false; // User cancelled authorization
+    }
+    
+    // --- Institution Details Functionality ---
+    async function openDetailsModal() {
+        if (!await askAuthorization()) return; // Require authorization
+        // Populate modal fields with current displayed details
+        document.getElementById('editHospitalName').value = document.getElementById('hospitalName').textContent;
+        document.getElementById('editHospitalAddress').value = document.getElementById('hospitalAddress').textContent;
+        document.getElementById('editHospitalContact').value = document.getElementById('hospitalContact').textContent;
+        document.getElementById('editMoicName').value = document.getElementById('moicName').textContent;
+        document.getElementById('editMoicContact').value = document.getElementById('moicContact').textContent;
+        document.getElementById('editInventoryChargeName').value = document.getElementById('inventoryChargeName').textContent;
+        document.getElementById('editInventoryChargeContact').value = document.getElementById('inventoryChargeContact').textContent;
+        // Show the modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('detailsModal')).show();
+    }
+
+    function saveDetails() {
+        // Update displayed details from modal fields
+        document.getElementById('hospitalName').textContent = document.getElementById('editHospitalName').value;
+        document.getElementById('hospitalAddress').textContent = document.getElementById('editHospitalAddress').value;
+        document.getElementById('hospitalContact').textContent = document.getElementById('editHospitalContact').value;
+        document.getElementById('moicName').textContent = document.getElementById('editMoicName').value;
+        document.getElementById('moicContact').textContent = document.getElementById('editMoicContact').value;
+        document.getElementById('inventoryChargeName').textContent = document.getElementById('editInventoryChargeName').value;
+        document.getElementById('inventoryChargeContact').textContent = document.getElementById('editInventoryChargeContact').value;
+        // Hide the modal
+        bootstrap.Modal.getInstance(document.getElementById('detailsModal')).hide();
+        showToast('success', 'Institution details updated!');
+        
+        // In a real Apps Script solution, you would also save these details to a specific sheet/cell
+        // Example: google.script.run.saveInstitutionDetails({
+        //    hospitalName: document.getElementById('editHospitalName').value,
+        //    // ... and so on for other fields
+        // });
+    }
+
+    // --- Data Loading & Table Building ---
+    function loadInventory() {
+        const category = document.getElementById('category').value;
+        const year = document.getElementById('year').value;
+
+        // Show loading sweetalert
+        Swal.fire({
+            title: 'Loading Inventory',
+            html: `Fetching data for <strong>${category} / ${year}</strong>...`,
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading()
+        });
+
+        // Call Google Apps Script function to get data
+        google.script.run
+            .withSuccessHandler(response => {
+                Swal.close(); // Close loading alert
+                if (response.status === 'success') {
+                    // `inventoryData` will store the data from Google Sheet.
+                    // The first row is assumed to be headers, so we store it as is.
+                    inventoryData = response.data || []; 
+                    buildTable(); // Rebuild the table with new data
+                    const message = inventoryData.length > 1 ? `Inventory for ${category}/${year} loaded.` : `No data found for ${category}/${year}.`;
+                    showToast(inventoryData.length > 1 ? 'success' : 'info', message);
+                } else {
+                    // Show error if data loading failed
+                    Swal.fire('Error', `Failed to load inventory: ${response.message || 'Unknown error'}`, 'error');
+                    inventoryData = []; // Clear data on error
+                    buildTable(); // Clear table
+                }
+            })
+            .withFailureHandler(error => {
+                Swal.close(); // Close loading alert
+                // Show generic script error if Apps Script call fails
+                Swal.fire('Script Error', `An error occurred: ${error.message || 'Could not connect to the server.'}`, 'error');
+                inventoryData = []; // Clear data on failure
+                buildTable(); // Clear table
+            })
+            .getInventoryData(category, year); // This function will be in your Apps Script
+    }
+
+    function buildTable() {
+        const tbody = document.querySelector('#inventoryTable tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        // If no data (or only header row), display "No data" message
+        if (!inventoryData || inventoryData.length <= 1) {
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">No data available for the selected criteria.</td></tr>';
+            return;
+        }
+
+        // Loop through data starting from the second row (index 1), as index 0 is header
+        for (let i = 1; i < inventoryData.length; i++) {
+            const row = inventoryData[i];
+            // Destructure row data - ensure they match your Google Sheet columns
+            const inventoryNo = row[0] || '', 
+                  description = row[1] || '', 
+                  ledgerBalance = Number(row[2]) || 0, 
+                  actualBalance = Number(row[3]) || 0, 
+                  remarks = row[4] || ''; // Assuming remarks is the 5th column (index 4)
+
+            const surplusDeficit = actualBalance - ledgerBalance;
+            // Determine class for surplus/deficit display
+            let surplusClass = surplusDeficit > 0 ? 'text-success fw-bold' : (surplusDeficit < 0 ? 'text-danger fw-bold' : '');
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${inventoryNo}</td>
+                <td class="text-break">${description}</td>
+                <td class="text-end">${ledgerBalance.toLocaleString()}</td>
+                <td class="text-end">${actualBalance.toLocaleString()}</td>
+                <td class="${surplusClass} text-end">${surplusDeficit.toLocaleString()}</td>
+                <td class="text-break">${remarks}</td>
+                <td class="action-buttons">
+                    <button class="btn btn-sm btn-warning me-1" onclick="openEditPopup(${i-1})" title="Edit Item"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteItem(${i-1})" title="Delete Item"><i class="fas fa-trash"></i> Delete</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+        filterTable(); // Apply any active search filter after building table
+    }
+
+    function filterTable() {
+        const input = document.getElementById("search").value.toLowerCase();
+        const rows = document.querySelectorAll("#inventoryTable tbody tr");
+        
+        // If there's only the "No data" placeholder, no filtering needed.
+        if (rows.length === 1 && rows[0].querySelector('td[colspan="7"]')) return;
+
+        let visibleRowCount = 0;
+        rows.forEach(row => {
+            // Check if the row is a "No data" or "No results" message row
+            if (row.classList.contains('no-results-row') || row.querySelector('td[colspan="7"]')) {
+                row.style.display = 'none'; // Hide existing message rows during filter
+                return;
+            }
+
+            const textContent = row.textContent || row.innerText;
+            if (textContent.toLowerCase().includes(input)) {
+                row.style.display = ''; // Show row
+                visibleRowCount++;
+            } else {
+                row.style.display = 'none'; // Hide row
+            }
+        });
+
+        const tbody = document.querySelector('#inventoryTable tbody');
+        let noResultsRow = tbody.querySelector('.no-results-row');
+        if (noResultsRow) noResultsRow.remove(); // Remove old "no results" row if exists
+
+        // If no rows are visible after filtering, add a "No items match" message
+        if (visibleRowCount === 0 && !tbody.querySelector('td[colspan="7"]')) {
+            noResultsRow = document.createElement('tr');
+            noResultsRow.classList.add('no-results-row');
+            noResultsRow.innerHTML = `<td colspan="7" class="text-center text-muted fst-italic py-3">No items match your search filter.</td>`;
+            tbody.appendChild(noResultsRow);
+        }
+    }
+
+    // --- CRUD and Other Actions ---
+    async function openAddModal() {
+        if (!await askAuthorization()) return; // Require authorization
+        document.getElementById('addItemForm').reset(); // Clear form fields
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('addModal')).show(); // Show modal
+    }
+
+    function saveNewItem() {
+        const inventoryNo = document.getElementById('addInventoryNo').value.trim();
+        const description = document.getElementById('addItemDescription').value.trim();
+        const ledgerBalance = document.getElementById('addLedgerBalance').value; // Keep as string for initial check
+        const actualBalance = document.getElementById('addActualBalance').value || '0';
+        const remarks = document.getElementById('addRemarks').value.trim();
+
+        // Basic client-side validation
+        if (!inventoryNo || !description || ledgerBalance === '') {
+            Swal.fire('Validation Error', 'Inventory No, Item Description, and Ledger Balance are required fields.', 'warning');
+            return;
+        }
+
+        showToast('info', 'Adding item...'); // Show toast notification
+
+        // Call Apps Script function to add new item
+        google.script.run
+            .withSuccessHandler(handleSuccess('Item added successfully!'))
+            .withFailureHandler(handleFailure('Failed to add item'))
+            .addNewInventoryItem(
+                document.getElementById('category').value,
+                document.getElementById('year').value,
+                inventoryNo,
+                description,
+                Number(ledgerBalance), // Convert to number for Apps Script
+                Number(actualBalance), // Convert to number for Apps Script
+                remarks
+            );
+    }
+
+    async function openEditPopup(displayIndex) { // displayIndex is the 0-based index of the item as displayed in the table (after header)
+        if (!await askAuthorization()) return; // Require authorization
+        
+        editRowIndex = displayIndex; // Store the index for later saving
+        const dataRow = inventoryData[displayIndex + 1]; // +1 because inventoryData includes header at index 0
+
+        // Populate edit modal fields
+        document.getElementById('editItemName').value = dataRow[1] || ''; // Item Description
+        document.getElementById('editLedgerBalance').value = Number(dataRow[2]) || 0; // Ledger Balance
+        document.getElementById('editActualBalance').value = Number(dataRow[3]) || 0; // Actual Balance
+        document.getElementById('editRemarks').value = dataRow[4] || ''; // Remarks
+
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('editModal')).show(); // Show edit modal
+    }
+
+    function saveEdit() {
+        const actualBalance = document.getElementById('editActualBalance').value;
+        const remarks = document.getElementById('editRemarks').value.trim();
+
+        // Basic client-side validation
+        if (actualBalance === '' || isNaN(Number(actualBalance)) || Number(actualBalance) < 0) {
+            Swal.fire('Validation Error', 'Actual Balance must be a non-negative number.', 'warning');
+            return;
+        }
+
+        showToast('info', 'Saving changes...'); // Show toast notification
+
+        // Call Apps Script function to update item
+        google.script.run
+            .withSuccessHandler(handleSuccess('Changes saved successfully!'))
+            .withFailureHandler(handleFailure('Failed to save changes'))
+            .updateInventoryItem(
+                document.getElementById('category').value,
+                document.getElementById('year').value,
+                editRowIndex, // Pass the 0-based index of the *data row*
+                Number(actualBalance),
+                remarks
+            );
+    }
+
+    async function deleteItem(displayIndex) { // displayIndex is the 0-based index of the item as displayed in the table (after header)
+        if (!await askAuthorization()) return; // Require authorization
+
+        const itemDescription = inventoryData[displayIndex + 1][1] || 'this item'; // Get description for confirmation message
+
+        // Confirmation dialog for deletion
+        Swal.fire({
+            title: 'Confirm Deletion',
+            html: `Are you sure you want to delete <strong>${itemDescription}</strong>? <br><strong class='text-danger'>This action cannot be undone.</strong>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: 'var(--danger-color)',
+            cancelButtonColor: 'var(--secondary-color)',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(result => {
+            if (result.isConfirmed) {
+                showToast('info', 'Deleting item...'); // Show toast notification
+                // Call Apps Script function to delete item
+                google.script.run
+                    .withSuccessHandler(handleSuccess('Item deleted successfully!'))
+                    .withFailureHandler(handleFailure('Failed to delete item'))
+                    .deleteInventoryItem(
+                        document.getElementById('category').value,
+                        document.getElementById('year').value,
+                        displayIndex // Pass the 0-based index of the *data row*
+                    );
+            }
+        });
+    }
+
+    // --- Export Functions ---
+    function exportToExcel() {
+        const table = document.getElementById("inventoryTable");
+        // Check if there's actual data in the table (not just the "No data" placeholder)
+        if (table.querySelectorAll("tbody tr").length === 1 && table.querySelector('td[colspan="7"]')) {
+            showToast('warning', 'No data to export.');
+            return;
+        }
+
+        let csv = [];
+        // Get headers (excluding the 'Actions' column)
+        const headers = Array.from(table.querySelectorAll("thead th")).slice(0, -1).map(th => `"${th.innerText.replace(/"/g, '""')}"`);
+        csv.push(headers.join(",")); // Add headers to CSV array
+
+        // Iterate over visible table rows (excluding the "No results" message)
+        table.querySelectorAll("tbody tr").forEach(row => {
+            if (row.style.display !== 'none' && !row.querySelector('td[colspan]')) { // Only include visible rows that are not messages
+                // Get cell data (excluding the 'Actions' column)
+                const cols = Array.from(row.querySelectorAll("td")).slice(0, -1);
+                csv.push(cols.map(col => `"${col.innerText.replace(/"/g, '""')}"`).join(","));
+            }
+        });
+
+        // Check if there's any visible data to export after filtering
+        if (csv.length <= 1) { // Only headers means no data
+            showToast('warning', 'No visible data to export based on current filter.');
+            return;
+        }
+
+        // Create a temporary link element to trigger the download
+        const link = document.createElement("a");
+        link.setAttribute("href", encodeURI("data:text/csv;charset=utf-8," + csv.join("\n")));
+        link.setAttribute("download", `HAMS_${document.getElementById('category').value}_${document.getElementById('year').value}.csv`);
+        document.body.appendChild(link); // Append to body to make it clickable
+        link.click(); // Programmatically click the link
+        document.body.removeChild(link); // Remove the link
+        showToast('success', 'Data exported to CSV.');
+    }
+    
+    // --- Utility & Handler Functions ---
+    // Function to show a small toast notification
+    function showToast(icon, title) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: icon,
+            title: title,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    }
+
+    // Generic success handler for Apps Script calls
+    function handleSuccess(message) {
+        return function(response) {
+            if (response.status === 'success') {
+                // Hide any active modals (add/edit)
+                const addModal = bootstrap.Modal.getInstance(document.getElementById('addModal'));
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                if (addModal) addModal.hide();
+                if (editModal) editModal.hide();
+                
+                showToast('success', message); // Show success toast
+                setTimeout(loadInventory, 500); // Reload data after a short delay
+            } else {
+                // If Apps Script indicates an operation failure
+                Swal.fire('Operation Failed', response.message || 'An unknown error occurred.', 'error');
+            }
+        };
+    }
+
+    // Generic failure handler for Apps Script calls (e.g., network error, script error)
+    function handleFailure(message) {
+        return function(error) {
+            Swal.fire('Script Error', `${message}: ${error.message || 'Could not connect to the server.'}`, 'error');
+        };
+    }
+</script>
+
+</body>
+</html>
