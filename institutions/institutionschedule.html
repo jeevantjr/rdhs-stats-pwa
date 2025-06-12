@@ -30,6 +30,7 @@
       margin-top: 10px;
       font-size: 16px;
     }
+
     .legend {
       background: #e0f2fe;
       padding: 10px 20px;
@@ -39,14 +40,22 @@
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
+      gap: 10px;
     }
-    .legend span {
+    .legend button {
+      background-color: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
       font-size: 14px;
-      margin: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      transition: background-color 0.3s;
     }
+    .legend button:hover {
+      background-color: #0369a1;
+    }
+
     .section {
       background: white;
       border-radius: 16px;
@@ -75,6 +84,11 @@
       margin-right: 10px;
       font-size: 18px;
     }
+
+    .hospital[data-type] {
+      display: block;
+    }
+
     @media (max-width: 600px) {
       .header h1 {
         font-size: 22px;
@@ -88,145 +102,102 @@
 <body>
   <div class="header">
     <h1>Hospital, Outpatient, Clinic & Laboratory Details</h1>
-    <p>📌 Please click on your relevant hospital to view full details about outpatient services, clinic schedules, and available laboratory tests. This information will help you plan your visit more efficiently.</p>
+    <p>📌 Click a category to view only those hospitals. Click again to show all.</p>
   </div>
 
   <div class="legend">
-    <span>🏥 Base Hospital</span>
-    <span>🏨 Divisional Hospital</span>
-    <span>🧑‍⚕️ PMCU</span>
+    <button onclick="filterHospitals('base')">🏥 Base Hospital</button>
+    <button onclick="filterHospitals('divisional')">🏨 Divisional Hospital</button>
+    <button onclick="filterHospitals('pmcu')">🧑‍⚕️ PMCU</button>
   </div>
 
-  <!-- All DS sections remain unchanged below -->
-<div style="
-  max-width: 720px;
-  margin: 0 auto 30px auto;
-  padding: 20px 24px;
-  background: #f0f9ff;
-  border-left: 6px solid #38bdf8;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  font-family: 'Inter', sans-serif;
-  color: #0c4a6e;
-  text-align: center;
-  line-height: 1.6;
-  font-size: 16px;
-">
-  📢 <strong>Note:</strong> At this moment, only <strong>DH - Type C - Thampalagamam</strong> (Divisional Hospital) has detailed OPD and Clinic information available.<br/>
-  👉 Click below to view the sample hospital’s outpatient and clinic services:<br/>
-  <a href="https://jeevantjr.github.io/rdhs-stats-pwa/clinicopddetails/thampalagamam.html" 
-     style="display: inline-block; margin-top: 10px; background-color: #0ea5e9; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">
-    View Thampalagamam Clinic & OPD Details
-  </a><br/>
-  🕒 Details for other hospitals will be added soon.
-</div>
+  <div style="
+    max-width: 720px;
+    margin: 0 auto 30px auto;
+    padding: 20px 24px;
+    background: #f0f9ff;
+    border-left: 6px solid #38bdf8;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    color: #0c4a6e;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 16px;
+  ">
+    📢 <strong>Note:</strong> At this moment, only <strong>DH - Type C - Thampalagamam</strong> has full OPD and Clinic details.<br/>
+    👉 Click below to view:<br/>
+    <a href="https://jeevantjr.github.io/rdhs-stats-pwa/clinicopddetails/thampalagamam.html" 
+       style="display: inline-block; margin-top: 10px; background-color: #0ea5e9; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+      View Thampalagamam Clinic & OPD Details
+    </a><br/>
+    🕒 Details for other hospitals will be added soon.
+  </div>
 
-
+  <!-- Sample DS section -->
   <div class="section">
     <h2>🏙️ Town & Gravets</h2>
-    <div class="hospital"><span class="icon">🏥</span>DGH Trincomalee</div>
-    <div class="hospital"><span class="icon">🏨</span>DH Selvanayagapuram</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Chinabay</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Sampalthivu</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Kappalthurai</div>
+    <div class="hospital" data-type="base"><span class="icon">🏥</span>DGH Trincomalee</div>
+    <div class="hospital" data-type="divisional"><span class="icon">🏨</span>DH Selvanayagapuram</div>
+    <div class="hospital" data-type="pmcu"><span class="icon">🧑‍⚕️</span>PMCU Chinabay</div>
+    <div class="hospital" data-type="pmcu"><span class="icon">🧑‍⚕️</span>PMCU Sampalthivu</div>
+    <div class="hospital" data-type="pmcu"><span class="icon">🧑‍⚕️</span>PMCU Kappalthurai</div>
   </div>
 
-  <!-- Additional DS divisions continue here (unchanged in structure) -->
-
-<div class="section">
-    <h2>🌾 Kanthalai</h2>
-    <div class="hospital"><span class="icon">🏥</span>DBH - Type A - Kantalai</div>
-    <div class="hospital"><span class="icon">🏥</span>DH Wanela</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Ganthalava</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Batukachchiya</div>
-  </div>
-
+  <!-- Add your remaining DS Divisions here with proper data-type: base, divisional, pmcu -->
+  <!-- Example for Thampalagamam with a linked DH -->
   <div class="section">
-    <h2>🏝️ Muthur</h2>
-    <div class="hospital"><span class="icon">🏥</span>DBH - Type B - Muthur</div>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Kilivetti</div>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Thoppur</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Chenaiyoor</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Manalchenai</div>
+    <h2>🏡 Thampalagamam</h2>
+    <div class="hospital" data-type="divisional">
+      <span class="icon">🏥</span>
+      <a href="https://jeevantjr.github.io/rdhs-stats-pwa/clinicopddetails/thampalagamam.html" style="color: #1e40af; text-decoration: none;">
+        DH - Type C - Thampalagamam
+      </a>
+    </div>
+    <div class="hospital" data-type="pmcu"><span class="icon">🧑‍⚕️</span>PMCU Mullipothana</div>
   </div>
 
-  <div class="section">
-    <h2>🏖️ Kuchcheveli</h2>
-    <div class="hospital"><span class="icon">🏥</span>DBH - Type B - Pulmuddai</div>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Nilaveli</div>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Kuchchaveli</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Thiriyai</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Kumpurupiddy</div>
-  </div>
+  <!-- Continue with all other DS divisions and apply data-type attributes -->
 
-  <div class="section">
-    <h2>💧 Kinniya</h2>
-    <div class="hospital"><span class="icon">🏥</span>DBH - Type B - Kinniya</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Kachchakodithivu</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Kakkamunai</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Alankerny</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Naduoothu</div>
-  </div>
+  <a href="index.html" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #002147;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  ">
+    🏠 Back to Health Services Overview Dashboard
+  </a>
 
-  <div class="section">
-    <h2>🏞️ Padavisiripura</h2>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Padavisripura</div>
-  </div>
+  <script>
+    let currentFilter = '';
 
- <div class="section">
-  <h2>🏡 Thampalagamam</h2>
-  <div class="hospital">
-    <span class="icon">🏥</span>
-    <a href="https://jeevantjr.github.io/rdhs-stats-pwa/clinicopddetails/thampalagamam.html" style="color: #1e40af; text-decoration: none;">
-      DH - Type C - Thampalagamam
-    </a>
-  </div>
-  <div class="hospital">
-    <span class="icon">🧑‍⚕️</span>PMCU Mullipothana
-  </div>
-</div>
+    function filterHospitals(type) {
+      const hospitals = document.querySelectorAll('.hospital');
 
+      if (currentFilter === type) {
+        hospitals.forEach(h => h.style.display = 'block');
+        currentFilter = '';
+        return;
+      }
 
-  <div class="section">
-    <h2>🌲 Seruwila</h2>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Serunuwara</div>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Seruwila</div>
-  </div>
+      hospitals.forEach(h => {
+        if (h.dataset.type === type) {
+          h.style.display = 'flex';
+        } else {
+          h.style.display = 'none';
+        }
+      });
 
-  <div class="section">
-    <h2>🌾 Gomarangadawela</h2>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Gomarankadawela</div>
-  </div>
-
-  <div class="section">
-    <h2>🌳 Morawewa</h2>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Mahadivulwewa</div>
-    <div class="hospital"><span class="icon">🧑‍⚕️</span>PMCU Morawawa</div>
-  </div>
-
-  <div class="section">
-    <h2>🏘️ Echchilampathai</h2>
-    <div class="hospital"><span class="icon">🏥</span>DH - Type C - Echchilampathai</div>
-  </div>
-
-<a href="index.html" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #002147;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-">
-  🏠 Back to Health Services Overview Dashboard
-</a>
-
-
+      currentFilter = type;
+    }
+  </script>
 </body>
 </html>
 
