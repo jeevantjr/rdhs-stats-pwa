@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hospital Assets Management System</title>
+  <title>Hospital Assets Management System (HAMS)</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -18,7 +18,7 @@
 
     .container {
       width: 90%;
-      max-width: 450px;
+      max-width: 500px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -26,10 +26,24 @@
       text-align: center;
     }
 
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
     h1 {
       color: #0e5d8f;
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #333;
       margin-bottom: 20px;
-      font-size: 1.5rem;
+      text-align: left;
+      line-height: 1.5;
     }
 
     input[type="text"],
@@ -62,16 +76,60 @@
       margin-top: 10px;
       font-weight: bold;
     }
+
+    .support {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .support a {
+      color: #0e5d8f;
+      text-decoration: none;
+    }
+
+    .support a:hover {
+      text-decoration: underline;
+    }
+
+    .home-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #002147;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
   <div class="container" id="login-box">
+    <img src="images/icon-192.png" alt="HAMS Logo" class="logo" />
     <h1>Hospital Assets Management System</h1>
+    <div class="description">
+      <strong>About HAMS:</strong><br/>
+      The <strong>Hospital Assets Management System (HAMS)</strong> is developed by the <strong>Regional Director of Health Services (RDHS) Office</strong> to effectively manage, track, and monitor inventories including medical equipment, furniture, and healthcare assets.<br/><br/>
+      This centralized system covers <strong>all healthcare institutions under the RDHS Office</strong>—including Base Hospitals, Divisional Hospitals, Primary Medical Care Units (PMCUs), and other field institutions.<br/><br/>
+      HAMS is designed to enhance <strong>accountability</strong>, improve <strong>asset tracking</strong>, and simplify <strong>reporting and decision-making</strong> processes across the region.
+    </div>
+
     <input type="text" id="username" placeholder="Enter Username" />
     <input type="password" id="password" placeholder="Enter Password" />
     <button onclick="validate()">Login</button>
     <div class="error" id="error-msg"></div>
+
+    <div class="support">
+      Forgot your password? Contact support at <a href="mailto:moinformationtco@gmail.com">moinformationtco@gmail.com</a>
+    </div>
   </div>
+
+  <a href="index.html" class="home-link">🏠 Home</a>
 
   <script>
     const correctUsername = "rdhs";
@@ -84,27 +142,11 @@
       const errorMsg = document.getElementById("error-msg");
 
       if (user === correctUsername && pass === correctPassword) {
-        // Redirect to the Apps Script page
         window.location.href = redirectURL;
       } else {
         errorMsg.textContent = "You are not authorized person to view and edit this system.";
       }
     }
   </script>
-      <a href="index.html" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #002147;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 1000;
-">
-  🏠 Home
 </body>
 </html>
