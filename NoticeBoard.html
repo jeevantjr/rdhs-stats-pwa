@@ -2,78 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Outbreak Alerts</title>
+  <title>Notice Board</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f0f9ff;
+      background: #f0f2f5;
       margin: 0;
       padding: 0;
-      color: #003366;
     }
 
-    .navbar {
-      width: 100%;
-      background-color: #007acc;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1.2rem;
-      max-width: 1200px;
-      margin: auto;
-      color: #ffffff;
-      flex-wrap: wrap;
-    }
-
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.4rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #ffcc00;
-    }
-
-    main {
-      padding: 6rem 1rem 2rem;
+    .header-card {
       max-width: 960px;
-      margin: auto;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #007B9E, #00B9A3);
+      border-radius: 16px;
+      padding: 30px 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: white;
     }
 
-    h2 {
-      text-align: center;
-      color: #004080;
-      margin-bottom: 1rem;
+    .header-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .header-card h1 {
+      font-size: 2rem;
+      margin: 0;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     }
 
     .table-container {
+      max-width: 960px;
+      margin: 0 auto 40px;
       background: white;
-      border-radius: 12px;
-      overflow-x: auto;
+      border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      overflow-x: auto;
     }
 
     table {
@@ -89,143 +63,121 @@
     }
 
     th {
-      background-color: #007acc;
+      background-color: #007B9E;
       color: white;
+      font-weight: 600;
     }
 
-    tr.safe {
-      background-color: #e8f5e9;
+    tr:hover {
+      background-color: #f9f9f9;
     }
 
-    tr.warning {
-      background-color: #fff8e1;
-    }
-
-    tr.danger {
-      background-color: #ffebee;
-    }
-
-    .icon {
-      font-size: 1.2rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #003366;
-      padding: 1rem;
-      background-color: #e0f7fa;
-      border-top: 1px solid #b3e5fc;
-      margin-top: 2rem;
+    a.link-btn {
+      color: #007B9E;
+      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background-color: #007acc;
-        padding: 0.5rem 1rem;
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-        color: white;
+      .header-card h1 {
         font-size: 1.5rem;
-        cursor: pointer;
+      }
+
+      .header-card img {
+        width: 60px;
+        height: 60px;
+      }
+
+      table {
+        font-size: 0.9rem;
       }
     }
+
+.viewing-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  margin: 10px auto 20px;
+  color: #007bff;
+}
+.viewing-tip i {
+  font-size: 1.6rem;
+}
+
+
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-logo">OutbreakWatch</div>
-      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="report.html">Report Symptoms</a>
-        <a href="alerts.html">Alerts</a>
-        <a href="analytics.html">Data Dashboard</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Header with centered logo and colored card -->
+  <div class="header-card">
+    <img src="images/icon-192.png" alt="Logo">
+    <h1>Notice Board</h1>
+    
+  </div><div class="viewing-tip">
+  <i class="fas fa-mobile-alt"></i>
+  <span> 📱 Best viewed in <strong>portrait mode</strong></span>
+</div>
+  
+  <!-- Table container -->
+  <div class="table-container">
+    <table id="noticeTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>To Whom</th>
+          <th>Message</th>
+          <th>From Whom</th>
+          <th>Attachment</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-  <main>
-    <h2>🚨 Live Outbreak Summary</h2>
-    <div class="table-container">
-      <table id="alertTable">
-        <thead>
-          <tr>
-            <th>GN Division</th>
-            <th>Fever</th>
-            <th>Rash</th>
-            <th>Alert</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </main>
+ <script>
+  const baseUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3ABmBzmX3OgzqubEa09Gepqxnw0JPz718WJzE9urSO2F8EkrhP9Rr0KPQoFxkBSUM1eYUj747JDY9/pub?gid=0&single=true&output=csv';
+  const csvUrl = baseUrl + '&cachebuster=' + new Date().getTime();
 
-  <footer>
-    <p>© 2025 OutbreakWatch. Powered by Community Health Intelligence.</p>
-  </footer>
+  Papa.parse(csvUrl, {
+    download: true,
+    header: true,
+    complete: function(results) {
+      const data = results.data;
+      const tableBody = document.querySelector('#noticeTable tbody');
+      tableBody.innerHTML = '';
 
-  <!-- PapaParse Script -->
-  <script>
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCyDH0ByMx_728zKrtJ5OI5ZsKQKjplFJNPWE78eUT2vD3WCHwFn3rFPbYYVlbiEn95Brxsdz_v9zy/pub?gid=917947109&single=true&output=csv";
-
-    Papa.parse(csvUrl, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const data = results.data;
-        const tableBody = document.querySelector("#alertTable tbody");
-
-        data.forEach(row => {
-          if (!row["GN Division"]) return;
-
-          const fever = parseInt(row["Fever"]);
-          const rash = parseInt(row["Rash"]);
-          const alert = row["Alert"] || "";
-          let rowClass = "safe";
-          let icon = "🟢";
-
-          if (alert.includes("Possible")) {
-            rowClass = "danger";
-            icon = "🔴";
-          } else if (alert.includes("Warning")) {
-            rowClass = "warning";
-            icon = "🟠";
-          }
-
-          const tr = document.createElement("tr");
-          tr.className = rowClass;
-
-          tr.innerHTML = `
-            <td>${row["GN Division"]}</td>
-            <td>${fever || 0}</td>
-            <td>${rash || 0}</td>
-            <td class="icon">${icon} ${alert}</td>
-          `;
-          tableBody.appendChild(tr);
-        });
-      }
-    });
-
-    function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("show");
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row["Date"] || ''}</td>
+          <td>${row["To Whom"] || ''}</td>
+          <td>${row["Message"] || ''}</td>
+          <td>${row["From Whom"] || ''}</td>
+          <td>${row["Attachment Link"] ? `<a href="${row["Attachment Link"]}" target="_blank" class="link-btn">View</a>` : ''}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
     }
-  </script>
+  });
+</script>
 
+<a href="index.html" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #002147;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+">
+  🏠 Home
+</a>
 </body>
 </html>
